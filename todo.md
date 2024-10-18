@@ -14,4 +14,5 @@
   - [ ] link to v0 chats
 - [ ] Profile against real site?
 - [x] search (postgress fts)
+  - [ ] partial matches
 - [ ] Ensure responsive

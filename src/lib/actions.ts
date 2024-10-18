@@ -44,6 +44,22 @@ export async function addToCart(prevState: unknown, formData: FormData) {
   return "Item added to cart";
 }
 
+export async function removeFromCart(formData: FormData) {
+  const prevCart = await getCart();
+  const productSlug = formData.get("productSlug");
+  if (typeof productSlug !== "string") {
+    return;
+  }
+  const itemAlreadyExists = prevCart.find(
+    (item) => item.productSlug === productSlug,
+  );
+  if (!itemAlreadyExists) {
+    return;
+  }
+  const newCart = prevCart.filter((item) => item.productSlug !== productSlug);
+  await updateCart(newCart);
+}
+
 export async function searchProducts(searchTerm: string) {
   const results = await db
     .select()
