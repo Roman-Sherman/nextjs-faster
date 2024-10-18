@@ -3,7 +3,7 @@ import { artSupplies } from "./data";
 
 export default function Home() {
   return (
-    <main className="flex-1 p-4">
+    <div className="flex-1 p-4">
       {artSupplies.map((collection) => (
         <div key={collection.collectionName} className="mb-8">
           <h2 className="mb-4 text-xl font-semibold">
@@ -29,6 +29,6 @@ export default function Home() {
           </div>
         </div>
       ))}
-    </main>
+    </div>
   );
 }
