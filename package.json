@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "typecheck": "tsc",
     "format:check": "prettier --check .",
     "format": "prettier --write . --list-different"
   },
