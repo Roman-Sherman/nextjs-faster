@@ -114,30 +114,30 @@ const adhesiveCategories = [
 
 export default async function Page(props: {
   params: Promise<{
-    subcategory: string;
+    category: string;
   }>;
 }) {
-  const { subcategory } = await props.params;
+  const { category } = await props.params;
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-sm font-bold mb-2 border-b-2">690 Products</h1>
       <div className="space-y-4">
-        {adhesiveCategories.map((category, index) => (
+        {adhesiveCategories.map((collection, index) => (
           <div key={index}>
             <h2 className="text-lg font-semibold mb-2 border-b-2">
-              {category.title}
+              {collection.title}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2  ">
-              {category.products.map((product, productIndex) => (
+              {collection.products.map((subcategory, subcategoryIndex) => (
                 <Link
-                  key={productIndex}
+                  key={subcategoryIndex}
                   className="flex flex-row h-full border px-4 py-2 group hover:bg-gray-100"
-                  href={`/products/${subcategory}/${product.name}`}
+                  href={`/products/${category}/${subcategory.name}`}
                 >
                   <div className="py-2">
                     <Image
                       src="/placeholder.svg?height=48&width=48"
-                      alt={product.name}
+                      alt={subcategory.name}
                       width={48}
                       height={48}
                       className="object-cover w-12 h-12 flex-shrink-0"
@@ -145,10 +145,10 @@ export default async function Page(props: {
                   </div>
                   <div className="flex items-start  flex-grow  flex-col py-2 h-24">
                     <div className="text-sm font-medium text-gray-700 group-hover:underline">
-                      {product.name}
+                      {subcategory.name}
                     </div>
                     <p className="text-xs overflow-hidden">
-                      {product.description}
+                      {subcategory.description}
                     </p>
                   </div>
                 </Link>
