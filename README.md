@@ -1,6 +1,6 @@
 ## NextMaster
 
-A  replica of [McMaster-Carr](https://www.mcmaster.com/) using Next.js and AI generated content by [@ethanniser](https://github.com/ethanniser), [@RhysSullivan](https://github.com/RhysSullivan) and [@armans-code](https://github.com/armans-code)
+A replica of [McMaster-Carr](https://www.mcmaster.com/) using Next.js and AI generated content by [@ethanniser](https://github.com/ethanniser), [@RhysSullivan](https://github.com/RhysSullivan) and [@armans-code](https://github.com/armans-code)
 
 ### Design notes
 
@@ -39,5 +39,3 @@ A  replica of [McMaster-Carr](https://www.mcmaster.com/) using Next.js and AI ge
 [PageSpeed report](https://pagespeed.web.dev/analysis/https-next-master-vercel-app/4181robe62?form_factor=mobile)
 
 ![image](https://github.com/user-attachments/assets/ccca9cb4-eedc-4415-b225-db9ee82ebf27)
-
-
