@@ -15,21 +15,24 @@ permissions: {}
 jobs:
   lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
 
-      - name: Setup Node 20
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "pnpm"
 
-      - name: Install deps
+      - name: Install dependencies
         run: pnpm install
 
       - name: Lint
@@ -37,21 +40,24 @@ jobs:
 
   format:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
 
-      - name: Setup Node 20
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "pnpm"
 
-      - name: Install deps
+      - name: Install dependencies
         run: pnpm install
 
       - name: Format
@@ -59,21 +65,24 @@ jobs:
 
   typecheck:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
 
-      - name: Setup Node 20
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "pnpm"
 
-      - name: Install deps
+      - name: Install dependencies
         run: pnpm install
 
       - name: Typecheck
