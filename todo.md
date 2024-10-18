@@ -11,6 +11,7 @@
 - [ ] Add fake data
 - [ ] Add fetching w/ revalidation & PPR
 - [ ] Add README (like hacker news)
+  - [ ] link to v0 chats
 - [ ] Profile against real site?
 - [ ] search (postgress fts)
 - [ ] Ensure responsive
