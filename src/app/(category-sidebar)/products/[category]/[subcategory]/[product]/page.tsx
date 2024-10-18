@@ -75,9 +75,11 @@ export default async function Page(props: {
         <AddToCartForm productSlug={productData.slug} />
       </div>
       <div className="pt-8">
-        <h2 className="text-lg font-bold text-green-800">
-          Explore more products
-        </h2>
+        {related.length > 0 && (
+          <h2 className="text-lg font-bold text-green-800">
+            Explore more products
+          </h2>
+        )}
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
           {related?.map((product) => (
             <ProductLink
