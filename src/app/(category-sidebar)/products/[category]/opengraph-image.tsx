@@ -20,7 +20,6 @@ export default async function Image(props: {
     category: string;
   }>;
 }) {
-  console.log(props);
   const { category: categoryParam } = await props.params;
   const urlDecodedCategory = decodeURIComponent(categoryParam);
 
@@ -43,6 +42,7 @@ export default async function Image(props: {
 
   const description = `Choose from our selection of ${category.name}, including ${examples + (category.subcollections.length > 1 ? "," : "")} and more. In stock and ready to ship.`;
 
+  // TODO: Change design to add subcategory images that blur out
   return new ImageResponse(
     (
       <div
