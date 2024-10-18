@@ -3,15 +3,12 @@ import { z } from "zod";
 
 const cartSchema = z.array(
   z.object({
-    id: z.string(),
+    productSlug: z.string(),
     quantity: z.number(),
   }),
 );
 
-type CartItem = {
-  id: string;
-  quantity: number;
-};
+export type CartItem = z.infer<typeof cartSchema>[number];
 
 export async function updateCart(newItems: CartItem[]) {
   (await cookies()).set("cart", JSON.stringify(newItems), {
