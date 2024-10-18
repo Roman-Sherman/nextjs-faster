@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Link from "next/link";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
-import { getCart } from "@/lib/cart";
 import { MenuIcon } from "lucide-react";
 import { Suspense } from "react";
 import { Cart } from "@/components/cart";
