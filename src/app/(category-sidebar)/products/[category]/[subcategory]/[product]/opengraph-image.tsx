@@ -1,10 +1,12 @@
+import { db } from "@/db";
 import { ImageResponse } from "next/og";
+import { notFound } from "next/navigation";
 
 // Route segment config
 export const runtime = "edge";
 
 // Image metadata
-export const alt = "About Acme";
+export const alt = "About the product";
 export const size = {
   width: 1200,
   height: 630,
@@ -13,7 +15,25 @@ export const size = {
 export const contentType = "image/png";
 
 // Image generation
-export default async function Image() {
+export default async function Image(props: {
+  params: Promise<{
+    product: string;
+    subcategory: string;
+    category: string;
+  }>;
+}) {
+  console.log(props);
+  const { product } = await props.params;
+  const urlDecodedProduct = decodeURIComponent(product);
+  // const urlDecodedSubcategory = decodeURIComponent(subcategory);
+  // const urlDecodedCategory = decodeURIComponent(category);
+  const productData = await db.query.products.findFirst({
+    where: (products, { eq }) => eq(products.slug, urlDecodedProduct),
+  });
+  console.log(productData);
+  if (!productData) {
+    notFound();
+  }
   return new ImageResponse(
     (
       <div
@@ -44,12 +64,14 @@ export default async function Image() {
               justifyContent: "center",
             }}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               style={{
-                width: "260px",
-                height: "160px",
+                width: "300px",
+                marginBottom: "30px",
               }}
-              src="https://www.mcmaster.com/mvd/contents/gfx/imagecache/900/90044a123-@halfx_637644589791018819.png?ver=imagenotfound"
+              src={productData.image_url ?? "/placeholder.svg"}
+              alt={productData.name}
             />
           </div>
         </div>
@@ -61,7 +83,7 @@ export default async function Image() {
             marginBottom: "20px",
           }}
         >
-          Alloy Steel Socket Head Screws
+          {productData.name}
         </h1>
         <div
           style={{
@@ -70,31 +92,10 @@ export default async function Image() {
             width: "100%",
           }}
         >
-          <div style={{ textAlign: "center", display: "flex" }}>
-            <p
-              style={{ fontSize: "36px", fontWeight: "bold", color: "#0066cc" }}
-            >
-              170,000 psi
-            </p>
-            <p style={{ fontSize: "24px", color: "#666" }}>Tensile Strength</p>
-          </div>
-          <div style={{ textAlign: "center", display: "flex" }}>
-            <p
-              style={{ fontSize: "36px", fontWeight: "bold", color: "#009933" }}
-            >
-              ASTM A574
-            </p>
-            <p style={{ fontSize: "24px", color: "#666" }}>Compliant</p>
-          </div>
-          <div style={{ textAlign: "center", display: "flex" }}>
-            <p
-              style={{ fontSize: "36px", fontWeight: "bold", color: "#cc3300" }}
-            >
-              Zinc-plated
-            </p>
-            <p style={{ fontSize: "24px", color: "#666" }}>
-              Corrosion Resistant
-            </p>
+          <div
+            style={{ textAlign: "center", display: "flex", fontSize: "24px" }}
+          >
+            {productData.description}
           </div>
         </div>
       </div>

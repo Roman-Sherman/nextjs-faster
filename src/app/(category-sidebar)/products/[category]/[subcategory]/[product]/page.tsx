@@ -15,7 +15,7 @@ export default async function Page(props: {
   const { product, subcategory, category } = await props.params;
   const urlDecodedProduct = decodeURIComponent(product);
   const urlDecodedSubcategory = decodeURIComponent(subcategory);
-  const urlDecodedCategory = decodeURIComponent(category);
+  // const urlDecodedCategory = decodeURIComponent(category);
   const productData = await db.query.products.findFirst({
     where: (products, { eq }) => eq(products.slug, urlDecodedProduct),
   });
