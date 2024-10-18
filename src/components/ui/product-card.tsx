@@ -16,7 +16,7 @@ export function ProductLink(props: {
       <div className="py-2">
         <Image
           src={imageUrl ?? "/placeholder.svg?height=48&width=48"}
-          alt={product.name}
+          alt={`A small picture of ${product.name}`}
           width={48}
           height={48}
           className="h-12 w-12 flex-shrink-0 object-cover"

@@ -23,7 +23,7 @@ export default async function Home() {
               >
                 <Image
                   src={category.image_url ?? "/placeholder.svg"}
-                  alt={category.name}
+                  alt={`A small picture of ${category.name}`}
                   className="mb-2 h-14 w-14 border hover:bg-yellow-200"
                   width={48}
                   height={48}

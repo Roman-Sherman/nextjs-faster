@@ -42,7 +42,7 @@ export default async function Page(props: {
         <div className="flex flex-row gap-2">
           <Image
             src={productData.image_url ?? "/placeholder.svg?height=64&width=64"}
-            alt={productData.name}
+            alt={`A small picture of ${productData.name}`}
             height={64}
             width={64}
             className="h-64 w-64 flex-shrink-0 border-2"
