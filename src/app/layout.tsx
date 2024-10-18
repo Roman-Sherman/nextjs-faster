@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-// import { artSupplies } from "./data";
+import { artSupplies } from "./data";
 import Link from "next/link";
 
 const helvetica = localFont({
@@ -30,6 +30,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const allCategories = artSupplies.flatMap((item) => item.categories);
   return (
     <html lang="en" className="h-full">
       <body
@@ -70,16 +71,19 @@ export default function RootLayout({
                 Choose a Category
               </h2>
               <ul className="">
-                {/* {categories.map((category) => (
-                  <li key={category} className="group pb-2 hover:bg-yellow-200">
+                {allCategories.map((category) => (
+                  <li
+                    key={category.categoryName}
+                    className="group pb-2 hover:bg-yellow-200"
+                  >
                     <a
-                      href="#"
+                      href={`/products/${category.categoryName}`}
                       className="text-xs text-gray-800 group-hover:underline"
                     >
-                      {category}
+                      {category.categoryName}
                     </a>
                   </li>
-                ))} */}
+                ))}
               </ul>
             </aside>
             <main className="flex-grow">{children}</main>
