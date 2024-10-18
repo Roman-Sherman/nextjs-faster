@@ -22,7 +22,10 @@ const futura = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "NextMaster",
+  title: {
+    template: "%s | NextMaster",
+    default: "NextMaster",
+  },
   description: "A performant site built with Next.js",
 };
 

@@ -2,7 +2,7 @@ import { LoginForm } from "@/components/login-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Order History | NextMaster",
+  title: "Order History",
 };
 
 export default function Page() {

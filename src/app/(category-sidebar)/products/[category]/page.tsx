@@ -37,9 +37,9 @@ export async function generateMetadata({
     .toLowerCase();
 
   return {
-    title: `${category.name} | NextMaster`,
+    title: `${category.name}`,
     openGraph: {
-      title: `${category.name} | NextMaster`,
+      title: `${category.name}`,
       description: `Choose from our selection of ${category.name.toLowerCase()}, including ${examples + (category.subcollections.length > 1 ? "," : "")} and more. In stock and ready to ship.`,
     },
   };

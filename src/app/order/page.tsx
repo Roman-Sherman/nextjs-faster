@@ -11,7 +11,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Order | NextMaster",
+  title: "Order",
 };
 
 export default async function Page() {
