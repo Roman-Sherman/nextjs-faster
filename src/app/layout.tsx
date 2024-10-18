@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { artSupplies } from "./data";
 import Link from "next/link";
+import { SearchDropdownComponent } from "@/components/search-dropdown";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -43,13 +44,7 @@ export default function RootLayout({
                 NextMaster
               </Link>
             </div>
-            <div className="relative">
-              <Input
-                placeholder="Search"
-                className="w-[300px] font-sans font-medium md:w-[450px]"
-              />
-              <Search className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
-            </div>
+            <SearchDropdownComponent />
             <div className="flex flex-row justify-between space-x-4">
               <Link
                 href="/order"
