@@ -36,8 +36,8 @@ A  replica of [McMaster-Carr](https://www.mcmaster.com/) using Next.js and AI ge
 
 ### Performance
 
-[PageSpeed report](https://pagespeed.web.dev/analysis/https-next-ai-news-vercel-app/x55es0m0ya?form_factor=mobile) for Emulated Moto G Power with Lighthouse 11.0.0, Slow 4G Throttling:
+[PageSpeed report](https://pagespeed.web.dev/analysis/https-next-master-vercel-app/4181robe62?form_factor=mobile)
 
-[![](https://h2rsi9anqnqbkvkf.public.blob.vercel-storage.com/perf-LAbwq5HsiimvbRrNSUV9JAGCATsBMs.png)](https://pagespeed.web.dev/analysis/https-next-ai-news-vercel-app/x55es0m0ya?form_factor=mobile)
-<sup>&nbsp;&nbsp;&nbsp;💩 The SEO `98` score cannot be `100` without sacrificing stylistic fidelity to the original HN navigation</sup>
+![image](https://github.com/user-attachments/assets/ccca9cb4-eedc-4415-b225-db9ee82ebf27)
+
 
