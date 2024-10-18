@@ -81,7 +81,7 @@ export default function RootLayout({
             <main className="flex-grow">{children}</main>
           </div>
         </div>
-        <footer className="flex h-10 items-center justify-between border-t border-gray-400 px-4 font-helvetica text-[11px]">
+        <footer className="flex h-6 items-center justify-between border-t border-gray-400 px-4 font-helvetica text-[11px]">
           <div>
             <Link
               href="/about"
