@@ -1,6 +1,6 @@
 export default function Page() {
   return (
-    <div className="min-h-screen p-4">
+    <main className="min-h-screen p-4">
       <div className="mx-auto flex max-w-md flex-col gap-4">
         <h1 className="font-futura text-2xl text-green-800">ORDER HISTORY</h1>
         <p className="font-semibold text-green-800">
@@ -44,6 +44,6 @@ export default function Page() {
           Create login
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -13,3 +13,4 @@
 - [ ] Add README (like hacker news)
 - [ ] Profile against real site?
 - [ ] search (postgress fts)
+- [ ] Ensure responsive
