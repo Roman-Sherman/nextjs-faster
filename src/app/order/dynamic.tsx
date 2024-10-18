@@ -34,6 +34,8 @@ function CartItem({ product }: { product: CartItem }) {
   if (!product) {
     return null;
   }
+  // limit to 2 decimal places
+  const cost = (Number(product.price) * product.quantity).toFixed(2);
   return (
     <div className="flex flex-row items-center justify-between space-x-4 border-t border-gray-200 pt-4">
       <Link
@@ -65,9 +67,7 @@ function CartItem({ product }: { product: CartItem }) {
             </div>
           </div>
           <div className="min-w-24">
-            <p className="font-semibold">
-              ${Number(product.price) * product.quantity}
-            </p>
+            <p className="font-semibold">${cost}</p>
           </div>
         </div>
         <form action={removeFromCart}>
