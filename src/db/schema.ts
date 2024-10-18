@@ -6,6 +6,8 @@ export const collections = pgTable("collections", {
   name: text("name").notNull(),
 });
 
+export type Collection = typeof collections.$inferSelect;
+
 export const categories = pgTable("categories", {
   slug: text("slug").notNull().primaryKey(),
   name: text("name").notNull(),
@@ -13,6 +15,8 @@ export const categories = pgTable("categories", {
     .notNull()
     .references(() => collections.id, { onDelete: "cascade" }),
 });
+
+export type Category = typeof categories.$inferSelect;
 
 export const subcollection = pgTable("subcollections", {
   id: serial("id").primaryKey(),
@@ -22,6 +26,8 @@ export const subcollection = pgTable("subcollections", {
     .references(() => categories.slug, { onDelete: "cascade" }),
 });
 
+export type Subcollection = typeof subcollection.$inferSelect;
+
 export const subcategories = pgTable("subcategories", {
   slug: text("slug").notNull().primaryKey(),
   name: text("name").notNull(),
@@ -29,6 +35,8 @@ export const subcategories = pgTable("subcategories", {
     .notNull()
     .references(() => subcollection.id, { onDelete: "cascade" }),
 });
+
+export type Subcategory = typeof subcategories.$inferSelect;
 
 export const products = pgTable("products", {
   slug: text("slug").notNull().primaryKey(),
@@ -39,6 +47,8 @@ export const products = pgTable("products", {
     .notNull()
     .references(() => subcategories.slug, { onDelete: "cascade" }),
 });
+
+export type Product = typeof products.$inferSelect;
 
 export const collectionsRelations = relations(collections, ({ many }) => ({
   categories: many(categories),

@@ -1,4 +1,6 @@
 import { db } from "@/db";
+import { products } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";

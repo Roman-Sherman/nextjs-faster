@@ -14,6 +14,7 @@ export default async function Page(props: {
   const urlDecodedProduct = decodeURIComponent(product);
   const urlDecodedSubcategory = decodeURIComponent(subcategory);
   const urlDecodedCategory = decodeURIComponent(category);
+  console.log(urlDecodedProduct);
   const productData = await db.query.products.findFirst({
     where: (products, { eq }) => eq(products.slug, urlDecodedProduct),
   });
@@ -59,12 +60,12 @@ export default async function Page(props: {
           Explore more products
         </h2>
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
-          {related?.map((item) => (
+          {related?.map((product) => (
             <ProductLink
-              key={item.name}
-              category={category}
-              subcategory={subcategory}
-              item={item}
+              key={product.name}
+              category_slug={category}
+              subcategory_slug={subcategory}
+              product={product}
             />
           ))}
         </div>
