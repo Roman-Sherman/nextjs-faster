@@ -13,6 +13,7 @@ export default function Home() {
                 key={subcategory.name}
                 className="flex flex-col items-center text-center"
                 href={`/products/${subcategory.name}`}
+                href="/products/subcategory"
               >
                 <img
                   src={subcategory.icon}

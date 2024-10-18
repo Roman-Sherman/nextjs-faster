@@ -31,37 +31,37 @@ export default function RootLayout({
       <body
         className={`${helvetica.variable} ${helveticaRoman.variable} antialiased`}
       >
-        <div className="flex flex-col min-h-screen">
-          <header className="flex items-center justify-between p-4 border-b-2 border-yellow-300">
+        <div className="flex min-h-screen flex-col">
+          <header className="flex items-center justify-between border-b-2 border-yellow-300 p-4">
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
               <Link href="/" className="text-2xl font-bold">
-                McMaster-Next
+                NextMaster
               </Link>
             </div>
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input placeholder="Search" className="pl-8 w-[300px]" />
+                <Input placeholder="Search" className="w-[300px] pl-8" />
               </div>
               <Button variant="ghost">ORDER</Button>
               <Button variant="ghost">ORDER HISTORY</Button>
             </div>
           </header>
           <div className="flex flex-1 font-helvetica-roman">
-            <aside className="w-64 border-r border-gray-400 p-4 hidden md:block">
-              <h2 className="text-sm border-b border-green-800 text-green-900 font-semibold">
+            <aside className="hidden w-64 border-r border-gray-400 p-4 md:block">
+              <h2 className="border-b border-green-800 text-sm font-semibold text-green-900">
                 Choose a Category
               </h2>
               <ul className="">
                 {categories.map((category) => (
-                  <li key={category} className="hover:bg-yellow-200 pb-2 group">
+                  <li key={category} className="group pb-2 hover:bg-yellow-200">
                     <a
                       href="#"
-                      className="text-xs group-hover:underline text-gray-800"
+                      className="text-xs text-gray-800 group-hover:underline"
                     >
                       {category}
                     </a>

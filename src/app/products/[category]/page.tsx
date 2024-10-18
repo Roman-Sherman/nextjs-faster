@@ -120,7 +120,7 @@ export default async function Page(props: {
   const { category } = await props.params;
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-sm font-bold mb-2 border-b-2">690 Products</h1>
+      <h1 className="mb-2 border-b-2 text-sm font-bold">690 Products</h1>
       <div className="space-y-4">
         {adhesiveCategories.map((collection, index) => (
           <div key={index}>
@@ -140,10 +140,10 @@ export default async function Page(props: {
                       alt={subcategory.name}
                       width={48}
                       height={48}
-                      className="object-cover w-12 h-12 flex-shrink-0"
+                      className="h-12 w-12 flex-shrink-0 object-cover"
                     />
                   </div>
-                  <div className="flex items-start  flex-grow  flex-col py-2 h-24">
+                  <div className="flex h-24 flex-grow flex-col items-start py-2">
                     <div className="text-sm font-medium text-gray-700 group-hover:underline">
                       {subcategory.name}
                     </div>

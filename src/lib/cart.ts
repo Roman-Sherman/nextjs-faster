@@ -5,7 +5,7 @@ const cartSchema = z.array(
   z.object({
     id: z.string(),
     quantity: z.number(),
-  })
+  }),
 );
 
 type CartItem = {
