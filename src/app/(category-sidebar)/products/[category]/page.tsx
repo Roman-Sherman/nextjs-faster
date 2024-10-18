@@ -20,7 +20,6 @@ export default async function Page(props: {
       },
     },
   });
-  console.log("cat", cat);
   if (!cat) {
     return notFound();
   }
