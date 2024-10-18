@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## NextMaster
 
-## Getting Started
+A  replica of [McMaster-Carr](https://www.mcmaster.com/) using Next.js and AI generated content by @ethanniser, @RhysSullivan and @armans-code
 
-First, run the development server:
+### Design notes
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Uses [Next.js 15](https://nextjs.org/)
+  - All mutations are done via [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
+- Uses [Drizzle ORM](https://orm.drizzle.team/docs/overview) on top of [@vercel/postgres](https://vercel.com/docs/storage/vercel-postgres)
+- Images storied on [Vercel Blob](https://vercel.com/docs/storage/vercel-blob)
+- Used [v0](https://v0.dev) to generate all initial UIs with
+- [PPR](https://vercel.com/blog/partial-prerendering-with-next-js-creating-a-new-default-rendering-model) is used to precompute the shells of pages
+  - When deployed, these are served statically from the edge
+  - This makes TTFB faster and speeds up CSS/fonts while origin streams
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### AI
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Used [OpenAI](https://openai.com)'s `gpt-3.5-turbo` to generate product categories, names and descriptions
+- [GetImg.ai](https://getimg.ai) was used to generate product images via the `stable-diffusion-v1-5` model
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Deployment
 
-## Learn More
+- Make sure the Vercel project is connected to a Vercel Postgres (Neon) database and Vercel Blob Storage
+- Run `pnpm db:push` to apply schema to your db
 
-To learn more about Next.js, take a look at the following resources:
+### Local dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Run `vc env pull` to get a `.env.local` file with your db credentials.
+- Run `pnpm install` && `pnpm dev` to start developing
+- For DB migrations with `drizzle-kit`:
+  - Make sure `?sslmode=required` is added to the `POSTGRES_URL` env for dev
+  - Run `pnpm db:push` to apply schema to your db
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Performance
 
-## Deploy on Vercel
+[PageSpeed report](https://pagespeed.web.dev/analysis/https-next-ai-news-vercel-app/x55es0m0ya?form_factor=mobile) for Emulated Moto G Power with Lighthouse 11.0.0, Slow 4G Throttling:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[![](https://h2rsi9anqnqbkvkf.public.blob.vercel-storage.com/perf-LAbwq5HsiimvbRrNSUV9JAGCATsBMs.png)](https://pagespeed.web.dev/analysis/https-next-ai-news-vercel-app/x55es0m0ya?form_factor=mobile)
+<sup>&nbsp;&nbsp;&nbsp;💩 The SEO `98` score cannot be `100` without sacrificing stylistic fidelity to the original HN navigation</sup>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
