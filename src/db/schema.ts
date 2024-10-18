@@ -56,7 +56,7 @@ export const subcollectionRelations = relations(
   subcollection,
   ({ one, many }) => ({
     category: one(categories, {
-      fields: [subcollection.category_id],
+      fields: [subcollection.category_slug],
       references: [categories.slug],
     }),
     subcategories: many(subcategories),
@@ -76,7 +76,7 @@ export const subcategoriesRelations = relations(
 
 export const productsRelations = relations(products, ({ one }) => ({
   subcategory: one(subcategories, {
-    fields: [products.subcategory_id],
+    fields: [products.subcategory_slug],
     references: [subcategories.slug],
   }),
 }));

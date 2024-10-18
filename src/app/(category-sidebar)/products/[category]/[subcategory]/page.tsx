@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { getSubcategoryDetails } from "@/db/utils";
 import { ProductLink } from "@/components/ui/product-card";
+import { db } from "@/db";
 
 export default async function Page(props: {
   params: Promise<{
@@ -11,9 +11,12 @@ export default async function Page(props: {
   const { subcategory, category } = await props.params;
   const urlDecodedCategory = decodeURIComponent(category);
   const urlDecodedSubcategory = decodeURIComponent(subcategory);
-  const sub = getSubcategoryDetails({
-    category: urlDecodedCategory,
-    subcategory: urlDecodedSubcategory,
+  const sub = await db.query.subcategories.findFirst({
+    where: (subcategories, { eq }) =>
+      eq(subcategories.slug, urlDecodedSubcategory),
+    with: {
+      products: true,
+    },
   });
   if (!sub) {
     return notFound();

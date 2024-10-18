@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { artSupplies } from "./data";
 import Link from "next/link";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
 

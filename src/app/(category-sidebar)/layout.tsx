@@ -1,7 +1,12 @@
-import { artSupplies } from "../data";
+import { db } from "@/db";
+import { categories } from "@/db/schema";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const allCategories = artSupplies.flatMap((item) => item.categories);
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const allCategories = await db.select().from(categories);
   return (
     <div className="flex flex-grow font-helvetica-roman">
       <aside className="hidden w-48 min-w-48 border-r border-gray-400 p-3 md:block">
@@ -10,11 +15,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </h2>
         <ul className="flex flex-col items-start justify-center">
           {allCategories.map((category) => (
-            <li key={category.categoryName}>
-              <a href={`/products/${category.categoryName}`}>
-                <div className="text-wrap py-1 text-xs text-gray-800 hover:bg-yellow-100 hover:underline">
-                  {category.categoryName}
-                </div>
+            <li key={category.name} className="w-full">
+              <a
+                href={`/products/${category.slug}`}
+                className="block w-full py-1 text-xs text-gray-800 hover:bg-yellow-100 hover:underline"
+              >
+                {category.name}
               </a>
             </li>
           ))}

@@ -1,5 +1,5 @@
 import { ProductLink } from "@/components/ui/product-card";
-import { getProductDetails, getRelatedProducts } from "@/db/utils";
+import { db } from "@/db";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -14,15 +14,16 @@ export default async function Page(props: {
   const urlDecodedProduct = decodeURIComponent(product);
   const urlDecodedSubcategory = decodeURIComponent(subcategory);
   const urlDecodedCategory = decodeURIComponent(category);
-  const productData = getProductDetails({
-    category: urlDecodedCategory,
-    subcategory: urlDecodedSubcategory,
-    product: urlDecodedProduct,
+  const productData = await db.query.products.findFirst({
+    where: (products, { eq }) => eq(products.slug, urlDecodedProduct),
   });
-  const related = getRelatedProducts({
-    category: urlDecodedCategory,
-    subcategory: urlDecodedSubcategory,
-    product: urlDecodedProduct,
+  const related = await db.query.products.findMany({
+    where: (products, { eq }) =>
+      eq(products.subcategory_slug, urlDecodedSubcategory),
+    with: {
+      subcategory: true,
+    },
+    limit: 5,
   });
   if (!productData) {
     return notFound();
