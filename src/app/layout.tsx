@@ -5,6 +5,8 @@ import Link from "next/link";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
 import { getCart } from "@/lib/cart";
 import { MenuIcon } from "lucide-react";
+import { Suspense } from "react";
+import { Cart } from "@/components/cart";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -33,8 +35,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cart = await getCart();
-
   return (
     <html lang="en" className="h-full">
       <body
@@ -67,11 +67,9 @@ export default async function RootLayout({
                 >
                   ORDER
                 </Link>
-                {cart.length > 0 && (
-                  <div className="absolute -right-3 -top-1 rounded-full bg-yellow-300 px-1 text-xs text-green-800">
-                    {cart.length}
-                  </div>
-                )}
+                <Suspense>
+                  <Cart />
+                </Suspense>
               </div>
               <Link
                 href="/order-history"
