@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
 import { artSupplies } from "./data";
 import Link from "next/link";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
@@ -84,8 +82,8 @@ export default function RootLayout({
             <main className="flex-grow">{children}</main>
           </div>
         </div>
-        <footer className="flex h-6 items-center justify-between border-t border-gray-400 px-4 font-helvetica text-[11px]">
-          <div className="space-x-1">
+        <footer className="flex h-auto flex-col items-center justify-between space-y-2 border-t border-gray-400 px-4 font-helvetica text-[11px] sm:h-6 sm:flex-row sm:space-y-0">
+          <div className="flex flex-wrap justify-center space-x-1 sm:justify-start">
             <span className="hover:bg-yellow-100 hover:underline">Home</span>
             <span>|</span>
             <span className="hover:bg-yellow-100 hover:underline">
@@ -110,11 +108,12 @@ export default function RootLayout({
               Settings
             </span>
           </div>
-          <div>
+          <div className="text-center sm:text-right">
             By using this website, you agree to check out the{" "}
             <Link
               href="https://github.com/ethanniser/NextMaster"
               className="font-bold hover:underline"
+              target="_blank"
             >
               Source Code
             </Link>
