@@ -4,21 +4,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const allCategories = artSupplies.flatMap((item) => item.categories);
   return (
     <div className="flex flex-grow font-helvetica-roman">
-      <aside className="hidden w-64 border-r border-gray-400 p-4 md:block">
+      <aside className="hidden w-64 border-r border-gray-400 p-3 md:block">
         <h2 className="border-b border-green-800 text-sm font-semibold text-green-900">
           Choose a Category
         </h2>
-        <ul className="">
+        <ul className="flex flex-col items-start justify-center">
           {allCategories.map((category) => (
-            <li
-              key={category.categoryName}
-              className="group pb-2 hover:bg-yellow-200"
-            >
-              <a
-                href={`/products/${category.categoryName}`}
-                className="text-xs text-gray-800 group-hover:underline"
-              >
-                {category.categoryName}
+            <li key={category.categoryName}>
+              <a href={`/products/${category.categoryName}`}>
+                <div className="py-1 text-xs text-gray-800 hover:bg-yellow-100 hover:underline">
+                  {category.categoryName}
+                </div>
               </a>
             </li>
           ))}

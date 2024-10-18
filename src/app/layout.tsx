@@ -29,7 +29,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const allCategories = artSupplies.flatMap((item) => item.categories);
   return (
     <html lang="en" className="h-full">
       <body

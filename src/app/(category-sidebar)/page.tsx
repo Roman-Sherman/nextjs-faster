@@ -4,7 +4,7 @@ import { getAllCollections } from "@/db/utils";
 export default function Home() {
   const collections = getAllCollections();
   return (
-    <div className="flex-1 p-4">
+    <div className="p-4">
       {collections.map((collection) => (
         <div key={collection.collectionName}>
           <h2 className="text-xl font-semibold">{collection.collectionName}</h2>
