@@ -40,18 +40,18 @@ export default async function Page(props: {
   const { subcategory, category } = await props.params;
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-sm font-bold mb-2 border-b-2">690 Products</h1>
+      <h1 className="mb-2 border-b-2 text-sm font-bold">690 Products</h1>
       <div className="space-y-4">
         {screwTypes.map((collection, index) => (
           <div key={index}>
-            <h2 className="text-lg font-semibold mb-2 border-b-2">
+            <h2 className="mb-2 border-b-2 text-lg font-semibold">
               {collection.name}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2  ">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
               {collection.items.map((item, subcategoryIndex) => (
                 <Link
                   key={subcategoryIndex}
-                  className="flex flex-row h-full border px-4 py-2 group hover:bg-gray-100"
+                  className="group flex h-full flex-row border px-4 py-2 hover:bg-gray-100"
                   href={`/products/${category}/${subcategory}/${item.name}`}
                 >
                   <div className="py-2">
@@ -60,14 +60,14 @@ export default async function Page(props: {
                       alt={item.name}
                       width={48}
                       height={48}
-                      className="object-cover w-12 h-12 flex-shrink-0"
+                      className="h-12 w-12 flex-shrink-0 object-cover"
                     />
                   </div>
-                  <div className="flex items-start  flex-grow  flex-col py-2 h-24">
+                  <div className="flex h-24 flex-grow flex-col items-start py-2">
                     <div className="text-sm font-medium text-gray-700 group-hover:underline">
                       {item.name}
                     </div>
-                    <p className="text-xs overflow-hidden">
+                    <p className="overflow-hidden text-xs">
                       {item.description}
                     </p>
                   </div>

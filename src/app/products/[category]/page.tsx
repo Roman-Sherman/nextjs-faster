@@ -124,14 +124,14 @@ export default async function Page(props: {
       <div className="space-y-4">
         {adhesiveCategories.map((collection, index) => (
           <div key={index}>
-            <h2 className="text-lg font-semibold mb-2 border-b-2">
+            <h2 className="mb-2 border-b-2 text-lg font-semibold">
               {collection.title}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2  ">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
               {collection.products.map((subcategory, subcategoryIndex) => (
                 <Link
                   key={subcategoryIndex}
-                  className="flex flex-row h-full border px-4 py-2 group hover:bg-gray-100"
+                  className="group flex h-full flex-row border px-4 py-2 hover:bg-gray-100"
                   href={`/products/${category}/${subcategory.name}`}
                 >
                   <div className="py-2">
@@ -147,7 +147,7 @@ export default async function Page(props: {
                     <div className="text-sm font-medium text-gray-700 group-hover:underline">
                       {subcategory.name}
                     </div>
-                    <p className="text-xs overflow-hidden">
+                    <p className="overflow-hidden text-xs">
                       {subcategory.description}
                     </p>
                   </div>
