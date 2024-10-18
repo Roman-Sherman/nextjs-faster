@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   description: "A performant site built with Next.js",
 };
 
+// revalidate the data at most every day
+export const revalidate = 86400;
+
 export default async function RootLayout({
   children,
 }: Readonly<{
