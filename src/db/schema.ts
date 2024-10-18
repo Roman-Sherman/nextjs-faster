@@ -17,7 +17,7 @@ export const categories = pgTable("categories", {
 export const subcollection = pgTable("subcollections", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  category_id: integer("category_id")
+  category_slug: text("category_slug")
     .notNull()
     .references(() => categories.slug, { onDelete: "cascade" }),
 });
@@ -35,7 +35,7 @@ export const products = pgTable("products", {
   name: text("name").notNull(),
   description: text("description").notNull(),
   price: numeric("price").notNull(),
-  subcategory_id: integer("subcategory_id")
+  subcategory_slug: text("subcategory_slug")
     .notNull()
     .references(() => subcategories.slug, { onDelete: "cascade" }),
 });
