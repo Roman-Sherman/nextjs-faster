@@ -26,5 +26,5 @@ export async function getCart() {
     return [];
   }
 
-  return cartSchema.parse(JSON.parse(decodeURIComponent(cart.value)));
+  return cartSchema.parse(JSON.parse(cart.value));
 }
