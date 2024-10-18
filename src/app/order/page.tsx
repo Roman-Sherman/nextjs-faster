@@ -8,6 +8,11 @@ import { removeFromCart } from "@/lib/actions";
 import { products } from "@/db/schema";
 import { inArray } from "drizzle-orm";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Order | NextMaster",
+};
 
 export default async function Page() {
   const cart = await getCart();
