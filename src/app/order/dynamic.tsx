@@ -51,19 +51,23 @@ function CartItem({ product }: { product: CartItem }) {
           </div>
           <div className="flex-grow">
             <h2 className="font-semibold">{product.name}</h2>
-            <p>{product.description}</p>
+            <p className="text-sm md:text-base">{product.description}</p>
           </div>
         </div>
       </Link>
       <div className="flex items-center justify-center space-x-10">
-        <p>{product.quantity}</p>
-        <div className="min-w-24">
-          <p>${product.price} each</p>
-        </div>
-        <div className="min-w-24">
-          <p className="font-semibold">
-            ${Number(product.price) * product.quantity}
-          </p>
+        <div className="flex flex-col-reverse md:flex-row md:gap-4">
+          <p>{product.quantity}</p>
+          <div className="flex md:block">
+            <div className="min-w-8 text-sm md:min-w-24 md:text-base">
+              <p>${product.price} each</p>
+            </div>
+          </div>
+          <div className="min-w-24">
+            <p className="font-semibold">
+              ${Number(product.price) * product.quantity}
+            </p>
+          </div>
         </div>
         <form action={removeFromCart}>
           <button type="submit">
