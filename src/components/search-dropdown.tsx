@@ -38,7 +38,7 @@ export function SearchDropdownComponent() {
               setSearchTerm(e.target.value);
               setIsOpen(e.target.value.length > 0);
             }}
-            className="w-[300px] font-sans font-medium md:w-[450px]"
+            className="w-[180px] font-sans font-medium sm:w-[300px] md:w-[375px]"
           />
           <Search className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
           <X

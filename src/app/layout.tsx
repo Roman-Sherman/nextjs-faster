@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
 import { getCart } from "@/lib/cart";
+import { MenuIcon } from "lucide-react";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -37,10 +38,21 @@ export default async function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
         <div className="flex flex-grow flex-col">
-          <header className="flex items-center justify-between border-b-2 border-yellow-300 p-4 font-futura">
+          <header className="flex items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 font-futura md:p-4">
             <div className="flex items-center space-x-4">
-              <Link href="/" className="text-4xl font-bold text-green-800">
+              <Link
+                href="/"
+                className="hidden text-4xl font-bold text-green-800 sm:block"
+              >
                 NextMaster
+              </Link>
+              <Link
+                href="/"
+                className="block text-4xl font-bold text-green-800 sm:hidden"
+              >
+                <div className="rounded-lg bg-yellow-400 p-2 tracking-tighter">
+                  N
+                </div>
               </Link>
             </div>
             <SearchDropdownComponent />
@@ -60,9 +72,15 @@ export default async function RootLayout({
               </div>
               <Link
                 href="/order-history"
-                className="text-lg text-green-800 hover:underline"
+                className="hidden text-lg text-green-800 hover:underline md:block"
               >
                 ORDER HISTORY
+              </Link>
+              <Link
+                href="/order-history"
+                className="block text-lg text-green-800 hover:underline md:hidden"
+              >
+                <MenuIcon />
               </Link>
             </div>
           </header>
