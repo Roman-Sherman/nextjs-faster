@@ -46,12 +46,14 @@ export default async function RootLayout({
           <header className="flex items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 font-futura md:p-4">
             <div className="flex items-center space-x-4">
               <Link
+                prefetch={true}
                 href="/"
                 className="hidden text-4xl font-bold text-green-800 sm:block"
               >
                 NextMaster
               </Link>
               <Link
+                prefetch={true}
                 href="/"
                 className="block text-4xl font-bold text-green-800 sm:hidden"
               >
@@ -64,6 +66,7 @@ export default async function RootLayout({
             <div className="flex flex-row justify-between space-x-4">
               <div className="relative">
                 <Link
+                  prefetch={true}
                   href="/order"
                   className="text-lg text-green-800 hover:underline"
                 >
@@ -74,12 +77,14 @@ export default async function RootLayout({
                 </Suspense>
               </div>
               <Link
+                prefetch={true}
                 href="/order-history"
                 className="hidden text-lg text-green-800 hover:underline md:block"
               >
                 ORDER HISTORY
               </Link>
               <Link
+                prefetch={true}
                 href="/order-history"
                 className="block text-lg text-green-800 hover:underline md:hidden"
               >
@@ -118,6 +123,7 @@ export default async function RootLayout({
           <div className="text-center sm:text-right">
             By using this website, you agree to check out the{" "}
             <Link
+              prefetch={true}
               href="https://github.com/ethanniser/NextMaster"
               className="font-bold hover:underline"
               target="_blank"

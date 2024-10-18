@@ -58,7 +58,7 @@ export function SearchDropdownComponent() {
           <div className="absolute z-10 mt-1 w-full rounded-md border border-gray-200 bg-white shadow-lg">
             <ScrollArea className="h-[300px]">
               {filteredItems.map((item) => (
-                <Link href={item.href} key={item.slug}>
+                <Link href={item.href} key={item.slug} prefetch={true}>
                   <div
                     key={item.slug}
                     className="flex cursor-pointer items-center p-2 hover:bg-gray-100"
