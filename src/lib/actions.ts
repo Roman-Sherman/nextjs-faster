@@ -1,4 +1,12 @@
 "use server";
+import { sql } from "drizzle-orm";
+import { db } from "../db";
+import {
+  categories,
+  products,
+  subcategories,
+  subcollection,
+} from "../db/schema";
 import { getCart, updateCart } from "./cart";
 
 export async function addToCart(prevState: unknown, formData: FormData) {
@@ -34,4 +42,34 @@ export async function addToCart(prevState: unknown, formData: FormData) {
   }
 
   return "Item added to cart";
+}
+
+export async function searchProducts(searchTerm: string) {
+  const results = await db
+    .select()
+    .from(products)
+    .where(
+      sql`to_tsvector('english', ${products.name}) @@ plainto_tsquery('english', ${searchTerm})`,
+    )
+    .limit(5)
+    .innerJoin(
+      subcategories,
+      sql`${products.subcategory_slug} = ${subcategories.slug}`,
+    )
+    .innerJoin(
+      subcollection,
+      sql`${subcategories.subcollection_id} = ${subcollection.id}`,
+    )
+    .innerJoin(
+      categories,
+      sql`${subcollection.category_slug} = ${categories.slug}`,
+    );
+
+  return results.map((item) => {
+    const href = `/products/${item.categories.slug}/${item.subcategories.slug}/${item.products.slug}`;
+    return {
+      ...item.products,
+      href,
+    };
+  });
 }
