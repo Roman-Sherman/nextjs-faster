@@ -9,6 +9,8 @@ import { products } from "@/db/schema";
 import { inArray } from "drizzle-orm";
 import Link from "next/link";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import { CartItems, TotalCost } from "./dynamic";
 
 export const metadata: Metadata = {
   title: "Order",
@@ -43,29 +45,18 @@ export default async function Page() {
 
         <div className="grid grid-cols-3 gap-8 pt-4">
           <div className="col-span-2">
-            {cart.length > 0 && (
-              <div className="pb-4">
-                <p className="font-semibold text-green-700">
-                  Delivers in 2-4 weeks
-                </p>
-                <p className="text-sm text-gray-500">Need this sooner?</p>
-              </div>
-            )}
-            {cart.length > 0 ? (
-              <div className="flex flex-col space-y-10">
-                {cart.map((item) => (
-                  <CartItem key={item.productSlug} item={item} />
-                ))}
-              </div>
-            ) : (
-              <p>No items in cart</p>
-            )}
+            <Suspense>
+              <CartItems />
+            </Suspense>
           </div>
 
           <div className="space-y-4">
             <div className="rounded bg-gray-100 p-4">
               <p className="font-semibold">
-                Merchandise ${totalCost.toFixed(2)}
+                Merchandise{" "}
+                <Suspense>
+                  <TotalCost />
+                </Suspense>
               </p>
               <p className="text-sm text-gray-500">
                 Applicable shipping and tax will be added.
@@ -79,61 +70,5 @@ export default async function Page() {
         </div>
       </div>
     </main>
-  );
-}
-
-async function CartItem({ item }: { item: CartItem }) {
-  const product = await db.query.products.findFirst({
-    where: (products, { eq }) => eq(products.slug, item.productSlug),
-    with: {
-      subcategory: {
-        with: {
-          subcollection: true,
-        },
-      },
-    },
-  });
-  if (!product) {
-    return null;
-  }
-  return (
-    <div className="flex flex-row items-center justify-between space-x-4 border-t border-gray-200 pt-4">
-      <Link
-        href={`/products/${product.subcategory.subcollection.category_slug}/${product.subcategory.slug}/${product.slug}`}
-      >
-        <div className="flex flex-row space-x-4">
-          <div className="flex h-24 w-24 items-center justify-center bg-gray-100">
-            <Image
-              src={product.image_url ?? "/placeholder.svg"}
-              alt="Product"
-              width={80}
-              height={80}
-              quality={65}
-            />
-          </div>
-          <div className="flex-grow">
-            <h2 className="font-semibold">{product.name}</h2>
-            <p>{product.description}</p>
-          </div>
-        </div>
-      </Link>
-      <div className="flex items-center justify-center space-x-10">
-        <p>{item.quantity}</p>
-        <div className="min-w-24">
-          <p>${product.price} each</p>
-        </div>
-        <div className="min-w-24">
-          <p className="font-semibold">
-            ${Number(product.price) * item.quantity}
-          </p>
-        </div>
-        <form action={removeFromCart}>
-          <button type="submit">
-            <input type="hidden" name="productSlug" value={product.slug} />
-            <X className="h-6 w-6" />
-          </button>
-        </form>
-      </div>
-    </div>
   );
 }
