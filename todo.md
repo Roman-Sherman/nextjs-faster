@@ -8,3 +8,4 @@
 - [ ] Add fetching w/ revalidation & PPR
 - [ ] Add README
 - [ ] Profile against real site?
+- [ ] search (postgress fts)
