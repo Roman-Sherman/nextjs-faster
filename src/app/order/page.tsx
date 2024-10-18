@@ -103,6 +103,7 @@ async function CartItem({ item }: { item: CartItem }) {
               alt="Product"
               width={80}
               height={80}
+              quality={65}
             />
           </div>
           <div className="flex-grow">

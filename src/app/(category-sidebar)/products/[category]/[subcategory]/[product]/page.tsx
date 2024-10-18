@@ -45,6 +45,7 @@ export default async function Page(props: {
             alt={`A small picture of ${productData.name}`}
             height={64}
             width={64}
+            quality={65}
             className="h-64 w-64 flex-shrink-0 border-2"
           />
           <p className="flex-grow text-base">{productData.description}</p>
