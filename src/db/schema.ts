@@ -1,4 +1,5 @@
 import { integer, numeric, pgTable, serial, text } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 
 export const collections = pgTable("collections", {
   id: serial("id").primaryKey(),
@@ -38,3 +39,44 @@ export const products = pgTable("products", {
     .notNull()
     .references(() => subcategories.slug, { onDelete: "cascade" }),
 });
+
+export const collectionsRelations = relations(collections, ({ many }) => ({
+  categories: many(categories),
+}));
+
+export const categoriesRelations = relations(categories, ({ one, many }) => ({
+  collection: one(collections, {
+    fields: [categories.collection_id],
+    references: [collections.id],
+  }),
+  subcollections: many(subcollection),
+}));
+
+export const subcollectionRelations = relations(
+  subcollection,
+  ({ one, many }) => ({
+    category: one(categories, {
+      fields: [subcollection.category_id],
+      references: [categories.slug],
+    }),
+    subcategories: many(subcategories),
+  }),
+);
+
+export const subcategoriesRelations = relations(
+  subcategories,
+  ({ one, many }) => ({
+    subcollection: one(subcollection, {
+      fields: [subcategories.subcollection_id],
+      references: [subcollection.id],
+    }),
+    products: many(products),
+  }),
+);
+
+export const productsRelations = relations(products, ({ one }) => ({
+  subcategory: one(subcategories, {
+    fields: [products.subcategory_id],
+    references: [subcategories.slug],
+  }),
+}));
