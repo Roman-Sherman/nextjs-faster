@@ -59,7 +59,9 @@ export default async function Page() {
 
           <div className="space-y-4">
             <div className="rounded bg-gray-100 p-4">
-              <p className="font-semibold">Merchandise ${totalCost}</p>
+              <p className="font-semibold">
+                Merchandise ${totalCost.toFixed(2)}
+              </p>
               <p className="text-sm text-gray-500">
                 Applicable shipping and tax will be added.
               </p>
