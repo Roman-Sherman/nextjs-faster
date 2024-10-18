@@ -93,6 +93,9 @@ importers:
       postcss:
         specifier: ^8
         version: 8.4.47
+      postcss-hover-media-feature:
+        specifier: ^1.0.2
+        version: 1.0.2(postcss@8.4.47)
       prettier-plugin-tailwindcss:
         specifier: ^0.6.8
         version: 0.6.8(prettier@3.3.3)
@@ -3174,6 +3177,15 @@ packages:
       }
     engines: { node: ">= 0.4" }
 
+  postcss-hover-media-feature@1.0.2:
+    resolution:
+      {
+        integrity: sha512-o5xDUqCQ4xtilWOcvo5LKYxFVSLWcBN0IlTqa0IJwAwHTd4pxKmX4c0fGIpgLQCcBB/+aFizt2NVWNGJWG4Izg==,
+      }
+    engines: { node: ">=10.0.0" }
+    peerDependencies:
+      postcss: ^8.0.0
+
   postcss-import@15.1.0:
     resolution:
       {
@@ -5877,6 +5889,11 @@ snapshots:
   pirates@4.0.6: {}
 
   possible-typed-array-names@1.0.0: {}
+
+  postcss-hover-media-feature@1.0.2(postcss@8.4.47):
+    dependencies:
+      postcss: 8.4.47
+      postcss-selector-parser: 6.1.2
 
   postcss-import@15.1.0(postcss@8.4.47):
     dependencies:

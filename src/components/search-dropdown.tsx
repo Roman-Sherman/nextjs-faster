@@ -20,7 +20,6 @@ export function SearchDropdownComponent() {
   useEffect(() => {
     const search = async () => {
       const results = await searchProducts(searchTerm);
-      console.log(results);
       setFilteredItems(results);
     };
 
