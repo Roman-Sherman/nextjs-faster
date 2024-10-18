@@ -11,7 +11,7 @@ export function ProductLink(props: {
   return (
     <Link
       className="group flex h-full flex-row border px-4 py-2 hover:bg-gray-100"
-      href={`/products/${category_slug}/${subcategory_slug}/${product.slug}`}
+      href={`/products/${encodeURIComponent(category_slug)}/${encodeURIComponent(subcategory_slug)}/${encodeURIComponent(product.slug)}`}
     >
       <div className="py-2">
         <Image

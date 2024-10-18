@@ -64,7 +64,7 @@ export default async function Page(props: {
                   <Link
                     key={subcategoryIndex}
                     className="group flex h-full flex-row border px-4 py-2 hover:bg-gray-100"
-                    href={`/products/${category}/${subcategory.slug}`}
+                    href={`/products/${encodeURIComponent(category)}/${encodeURIComponent(subcategory.slug)}`}
                   >
                     <div className="py-2">
                       <Image

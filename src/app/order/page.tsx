@@ -94,7 +94,7 @@ async function CartItem({ item }: { item: CartItem }) {
   return (
     <div className="flex flex-row items-center justify-between space-x-4 border-t border-gray-200 pt-4">
       <Link
-        href={`/products/${product.subcategory.subcollection.category_slug}/${product.subcategory.slug}/${product.slug}`}
+        href={`/products/${encodeURIComponent(product.subcategory.subcollection.category_slug)}/${encodeURIComponent(product.subcategory.slug)}/${encodeURIComponent(product.slug)}`}
       >
         <div className="flex flex-row space-x-4">
           <div className="flex h-24 w-24 items-center justify-center bg-gray-100">
