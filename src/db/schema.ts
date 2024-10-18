@@ -22,6 +22,7 @@ export const categories = pgTable("categories", {
   collection_id: integer("collection_id")
     .notNull()
     .references(() => collections.id, { onDelete: "cascade" }),
+  image_url: text("image_url"),
 });
 
 export type Category = typeof categories.$inferSelect;
@@ -42,6 +43,7 @@ export const subcategories = pgTable("subcategories", {
   subcollection_id: integer("subcollection_id")
     .notNull()
     .references(() => subcollection.id, { onDelete: "cascade" }),
+  image_url: text("image_url"),
 });
 
 export type Subcategory = typeof subcategories.$inferSelect;
@@ -56,6 +58,7 @@ export const products = pgTable(
     subcategory_slug: text("subcategory_slug")
       .notNull()
       .references(() => subcategories.slug, { onDelete: "cascade" }),
+    image_url: text("image_url"),
   },
   (table) => ({
     nameSearchIndex: index("name_search_index").using(

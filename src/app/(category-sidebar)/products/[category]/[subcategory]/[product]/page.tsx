@@ -41,7 +41,7 @@ export default async function Page(props: {
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
           <Image
-            src={"/placeholder.svg?height=64&width=64"}
+            src={productData.image_url ?? "/placeholder.svg?height=64&width=64"}
             alt={productData.name}
             height={64}
             width={64}
@@ -62,6 +62,7 @@ export default async function Page(props: {
               category_slug={category}
               subcategory_slug={subcategory}
               product={product}
+              imageUrl={product.image_url}
             />
           ))}
         </div>

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { db } from "@/db";
+import Image from "next/image";
 
 export default async function Home() {
   const collections = await db.query.collections.findMany({
     with: {
       categories: true,
     },
+    orderBy: (collections, { asc }) => asc(collections.name),
   });
   return (
     <div className="p-4">
@@ -19,8 +21,8 @@ export default async function Home() {
                 className="flex flex-col items-center text-center"
                 href={`/products/${category.slug}`}
               >
-                <img
-                  src={category.icon}
+                <Image
+                  src={category.image_url ?? "/placeholder.svg"}
                   alt={category.name}
                   className="mb-2 h-14 w-14 border hover:bg-yellow-200"
                   width={48}

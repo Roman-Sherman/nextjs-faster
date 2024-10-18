@@ -90,14 +90,14 @@ async function CartItem({ item }: { item: CartItem }) {
     return null;
   }
   return (
-    <div className="flex flex-row items-center space-x-4 border-t border-gray-200 pt-4">
+    <div className="flex flex-row items-center justify-between space-x-4 border-t border-gray-200 pt-4">
       <Link
         href={`/products/${product.subcategory.subcollection.category_slug}/${product.subcategory.slug}/${product.slug}`}
       >
         <div className="flex flex-row space-x-4">
           <div className="flex h-24 w-24 items-center justify-center bg-gray-100">
             <Image
-              src="/placeholder.svg"
+              src={product.image_url ?? "/placeholder.svg"}
               alt="Product"
               width={80}
               height={80}
@@ -109,7 +109,6 @@ async function CartItem({ item }: { item: CartItem }) {
           </div>
         </div>
       </Link>
-      <div className="px-10" />
       <div className="flex items-center justify-center space-x-10">
         <p>{item.quantity}</p>
         <div className="min-w-24">

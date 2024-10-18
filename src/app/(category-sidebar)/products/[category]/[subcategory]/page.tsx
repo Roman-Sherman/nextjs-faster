@@ -11,7 +11,7 @@ export default async function Page(props: {
   }>;
 }) {
   const { subcategory, category } = await props.params;
-  const urlDecodedCategory = decodeURIComponent(category);
+  // const urlDecodedCategory = decodeURIComponent(category);
   const urlDecodedSubcategory = decodeURIComponent(subcategory);
   const sub = await db.query.subcategories.findFirst({
     where: (subcategories, { eq }) =>
@@ -19,6 +19,7 @@ export default async function Page(props: {
     with: {
       products: true,
     },
+    orderBy: (subcategories, { asc }) => asc(subcategories.name),
   });
 
   if (!sub) {
@@ -45,6 +46,7 @@ export default async function Page(props: {
             category_slug={category}
             subcategory_slug={subcategory}
             product={product}
+            imageUrl={product.image_url}
           />
         ))}
       </div>

@@ -26,6 +26,7 @@ export default async function Page(props: {
         },
       },
     },
+    orderBy: (categories, { asc }) => asc(categories.name),
   });
   if (!cat) {
     return notFound();
@@ -67,7 +68,7 @@ export default async function Page(props: {
                   >
                     <div className="py-2">
                       <Image
-                        src="/placeholder.svg?height=48&width=48"
+                        src={subcategory.image_url ?? "/placeholder.svg"}
                         alt={subcategory.name}
                         width={48}
                         height={48}

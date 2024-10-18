@@ -4,10 +4,10 @@
   - [ ] /subcategory
   - [ ] /product
 
-- [ ] Cart
-  - [ ] add things to cart
-  - [ ] view cart
-  - [ ] streams in after static shell
+- [x] Cart
+  - [x] add things to cart
+  - [x] view cart
+  - [x] streams in after static shell
 - [x] Add fake data
 - [ ] Add fetching w/ revalidation & PPR
 - [ ] Add README (like hacker news)

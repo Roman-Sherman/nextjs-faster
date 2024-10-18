@@ -1,12 +1,13 @@
 import { db } from "@/db";
-import { categories } from "@/db/schema";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const allCategories = await db.select().from(categories);
+  const allCategories = await db.query.categories.findMany({
+    orderBy: (categories, { asc }) => asc(categories.name),
+  });
   return (
     <div className="flex flex-grow font-helvetica-roman">
       <aside className="hidden w-48 min-w-48 border-r border-gray-400 p-3 md:block">
