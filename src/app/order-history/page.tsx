@@ -32,7 +32,7 @@ export default function Page() {
             Reset Password
           </div>
         </div>
-        <div className="w-full rounded-sm bg-green-700 p-2 text-center font-bold text-white hover:bg-green-800">
+        <div className="w-full rounded-sm bg-green-800 p-2 text-center font-bold text-white hover:bg-green-800">
           Log in
         </div>
         <div className="w-full rounded-sm border border-green-800 p-2 text-center font-bold text-green-800 hover:bg-gray-100">
