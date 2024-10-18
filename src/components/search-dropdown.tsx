@@ -58,7 +58,7 @@ export function SearchDropdownComponent() {
           <div className="absolute z-10 mt-1 w-full rounded-md border border-gray-200 bg-white shadow-lg">
             <ScrollArea className="h-[300px]">
               {filteredItems.map((item) => (
-                <Link href={item.href}>
+                <Link href={item.href} key={item.slug}>
                   <div
                     key={item.slug}
                     className="flex cursor-pointer items-center p-2 hover:bg-gray-100"
@@ -68,7 +68,7 @@ export function SearchDropdownComponent() {
                     }}
                   >
                     <Image
-                      src={item.icon}
+                      src={item.icon ?? "/placeholder.svg"}
                       alt=""
                       className="h-10 w-10 pr-2"
                       height={40}

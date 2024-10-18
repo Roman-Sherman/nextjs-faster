@@ -13,5 +13,5 @@
 - [ ] Add README (like hacker news)
   - [ ] link to v0 chats
 - [ ] Profile against real site?
-- [ ] search (postgress fts)
+- [x] search (postgress fts)
 - [ ] Ensure responsive
