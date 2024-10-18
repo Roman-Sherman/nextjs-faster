@@ -120,4 +120,4 @@ type Product = {
   description: string;
   img: string;
   highlights: string[];
-}
+};

@@ -37,7 +37,7 @@ export default function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
         <div className="flex flex-grow flex-col">
-          <header className="font-futura flex items-center justify-between border-b-2 border-yellow-300 p-4">
+          <header className="flex items-center justify-between border-b-2 border-yellow-300 p-4 font-futura">
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
@@ -52,12 +52,18 @@ export default function RootLayout({
                 <Input placeholder="Search" className="w-[300px]" />
                 <Search className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
               </div>
-              <Button variant="ghost" className="text-lg text-green-800">
+              <Link
+                href="/order"
+                className="text-lg text-green-800 hover:underline"
+              >
                 ORDER
-              </Button>
-              <Button variant="ghost" className="text-lg text-green-800">
+              </Link>
+              <Link
+                href="/order-history"
+                className="text-lg text-green-800 hover:underline"
+              >
                 ORDER HISTORY
-              </Button>
+              </Link>
             </div>
           </header>
           <div className="flex flex-grow font-helvetica-roman">
