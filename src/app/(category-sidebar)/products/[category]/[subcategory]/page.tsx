@@ -3,6 +3,37 @@ import { ProductLink } from "@/components/ui/product-card";
 import { db } from "@/db";
 import { products } from "@/db/schema";
 import { count, eq } from "drizzle-orm";
+import type { Metadata } from "next";
+
+export async function generateMetadata(props: {
+  params: Promise<{ category: string; subcategory: string }>;
+}): Promise<Metadata> {
+  const { subcategory: subcategoryParam } = await props.params;
+  const urlDecodedCategory = decodeURIComponent(subcategoryParam);
+
+  const subcategory = await db.query.subcategories.findFirst({
+    where: (subcategories, { eq }) =>
+      eq(subcategories.slug, urlDecodedCategory),
+    orderBy: (categories, { asc }) => asc(categories.name),
+  });
+
+  const rows = await db
+    .select({ count: count() })
+    .from(products)
+    .where(eq(products.subcategory_slug, urlDecodedCategory));
+
+  if (!subcategory) {
+    return notFound();
+  }
+
+  const description = rows[0]?.count
+    ? `Choose from over ${rows[0]?.count - 1} products in ${subcategory.name}. In stock and ready to ship.`
+    : undefined;
+
+  return {
+    openGraph: { title: subcategory.name, description },
+  };
+}
 
 export default async function Page(props: {
   params: Promise<{
