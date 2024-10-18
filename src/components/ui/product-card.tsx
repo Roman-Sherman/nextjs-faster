@@ -10,7 +10,6 @@ export function ProductLink(props: {
   const { category_slug, subcategory_slug, product, imageUrl } = props;
   return (
     <Link
-      prefetch={true}
       className="group flex h-full flex-row border px-4 py-2 hover:bg-gray-100"
       href={`/products/${category_slug}/${subcategory_slug}/${product.slug}`}
     >

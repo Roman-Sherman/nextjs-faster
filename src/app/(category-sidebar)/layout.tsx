@@ -19,7 +19,6 @@ export default async function Layout({
           {allCategories.map((category) => (
             <li key={category.name} className="w-full">
               <Link
-                prefetch={true}
                 href={`/products/${category.slug}`}
                 className="block w-full py-1 text-xs text-gray-800 hover:bg-yellow-100 hover:underline"
               >
