@@ -93,75 +93,75 @@ const makeCategoryPrompt = (categoryName: string) => `
   OUTPUT:`;
 
 const main = Effect.gen(function* () {
-  // find subcollections with less than 5 subcategories
-  const subcollectionsWithLessThan5Subcategories = yield* Effect.tryPromise(
-    () =>
-      db
-        .select({
-          subcollectionId: subcollection.id,
-          subcollectionName: subcollection.name,
-          subcategoryCount: sql<number>`COUNT(${subcategories.slug})`,
-        })
-        .from(subcollection)
-        .leftJoin(
-          subcategories,
-          eq(subcollection.id, subcategories.subcollection_id),
-        )
-        .groupBy(subcollection.id, subcollection.name)
-        .having(eq(sql<number>`COUNT(${subcategories.slug})`, 0)),
-  );
+  // // find subcollections with less than 5 subcategories
+  // const subcollectionsWithLessThan5Subcategories = yield* Effect.tryPromise(
+  //   () =>
+  //     db
+  //       .select({
+  //         subcollectionId: subcollection.id,
+  //         subcollectionName: subcollection.name,
+  //         subcategoryCount: sql<number>`COUNT(${subcategories.slug})`,
+  //       })
+  //       .from(subcollection)
+  //       .leftJoin(
+  //         subcategories,
+  //         eq(subcollection.id, subcategories.subcollection_id),
+  //       )
+  //       .groupBy(subcollection.id, subcollection.name)
+  //       .having(eq(sql<number>`COUNT(${subcategories.slug})`, 0)),
+  // );
 
-  console.log(
-    `found ${subcollectionsWithLessThan5Subcategories.length} subcollections with no subcategories`,
-  );
-  let counter1 = 0;
-  yield* Effect.all(
-    subcollectionsWithLessThan5Subcategories.map((coll) =>
-      Effect.gen(function* () {
-        console.log(
-          `starting ${counter1++} of ${subcollectionsWithLessThan5Subcategories.length}`,
-        );
-        console.log("starting", coll.subcollectionName);
-        const res = yield* Effect.tryPromise(() =>
-          openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-              {
-                role: "user",
-                content: makeCategoryPrompt(coll.subcollectionName),
-              },
-            ],
-          }),
-        );
-        const json = res.choices[0].message.content;
-        if (!json) {
-          return yield* Effect.fail("no json");
-        }
-        console.log("json", json);
-        const res2 = categoryValidator.safeParse(JSON.parse(json));
-        if (!res2.success) {
-          return yield* Effect.fail("invalid json");
-        }
-        yield* Effect.all(
-          res2.data.categories
-            .map(
-              (category) =>
-                ({
-                  ...category,
-                  slug: slugify(category.name),
-                  subcollection_id: coll.subcollectionId,
-                }) as const,
-            )
-            .map((x) =>
-              Effect.tryPromise(() => db.insert(subcategories).values(x)).pipe(
-                Effect.catchAll((e) => Effect.void),
-              ),
-            ),
-        );
-      }),
-    ),
-    { concurrency: 1 },
-  );
+  // console.log(
+  //   `found ${subcollectionsWithLessThan5Subcategories.length} subcollections with no subcategories`,
+  // );
+  // let counter1 = 0;
+  // yield* Effect.all(
+  //   subcollectionsWithLessThan5Subcategories.map((coll) =>
+  //     Effect.gen(function* () {
+  //       console.log(
+  //         `starting ${counter1++} of ${subcollectionsWithLessThan5Subcategories.length}`,
+  //       );
+  //       console.log("starting", coll.subcollectionName);
+  //       const res = yield* Effect.tryPromise(() =>
+  //         openai.chat.completions.create({
+  //           model: "gpt-3.5-turbo",
+  //           messages: [
+  //             {
+  //               role: "user",
+  //               content: makeCategoryPrompt(coll.subcollectionName),
+  //             },
+  //           ],
+  //         }),
+  //       );
+  //       const json = res.choices[0].message.content;
+  //       if (!json) {
+  //         return yield* Effect.fail("no json");
+  //       }
+  //       console.log("json", json);
+  //       const res2 = categoryValidator.safeParse(JSON.parse(json));
+  //       if (!res2.success) {
+  //         return yield* Effect.fail("invalid json");
+  //       }
+  //       yield* Effect.all(
+  //         res2.data.categories
+  //           .map(
+  //             (category) =>
+  //               ({
+  //                 ...category,
+  //                 slug: slugify(category.name),
+  //                 subcollection_id: coll.subcollectionId,
+  //               }) as const,
+  //           )
+  //           .map((x) =>
+  //             Effect.tryPromise(() => db.insert(subcategories).values(x)).pipe(
+  //               Effect.catchAll((e) => Effect.void),
+  //             ),
+  //           ),
+  //       );
+  //     }),
+  //   ),
+  //   { concurrency: 1 },
+  // );
 
   // find subcategories withless than 5 products
   const subcategoriesWithLessThan5Products = yield* Effect.tryPromise(() =>
@@ -186,6 +186,7 @@ const main = Effect.gen(function* () {
         console.log(
           `starting ${counter2++} of ${subcategoriesWithLessThan5Products.length}`,
         );
+        console.log("starting", cat.subcategoryName);
         const res = yield* Effect.tryPromise(() =>
           openai.chat.completions.create({
             model: "gpt-3.5-turbo",
@@ -206,21 +207,26 @@ const main = Effect.gen(function* () {
           return yield* Effect.fail("invalid json");
         }
 
-        yield* Effect.tryPromise(() =>
-          db.insert(products).values(
-            res2.data.products.map((product) => ({
+        yield* Effect.all(
+          res2.data.products
+            .map((product) => ({
               ...product,
               price: product.price.toString(),
               subcategory_slug: cat.subcategorySlug,
               slug: slugify(product.name),
-            })),
-          ),
+            }))
+            .map((x) =>
+              Effect.tryPromise(() => db.insert(products).values(x)).pipe(
+                Effect.catchAll((e) => Effect.void),
+              ),
+            ),
+          {
+            concurrency: 5,
+          },
         );
       }),
     ),
-    {
-      concurrency: 5,
-    },
+    { concurrency: 3 },
   );
 });
 

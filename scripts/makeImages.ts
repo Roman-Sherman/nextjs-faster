@@ -1,6 +1,6 @@
 import { put } from "@vercel/blob";
 import { db } from "../src/db";
-import { Effect } from "effect";
+import { Effect, Schedule } from "effect";
 import {
   products as products_table,
   categories as categories_table,
@@ -149,5 +149,7 @@ const main = Effect.gen(function* () {
   );
 });
 
-const exit = await Effect.runPromiseExit(main);
+const exit = await Effect.runPromiseExit(
+  main.pipe(Effect.retry({ schedule: Schedule.spaced("10 seconds") })),
+);
 console.log(exit.toString());
