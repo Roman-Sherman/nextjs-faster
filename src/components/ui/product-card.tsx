@@ -24,7 +24,7 @@ export function ProductLink(props: {
         />
       </div>
       <div className="px-2" />
-      <div className="flex h-24 flex-grow flex-col items-start py-2">
+      <div className="h-26 flex flex-grow flex-col items-start py-2">
         <div className="text-sm font-medium text-gray-700 group-hover:underline">
           {product.name}
         </div>
