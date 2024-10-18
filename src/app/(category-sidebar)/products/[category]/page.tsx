@@ -33,13 +33,14 @@ export async function generateMetadata({
   const examples = category.subcollections
     .slice(0, 2)
     .map((s) => s.name)
-    .join(", ");
+    .join(", ")
+    .toLowerCase();
 
   return {
     title: `${category.name} | NextMaster`,
     openGraph: {
       title: `${category.name} | NextMaster`,
-      description: `Choose from our selection of ${category.name}, including ${examples + (category.subcollections.length > 1 ? "," : "")} and more. In stock and ready to ship.`,
+      description: `Choose from our selection of ${category.name.toLowerCase()}, including ${examples + (category.subcollections.length > 1 ? "," : "")} and more. In stock and ready to ship.`,
     },
   };
 }
