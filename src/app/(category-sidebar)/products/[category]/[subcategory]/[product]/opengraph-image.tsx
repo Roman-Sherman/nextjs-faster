@@ -98,6 +98,16 @@ export default async function Image(props: {
             {productData.description}
           </div>
         </div>
+        <div
+          style={{
+            textAlign: "center",
+            display: "flex",
+            fontSize: "24px",
+            marginTop: "10px",
+          }}
+        >
+          ${productData.price}
+        </div>
       </div>
     ),
     {
