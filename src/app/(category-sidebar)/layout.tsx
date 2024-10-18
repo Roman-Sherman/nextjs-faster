@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import Link from "next/link";
 
 export default async function Layout({
   children,
@@ -17,12 +18,12 @@ export default async function Layout({
         <ul className="flex flex-col items-start justify-center">
           {allCategories.map((category) => (
             <li key={category.name} className="w-full">
-              <a
+              <Link
                 href={`/products/${category.slug}`}
                 className="block w-full py-1 text-xs text-gray-800 hover:bg-yellow-100 hover:underline"
               >
                 {category.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
