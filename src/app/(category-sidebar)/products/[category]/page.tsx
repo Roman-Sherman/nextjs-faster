@@ -1,6 +1,11 @@
 import { db } from "@/db";
-import { products } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import {
+  categories,
+  products,
+  subcategories,
+  subcollection,
+} from "@/db/schema";
+import { count, eq } from "drizzle-orm";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -25,9 +30,27 @@ export default async function Page(props: {
   if (!cat) {
     return notFound();
   }
+
+  const countRes = await db
+    .select({ count: count() })
+    .from(categories)
+    .leftJoin(subcollection, eq(categories.slug, subcollection.category_slug))
+    .leftJoin(
+      subcategories,
+      eq(subcollection.id, subcategories.subcollection_id),
+    )
+    .leftJoin(products, eq(subcategories.slug, products.subcategory_slug))
+    .where(eq(categories.slug, cat.slug));
+
+  const finalCount = countRes[0]?.count;
+
   return (
     <div className="container mx-auto p-4">
-      <h1 className="mb-2 border-b-2 text-sm font-bold">690 Products</h1>
+      {finalCount && (
+        <h1 className="mb-2 border-b-2 text-sm font-bold">
+          {finalCount} Products
+        </h1>
+      )}
       <div className="space-y-4">
         {cat.subcollections.map((subcollection, index) => (
           <div key={index}>

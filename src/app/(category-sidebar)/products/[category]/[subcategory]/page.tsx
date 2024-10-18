@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { ProductLink } from "@/components/ui/product-card";
 import { db } from "@/db";
+import { products } from "@/db/schema";
+import { count, eq } from "drizzle-orm";
 
 export default async function Page(props: {
   params: Promise<{
@@ -18,12 +20,24 @@ export default async function Page(props: {
       products: true,
     },
   });
+
   if (!sub) {
     return notFound();
   }
+
+  const countRes = await db
+    .select({ count: count() })
+    .from(products)
+    .where(eq(products.subcategory_slug, urlDecodedSubcategory));
+
+  const finalCount = countRes[0]?.count;
   return (
     <div className="container mx-auto p-4">
-      <h1 className="mb-2 border-b-2 text-sm font-bold">690 Products</h1>
+      {finalCount && (
+        <h1 className="mb-2 border-b-2 text-sm font-bold">
+          {finalCount} Products
+        </h1>
+      )}
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
         {sub.products.map((product) => (
           <ProductLink

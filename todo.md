@@ -8,7 +8,7 @@
   - [ ] add things to cart
   - [ ] view cart
   - [ ] streams in after static shell
-- [ ] Add fake data
+- [x] Add fake data
 - [ ] Add fetching w/ revalidation & PPR
 - [ ] Add README (like hacker news)
   - [ ] link to v0 chats
