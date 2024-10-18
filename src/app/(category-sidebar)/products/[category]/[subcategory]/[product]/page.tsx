@@ -49,6 +49,7 @@ export default async function Page(props: {
           />
           <p className="flex-grow text-base">{productData.description}</p>
         </div>
+        <p className="text-xl font-bold">${productData.price}</p>
         <AddToCartForm productSlug={productData.slug} />
       </div>
       <div className="pt-8">

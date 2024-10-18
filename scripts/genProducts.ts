@@ -1,5 +1,5 @@
 import { db } from "../src/db";
-import { Effect, Console } from "effect";
+import { Effect, Schedule, Console, Cause } from "effect";
 import {
   products as products_table,
   categories,
@@ -93,7 +93,7 @@ const makeCategoryPrompt = (categoryName: string) => `
   OUTPUT:`;
 
 const main = Effect.gen(function* () {
-  // // find subcollections with less than 5 subcategories
+  // find subcollections with less than 5 subcategories
   // const subcollectionsWithLessThan5Subcategories = yield* Effect.tryPromise(
   //   () =>
   //     db
@@ -110,7 +110,6 @@ const main = Effect.gen(function* () {
   //       .groupBy(subcollection.id, subcollection.name)
   //       .having(eq(sql<number>`COUNT(${subcategories.slug})`, 0)),
   // );
-
   // console.log(
   //   `found ${subcollectionsWithLessThan5Subcategories.length} subcollections with no subcategories`,
   // );
@@ -132,13 +131,13 @@ const main = Effect.gen(function* () {
   //             },
   //           ],
   //         }),
-  //       );
-  //       const json = res.choices[0].message.content;
-  //       if (!json) {
+  //       ).pipe(Effect.tapErrorCause((e) => Console.error("hi", e)));
+  //       const text = res.choices[0].message.content;
+  //       if (!text) {
   //         return yield* Effect.fail("no json");
   //       }
-  //       console.log("json", json);
-  //       const res2 = categoryValidator.safeParse(JSON.parse(json));
+  //       const json = yield* Effect.try(() => JSON.parse(text));
+  //       const res2 = categoryValidator.safeParse(json);
   //       if (!res2.success) {
   //         return yield* Effect.fail("invalid json");
   //       }
@@ -158,12 +157,12 @@ const main = Effect.gen(function* () {
   //             ),
   //           ),
   //       );
+  //       console.log("data inserted");
   //     }),
   //   ),
-  //   { concurrency: 1 },
+  //   { mode: "either", concurrency: 4 },
   // );
-
-  // find subcategories withless than 5 products
+  // // find subcategories withless than 5 products
   const subcategoriesWithLessThan5Products = yield* Effect.tryPromise(() =>
     db
       .select({
@@ -206,7 +205,6 @@ const main = Effect.gen(function* () {
         if (!res2.success) {
           return yield* Effect.fail("invalid json");
         }
-
         yield* Effect.all(
           res2.data.products
             .map((product) => ({
@@ -230,5 +228,7 @@ const main = Effect.gen(function* () {
   );
 });
 
-const exit = await Effect.runPromiseExit(main);
+const exit = await Effect.runPromiseExit(
+  main.pipe(Effect.retry({ schedule: Schedule.spaced("1 seconds") })),
+);
 console.log(exit.toString());
