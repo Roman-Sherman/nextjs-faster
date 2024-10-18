@@ -4,8 +4,6 @@ import "./globals.css";
 import Link from "next/link";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
 import { MenuIcon } from "lucide-react";
-import { Suspense } from "react";
-import { Cart } from "@/components/cart";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -66,9 +64,6 @@ export default async function RootLayout({
                 >
                   ORDER
                 </Link>
-                <Suspense>
-                  <Cart />
-                </Suspense>
               </div>
               <Link
                 href="/order-history"
