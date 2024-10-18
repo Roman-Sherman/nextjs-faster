@@ -114,3 +114,10 @@ export const productCategories = [
     ],
   },
 ];
+
+type Product = {
+  name: string;
+  description: string;
+  img: string;
+  highlights: string[];
+}
