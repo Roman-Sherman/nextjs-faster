@@ -1,7 +1,8 @@
 - [ ] OG & Metadata
-    - [ ] /category
-    - [ ] /subcategory
-    - [ ] /product
+
+  - [ ] /category
+  - [ ] /subcategory
+  - [ ] /product
 
 - [ ] Cart
   - [ ] add things to cart
