@@ -36,7 +36,7 @@ export default function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
         <div className="flex flex-grow flex-col">
-          <header className="flex items-center justify-between border-b-2 border-yellow-300 p-4 font-futura">
+          <header className="font-futura flex items-center justify-between border-b-2 border-yellow-300 p-4">
             <div className="flex items-center space-x-4">
               <Link href="/" className="text-4xl font-bold text-green-800">
                 NextMaster
@@ -112,8 +112,13 @@ export default function RootLayout({
             </span>
           </div>
           <div>
-            By using this website, you agree to our Terms and Conditions and
-            Privacy Policy
+            By using this website, you agree to check out the{" "}
+            <Link
+              href="https://github.com/ethanniser/NextMaster"
+              className="font-bold hover:underline"
+            >
+              Source Code
+            </Link>
           </div>
         </footer>
       </body>
