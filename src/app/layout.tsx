@@ -86,6 +86,7 @@ export default async function RootLayout({
               <Link
                 prefetch={true}
                 href="/order-history"
+                aria-label="Order History"
                 className="block text-lg text-green-800 hover:underline md:hidden"
               >
                 <MenuIcon />
