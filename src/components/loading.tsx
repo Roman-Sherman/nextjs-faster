@@ -1,13 +1,9 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/Z1bVbMZYEOI
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
-export default function Page() {
+export function LoadingPage() {
+  // take up the full screen and center the spinner
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex h-screen items-center justify-center">
       <svg
-        className="h-8 w-8 animate-spin text-gray-900 dark:text-gray-50"
+        className="h-8 w-8 animate-spin text-green-800"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
