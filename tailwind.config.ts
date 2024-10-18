@@ -13,6 +13,7 @@ const config: Config = {
       fontFamily: {
         helvetica: ["var(--font-helvetica)"],
         "helvetica-roman": ["var(--font-helvetica-roman)"],
+        futura: ["var(--font-futura)"],
       },
       colors: {
         background: "hsl(var(--background))",
