@@ -15,7 +15,7 @@ export default async function Page() {
           <h1 className="font-futura text-2xl text-green-800">Order</h1>
         </div>
 
-        <div className="grid grid-cols-3 gap-8 pt-4">
+        <div className="flex grid-cols-3 flex-col gap-8 pt-4 lg:grid">
           <div className="col-span-2">
             <Suspense>
               <CartItems />
