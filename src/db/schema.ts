@@ -3,7 +3,6 @@ import { integer, numeric, pgTable, serial, text } from "drizzle-orm/pg-core";
 export const collections = pgTable("collections", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  slug: text("slug").notNull(),
 });
 
 export const categories = pgTable("categories", {
