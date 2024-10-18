@@ -3,8 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { artSupplies } from "./data";
 import Link from "next/link";
-import { getAllCategories } from "@/db/utils";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -30,7 +30,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const allCategories = getAllCategories();
+  const allCategories = artSupplies.flatMap((item) => item.categories);
   return (
     <html lang="en" className="h-full">
       <body
@@ -43,14 +43,14 @@ export default function RootLayout({
                 NextMaster
               </Link>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <Input
-                  placeholder="Search"
-                  className="w-[450px] font-sans font-medium"
-                />
-                <Search className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
-              </div>
+            <div className="relative">
+              <Input
+                placeholder="Search"
+                className="w-[450px] font-sans font-medium"
+              />
+              <Search className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            </div>
+            <div className="flex flex-row justify-between space-x-4">
               <Link
                 href="/order"
                 className="text-lg text-green-800 hover:underline"
