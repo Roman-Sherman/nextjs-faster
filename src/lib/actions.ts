@@ -8,6 +8,7 @@ import {
   subcollection,
 } from "../db/schema";
 import { getCart, updateCart } from "./cart";
+import { revalidatePath } from "next/cache";
 
 export async function addToCart(prevState: unknown, formData: FormData) {
   const prevCart = await getCart();
@@ -44,7 +45,7 @@ export async function addToCart(prevState: unknown, formData: FormData) {
   return "Item added to cart";
 }
 
-export async function removeFromCart(formData: FormData) {
+export async function removeFromCart(prevState: unknown, formData: FormData) {
   const prevCart = await getCart();
   const productSlug = formData.get("productSlug");
   if (typeof productSlug !== "string") {
@@ -58,6 +59,8 @@ export async function removeFromCart(formData: FormData) {
   }
   const newCart = prevCart.filter((item) => item.productSlug !== productSlug);
   await updateCart(newCart);
+  revalidatePath("/order");
+  return "Item removed from cart";
 }
 
 export async function searchProducts(searchTerm: string) {

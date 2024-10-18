@@ -1,9 +1,14 @@
 "use client";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { addToCart } from "@/lib/actions";
+import { useSWRConfig } from "swr";
 
 export function AddToCartForm({ productSlug }: { productSlug: string }) {
   const [message, formAction, isPending] = useActionState(addToCart, null);
+  const { mutate } = useSWRConfig();
+  useEffect(() => {
+    mutate("/api/cart");
+  }, [message]);
   return (
     <form className="flex flex-col gap-2" action={formAction}>
       <input type="hidden" name="productSlug" value={productSlug} />

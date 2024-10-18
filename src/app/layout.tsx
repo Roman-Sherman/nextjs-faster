@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 
 // revalidate the data at most every day
 export const revalidate = 86400;
+export const dynamic = "force-static";
 
 export default async function RootLayout({
   children,

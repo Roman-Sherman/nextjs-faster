@@ -1,14 +1,13 @@
 import { LoginForm } from "@/components/login-form";
 import { getCart } from "@/lib/cart";
-import { X } from "lucide-react";
-import type { CartItem } from "@/lib/cart";
+import type { CartItem } from "@/lib/utils";
 import Image from "next/image";
 import { db } from "@/db";
-import { removeFromCart } from "@/lib/actions";
 import { products } from "@/db/schema";
 import { inArray } from "drizzle-orm";
 import Link from "next/link";
 import { Metadata } from "next";
+import { RemoveFromCartForm } from "@/components/remove-from-cart-form";
 
 export const metadata: Metadata = {
   title: "Order",
@@ -16,6 +15,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const cart = await getCart();
+  console.log("cart", cart);
   const dbProducts = await db
     .select()
     .from(products)
@@ -127,12 +127,7 @@ async function CartItem({ item }: { item: CartItem }) {
             ${Number(product.price) * item.quantity}
           </p>
         </div>
-        <form action={removeFromCart}>
-          <button type="submit">
-            <input type="hidden" name="productSlug" value={product.slug} />
-            <X className="h-6 w-6" />
-          </button>
-        </form>
+        <RemoveFromCartForm productSlug={product.slug} />
       </div>
     </div>
   );
