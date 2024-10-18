@@ -1,6 +1,6 @@
 ## NextMaster
 
-A  replica of [McMaster-Carr](https://www.mcmaster.com/) using Next.js and AI generated content by @ethanniser, @RhysSullivan and @armans-code
+A  replica of [McMaster-Carr](https://www.mcmaster.com/) using Next.js and AI generated content by [@ethanniser](https://github.com/ethanniser), [@RhysSullivan](https://github.com/RhysSullivan) and [@armans-code](https://github.com/armans-code)
 
 ### Design notes
 
