@@ -68,7 +68,7 @@ export function SearchDropdownComponent() {
                     }}
                   >
                     <Image
-                      src={"item.icon"}
+                      src={item.icon}
                       alt=""
                       className="h-10 w-10 pr-2"
                       height={40}
