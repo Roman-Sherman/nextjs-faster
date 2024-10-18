@@ -50,7 +50,7 @@ export default async function RootLayout({
                 href="/"
                 className="block text-4xl font-bold text-green-800 sm:hidden"
               >
-                <div className="rounded-lg bg-yellow-400 p-2 tracking-tighter">
+                <div className="rounded-lg bg-yellow-400 px-3 pt-2 tracking-tighter">
                   N
                 </div>
               </Link>
