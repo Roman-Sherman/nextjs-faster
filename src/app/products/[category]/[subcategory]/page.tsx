@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { artSupplies } from "@/app/data";
 import { notFound } from "next/navigation";
+import { getSubcategoryDetails } from "@/db/utils";
 
 export default async function Page(props: {
   params: Promise<{
@@ -11,21 +11,11 @@ export default async function Page(props: {
 }) {
   const { subcategory, category } = await props.params;
   const urlDecodedCategory = decodeURIComponent(category);
-  const categoryData = artSupplies.find((c) =>
-    c.categories.find((cat) => cat.categoryName === urlDecodedCategory),
-  );
-  const cat = categoryData?.categories.find(
-    (cat) => cat.categoryName === urlDecodedCategory,
-  );
   const urlDecodedSubcategory = decodeURIComponent(subcategory);
-  const screwTypes = cat?.categoryItems.find((collection) =>
-    collection.subcategories.find(
-      (sub) => sub.subcategoryName === urlDecodedSubcategory,
-    ),
-  );
-  const sub = screwTypes?.subcategories.find(
-    (sub) => sub.subcategoryName === urlDecodedSubcategory,
-  );
+  const sub = getSubcategoryDetails({
+    category: urlDecodedCategory,
+    subcategory: urlDecodedSubcategory,
+  });
   if (!sub) {
     return notFound();
   }
