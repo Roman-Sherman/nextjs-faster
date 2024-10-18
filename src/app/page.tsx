@@ -1,52 +1,28 @@
-import Image from "next/image";
+import { productCategories } from "./data";
+
 
 export default function Home() {
   return (
-    <>
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Fastening & Joining</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {[
-            "Screws & Bolts",
-            "Nuts",
-            "Washers",
-            "Rivets",
-            "Pins",
-            "Anchors",
-          ].map((item) => (
-            <div key={item} className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-gray-200 rounded-full mb-2 flex items-center justify-center">
-                {/* Replace with actual icons */}
-                <span className="text-3xl">🔩</span>
-              </div>
-              <span className="text-sm">{item}</span>
+    <main className="flex-1 p-4">
+    {productCategories.map((category) => (
+      <div key={category.name} className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">{category.name}</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {category.subcategories.map((subcategory) => (
+            <div key={subcategory.name} className="flex flex-col items-center text-center">
+              <img
+                src={subcategory.icon}
+                alt={subcategory.name}
+                className="w-12 h-12 mb-2"
+                width={48}
+                height={48}
+              />
+              <span className="text-xs">{subcategory.name}</span>
             </div>
           ))}
         </div>
-      </section>
-      <section>
-        <h2 className="text-2xl font-bold mb-6">
-          Pipe, Tubing, Hose & Fittings
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {[
-            "Pipe Fittings",
-            "Tube Fittings",
-            "Hose",
-            "Tubing",
-            "Valves",
-            "Manifolds",
-          ].map((item) => (
-            <div key={item} className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-gray-200 rounded-full mb-2 flex items-center justify-center">
-                {/* Replace with actual icons */}
-                <span className="text-3xl">🔧</span>
-              </div>
-              <span className="text-sm">{item}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
+      </div>
+    ))}
+  </main>
   );
 }
