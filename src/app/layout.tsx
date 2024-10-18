@@ -37,7 +37,7 @@ export default function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
         <div className="flex flex-grow flex-col">
-          <header className="font-futura flex items-center justify-between border-b-2 border-yellow-300 p-4">
+          <header className="flex items-center justify-between border-b-2 border-yellow-300 p-4 font-futura">
             <div className="flex items-center space-x-4">
               <Link href="/" className="text-4xl font-bold text-green-800">
                 NextMaster
@@ -46,7 +46,7 @@ export default function RootLayout({
             <div className="relative">
               <Input
                 placeholder="Search"
-                className="w-[450px] font-sans font-medium"
+                className="w-[300px] font-sans font-medium md:w-[450px]"
               />
               <Search className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
             </div>
