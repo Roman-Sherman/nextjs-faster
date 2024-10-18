@@ -46,25 +46,25 @@ export default async function RootLayout({
             </div>
             <SearchDropdownComponent />
             <div className="flex flex-row justify-between space-x-4">
-              <Link
-                href="/order"
-                className="text-lg text-green-800 hover:underline"
-              >
-                ORDER
-              </Link>
               <div className="relative">
                 <Link
-                  href="/order-history"
+                  href="/order"
                   className="text-lg text-green-800 hover:underline"
                 >
-                  ORDER HISTORY
+                  ORDER
                 </Link>
                 {cart.length > 0 && (
-                  <div className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-gray-600">
+                  <div className="absolute -right-3 -top-1 rounded-full bg-yellow-300 px-1 text-xs text-green-800">
                     {cart.length}
                   </div>
                 )}
               </div>
+              <Link
+                href="/order-history"
+                className="text-lg text-green-800 hover:underline"
+              >
+                ORDER HISTORY
+              </Link>
             </div>
           </header>
           {children}

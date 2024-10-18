@@ -1,7 +1,7 @@
 "use server";
 import { getCart, updateCart } from "./cart";
 
-export async function addToCart(formData: FormData) {
+export async function addToCart(prevState: unknown, formData: FormData) {
   const prevCart = await getCart();
   const productSlug = formData.get("productSlug");
   if (typeof productSlug !== "string") {
@@ -32,4 +32,6 @@ export async function addToCart(formData: FormData) {
     ];
     await updateCart(newCart);
   }
+
+  return "Item added to cart";
 }

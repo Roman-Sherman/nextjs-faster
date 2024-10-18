@@ -2,8 +2,8 @@ import { ProductLink } from "@/components/ui/product-card";
 import { db } from "@/db";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { addToCart } from "@/lib/actions";
 import { ne } from "drizzle-orm";
+import { AddToCartForm } from "./add-to-cart-form";
 
 export default async function Page(props: {
   params: Promise<{
@@ -50,15 +50,7 @@ export default async function Page(props: {
           />
           <p className="flex-grow text-base">{productData.description}</p>
         </div>
-        <form className="flex flex-col gap-2" action={addToCart}>
-          <input type="hidden" name="productSlug" value={productData.name} />
-          <button
-            type="submit"
-            className="max-w-[150px] rounded-[2px] bg-green-800 px-5 py-1 text-sm font-semibold text-white"
-          >
-            Add to cart
-          </button>
-        </form>
+        <AddToCartForm productSlug={productData.slug} />
       </div>
       <div className="pt-8">
         <h2 className="text-lg font-bold text-green-800">
