@@ -27,6 +27,7 @@ export default async function Home() {
                   className="mb-2 h-14 w-14 border hover:bg-yellow-200"
                   width={48}
                   height={48}
+                  quality={65}
                 />
                 <span className="text-xs">{category.name}</span>
               </Link>

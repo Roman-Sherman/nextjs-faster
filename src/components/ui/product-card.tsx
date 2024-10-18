@@ -19,6 +19,7 @@ export function ProductLink(props: {
           alt={`A small picture of ${product.name}`}
           width={48}
           height={48}
+          quality={65}
           className="h-12 w-12 flex-shrink-0 object-cover"
         />
       </div>
