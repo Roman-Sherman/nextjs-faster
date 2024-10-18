@@ -39,7 +39,7 @@ export default function RootLayout({
                 <span className="sr-only">Toggle menu</span>
               </Button>
               <Link href="/" className="text-2xl font-bold">
-                McMaster-Next
+                NextMaster
               </Link>
             </div>
             <div className="flex items-center space-x-4">
