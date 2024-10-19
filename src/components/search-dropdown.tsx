@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { Product } from "../db/schema";
 import { searchProducts } from "../lib/actions";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 type SearchResult = Product & { href: string };
 
@@ -17,6 +17,8 @@ export function SearchDropdownComponent() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredItems, setFilteredItems] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const router = useRouter();
 
   useEffect(() => {
     const search = async () => {
@@ -40,6 +42,21 @@ export function SearchDropdownComponent() {
     }
   }, [params]);
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowDown") {
+      setHighlightedIndex((prevIndex) =>
+        prevIndex < filteredItems.length - 1 ? prevIndex + 1 : 0,
+      );
+    } else if (e.key === "ArrowUp") {
+      setHighlightedIndex((prevIndex) =>
+        prevIndex > 0 ? prevIndex - 1 : filteredItems.length - 1,
+      );
+    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+      router.push(filteredItems[highlightedIndex].href);
+      setIsOpen(false);
+    }
+  };
+
   return (
     <div className="font-sans">
       <div className="relative w-full">
@@ -51,7 +68,9 @@ export function SearchDropdownComponent() {
             onChange={(e) => {
               setSearchTerm(e.target.value);
               setIsOpen(e.target.value.length > 0);
+              setHighlightedIndex(-1);
             }}
+            onKeyDown={handleKeyDown}
             className="w-[180px] font-sans font-medium sm:w-[300px] md:w-[375px]"
           />
           <Search className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -71,11 +90,14 @@ export function SearchDropdownComponent() {
         {isOpen && filteredItems.length > 0 && (
           <div className="absolute z-10 mt-1 w-full rounded-md border border-gray-200 bg-white shadow-lg">
             <ScrollArea className="h-[300px]">
-              {filteredItems.map((item) => (
+              {filteredItems.map((item, index) => (
                 <Link href={item.href} key={item.slug} prefetch={true}>
                   <div
                     key={item.slug}
-                    className="flex cursor-pointer items-center p-2 hover:bg-gray-100"
+                    className={cn("flex cursor-pointer items-center p-2", {
+                      "bg-gray-100": index === highlightedIndex,
+                    })}
+                    onMouseEnter={() => setHighlightedIndex(index)}
                     onClick={() => {
                       setSearchTerm(item.name);
                       setIsOpen(false);
