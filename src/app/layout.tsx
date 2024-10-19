@@ -6,6 +6,8 @@ import { SearchDropdownComponent } from "@/components/search-dropdown";
 import { MenuIcon } from "lucide-react";
 import { Suspense } from "react";
 import { Cart } from "@/components/cart";
+import { AuthServer } from "./auth.server";
+import { UsernamePreview } from "./username-preview";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -51,7 +53,21 @@ export default async function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
         <div className="flex flex-grow flex-col">
-          <header className="flex items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 font-futura md:p-4">
+          <div className="flex w-full flex-grow justify-end px-4 pt-2 text-sm hover:underline">
+            <Suspense
+              fallback={
+                <button className="flex flex-row items-center gap-1">
+                  <div className="h-[20px]" />
+                  <svg viewBox="0 0 10 6" className="h-[6px] w-[10px]">
+                    <polygon points="0,0 5,6 10,0"></polygon>
+                  </svg>
+                </button>
+              }
+            >
+              <AuthServer />
+            </Suspense>
+          </div>
+          <header className="flex items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 pt-0 font-futura md:p-4 md:pt-0">
             <div className="flex items-center space-x-4">
               <Link
                 prefetch={true}
