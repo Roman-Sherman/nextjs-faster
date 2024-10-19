@@ -20,9 +20,9 @@ export function ProductLink(props: {
           loading={props.loading}
           src={imageUrl ?? "/placeholder.svg?height=48&width=48"}
           alt={`A small picture of ${product.name}`}
-          width={48}
-          height={48}
-          quality={65}
+          height={256}
+          width={256}
+          quality={70}
           className="h-12 w-12 flex-shrink-0 object-cover"
         />
       </div>
