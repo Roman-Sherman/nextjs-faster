@@ -1,7 +1,7 @@
-import { LoginForm } from "@/components/login-form";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { CartItems, TotalCost } from "./dynamic";
+import { PlaceOrderAuth } from "../auth.server";
 
 export const metadata: Metadata = {
   title: "Order",
@@ -34,10 +34,9 @@ export default async function Page() {
                 Applicable shipping and tax will be added.
               </p>
             </div>
-            <p className="font-semibold text-green-800">
-              Log in to place an order
-            </p>
-            <LoginForm />
+            <Suspense>
+              <PlaceOrderAuth />
+            </Suspense>
           </div>
         </div>
       </div>
