@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Link from "next/link";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
 import { MenuIcon } from "lucide-react";
 import { Suspense } from "react";
 import { Cart } from "@/components/cart";
 import { AuthServer } from "./auth.server";
+import { Link } from "@/components/ui/link";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
