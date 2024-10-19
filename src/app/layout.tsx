@@ -52,7 +52,7 @@ export default async function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
         <div className="flex flex-grow flex-col">
-          <div className="flex w-full flex-grow justify-end px-4 pt-2 text-sm hover:underline">
+          <div className="flex w-full justify-end px-4 pt-2 text-sm hover:underline">
             <Suspense
               fallback={
                 <button className="flex flex-row items-center gap-1">
