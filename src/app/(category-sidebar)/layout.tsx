@@ -1,5 +1,5 @@
+import { Link } from "@/components/ui/link";
 import { db } from "@/db";
-import Link from "next/link";
 
 export default async function Layout({
   children,
