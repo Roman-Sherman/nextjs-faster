@@ -65,9 +65,9 @@ export default async function Page(props: {
             loading="eager"
             src={productData.image_url ?? "/placeholder.svg?height=64&width=64"}
             alt={`A small picture of ${productData.name}`}
-            height={256}
-            width={256}
-            quality={70}
+            height={128}
+            width={128}
+            quality={60}
             className="h-64 w-64 flex-shrink-0 border-2"
           />
           <p className="flex-grow text-base">{productData.description}</p>
