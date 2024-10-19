@@ -45,6 +45,7 @@ function CartItem({ product }: { product: CartItem }) {
         <div className="flex flex-row space-x-4">
           <div className="flex h-24 w-24 items-center justify-center bg-gray-100">
             <Image
+              priority={true}
               src={product.image_url ?? "/placeholder.svg"}
               alt="Product"
               width={80}

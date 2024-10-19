@@ -69,6 +69,7 @@ export default async function Page(props: {
                   >
                     <div className="py-2">
                       <Image
+                        priority={true}
                         src={subcategory.image_url ?? "/placeholder.svg"}
                         alt={`A small picture of ${subcategory.name}`}
                         width={48}

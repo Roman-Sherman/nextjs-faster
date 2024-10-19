@@ -23,6 +23,7 @@ export default async function Home() {
                 href={`/products/${category.slug}`}
               >
                 <Image
+                  priority={true}
                   src={category.image_url ?? "/placeholder.svg"}
                   alt={`A small picture of ${category.name}`}
                   className="mb-2 h-14 w-14 border hover:bg-yellow-200"
