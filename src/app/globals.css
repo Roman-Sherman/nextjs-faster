@@ -76,9 +76,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-
-/* fix ios zooming */
-input, textarea, select {
-  font-size: 16px;
-}
