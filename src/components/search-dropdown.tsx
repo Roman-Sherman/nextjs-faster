@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Product } from "../db/schema";
 import { searchProducts } from "../lib/actions";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 type SearchResult = Product & { href: string };
 
@@ -28,6 +29,16 @@ export function SearchDropdownComponent() {
 
     search();
   }, [searchTerm]);
+
+  const params = useParams();
+  useEffect(() => {
+    if (!params.product) {
+      const subcategory = params.subcategory;
+      setSearchTerm(
+        typeof subcategory === "string" ? subcategory.replaceAll("-", " ") : "",
+      );
+    }
+  }, [params]);
 
   return (
     <div className="font-sans">
