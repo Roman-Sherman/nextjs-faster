@@ -9,6 +9,7 @@ export default async function Home() {
     },
     orderBy: (collections, { asc }) => asc(collections.name),
   });
+  let imageCount = 0;
   return (
     <div className="p-4">
       {collections.map((collection) => (
@@ -23,7 +24,7 @@ export default async function Home() {
                 href={`/products/${category.slug}`}
               >
                 <Image
-                  loading="eager"
+                  loading={imageCount++ < 15 ? "eager" : "lazy"}
                   src={category.image_url ?? "/placeholder.svg"}
                   alt={`A small picture of ${category.name}`}
                   className="mb-2 h-14 w-14 border hover:bg-yellow-200"
