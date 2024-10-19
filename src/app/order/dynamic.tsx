@@ -46,6 +46,7 @@ function CartItem({ product }: { product: CartItem }) {
           <div className="flex h-24 w-24 items-center justify-center bg-gray-100">
             <Image
               loading="eager"
+              decoding="sync"
               src={product.image_url ?? "/placeholder.svg"}
               alt="Product"
               width={80}
