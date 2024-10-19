@@ -19,8 +19,11 @@ export function SearchDropdownComponent() {
 
   useEffect(() => {
     const search = async () => {
-      const results = await searchProducts(searchTerm);
-      setFilteredItems(results);
+      if (searchTerm.length === 0) setFilteredItems([]);
+      else {
+        const results = await searchProducts(searchTerm);
+        setFilteredItems(results);
+      }
     };
 
     search();
