@@ -5,6 +5,7 @@ export function ProductLink(props: {
   imageUrl?: string | null;
   category_slug: string;
   subcategory_slug: string;
+  loading: "eager" | "lazy";
   product: Product;
 }) {
   const { category_slug, subcategory_slug, product, imageUrl } = props;
@@ -16,7 +17,7 @@ export function ProductLink(props: {
     >
       <div className="py-2">
         <Image
-          loading="eager"
+          loading={props.loading}
           src={imageUrl ?? "/placeholder.svg?height=48&width=48"}
           alt={`A small picture of ${product.name}`}
           width={48}

@@ -85,6 +85,7 @@ export default async function Page(props: {
           {related?.map((product) => (
             <ProductLink
               key={product.name}
+              loading="lazy"
               category_slug={category}
               subcategory_slug={subcategory}
               product={product}
