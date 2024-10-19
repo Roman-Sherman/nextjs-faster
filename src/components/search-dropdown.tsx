@@ -106,6 +106,7 @@ export function SearchDropdownComponent() {
                   >
                     <Image
                       loading="eager"
+                      decoding="sync"
                       src={item.image_url ?? "/placeholder.svg"}
                       alt=""
                       className="h-10 w-10 pr-2"
