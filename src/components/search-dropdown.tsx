@@ -68,7 +68,7 @@ export function SearchDropdownComponent() {
                     }}
                   >
                     <Image
-                      priority={true}
+                      loading="eager"
                       src={item.image_url ?? "/placeholder.svg"}
                       alt=""
                       className="h-10 w-10 pr-2"

@@ -16,7 +16,7 @@ export function ProductLink(props: {
     >
       <div className="py-2">
         <Image
-          priority={true}
+          loading="eager"
           src={imageUrl ?? "/placeholder.svg?height=48&width=48"}
           alt={`A small picture of ${product.name}`}
           width={48}

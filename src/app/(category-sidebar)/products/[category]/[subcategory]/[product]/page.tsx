@@ -62,7 +62,7 @@ export default async function Page(props: {
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
           <Image
-            priority={true}
+            loading="eager"
             src={productData.image_url ?? "/placeholder.svg?height=64&width=64"}
             alt={`A small picture of ${productData.name}`}
             height={256}
