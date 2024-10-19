@@ -53,6 +53,7 @@ export function SearchDropdownComponent() {
       );
     } else if (e.key === "Enter" && highlightedIndex >= 0) {
       router.push(filteredItems[highlightedIndex].href);
+      setSearchTerm(filteredItems[highlightedIndex].name);
       setIsOpen(false);
     }
   };
