@@ -8,7 +8,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Product } from "../db/schema";
 import { searchProducts } from "../lib/actions";
-import Link from "next/link";
+import { Link } from "@/components/ui/link";
 import { useParams, useRouter } from "next/navigation";
 
 type SearchResult = Product & { href: string };

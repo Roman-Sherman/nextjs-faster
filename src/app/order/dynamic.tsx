@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { detailedCart } from "@/lib/cart";
-import Link from "next/link";
+import { Link } from "@/components/ui/link";
 import Image from "next/image";
 import { removeFromCart } from "@/lib/actions";
 import { X } from "lucide-react";
