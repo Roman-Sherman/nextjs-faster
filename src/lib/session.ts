@@ -56,10 +56,4 @@ export async function setSession(user: NewUser) {
     secure: true,
     sameSite: "lax",
   }); 
-  (await cookies()).set("username", user.username, {
-    expires: expiresInOneDay,
-    httpOnly: false,
-    secure: true,
-    sameSite: "lax",
-  });
 }
