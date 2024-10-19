@@ -11,7 +11,7 @@ export default async function Home() {
   });
   return (
     <div className="p-4">
-      {collections.map((collection) => (
+      {collections.map((collection, i) => (
         <div key={collection.name}>
           <h2 className="text-xl font-semibold">{collection.name}</h2>
           <div className="grid grid-cols-2 gap-4 border-b-2 py-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
@@ -29,6 +29,7 @@ export default async function Home() {
                   width={48}
                   height={48}
                   quality={65}
+                  priority={i < 4}
                 />
                 <span className="text-xs">{category.name}</span>
               </Link>
