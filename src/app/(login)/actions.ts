@@ -15,7 +15,7 @@ const authSchema = z.object({
 });
 
 async function signIn(input: z.infer<typeof authSchema>) {
-  const { username, password } = input
+  const { username, password } = input;
   const user = await db
     .select({
       user: users,
@@ -69,13 +69,12 @@ async function signUp(input: z.infer<typeof authSchema>) {
 }
 export const signInSignUp = validatedAction(authSchema, async (data) => {
   const { mode } = data;
-  if(mode === "signin") {
+  if (mode === "signin") {
     return signIn(data);
   } else {
     return signUp(data);
   }
 });
-
 
 export async function signOut() {
   (await cookies()).delete("session");
