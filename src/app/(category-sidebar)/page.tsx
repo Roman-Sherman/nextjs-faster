@@ -29,7 +29,7 @@ export default async function Home() {
                   width={48}
                   height={48}
                   quality={65}
-                  priority={i < 4}
+                  priority={i < 1}
                 />
                 <span className="text-xs">{category.name}</span>
               </Link>
