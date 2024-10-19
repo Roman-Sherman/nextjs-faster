@@ -26,7 +26,7 @@
     "drizzle-orm": "^0.35.1",
     "effect": "^3.9.2",
     "lucide-react": "^0.453.0",
-    "next": "15.0.0-canary.195",
+    "next": "15.0.0-canary.198",
     "openai": "^4.68.0",
     "react": "19.0.0-rc-cd22717c-20241013",
     "react-dom": "19.0.0-rc-cd22717c-20241013",
