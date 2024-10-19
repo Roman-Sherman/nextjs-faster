@@ -2,11 +2,12 @@
 
 import { z } from "zod";
 import { eq } from "drizzle-orm";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { validatedAction } from "@/lib/middleware";
 import { db } from "@/db";
 import { NewUser, users } from "@/db/schema";
 import { comparePasswords, hashPassword, setSession } from "@/lib/session";
+import { authRateLimit, signUpRateLimit } from "@/lib/rate-limit";
 
 const authSchema = z.object({
   username: z.string().min(1),
@@ -16,6 +17,17 @@ const authSchema = z.object({
 
 async function signIn(input: z.infer<typeof authSchema>) {
   const { username, password } = input;
+  const ip = (await headers()).get("x-real-ip") ?? "local";
+  const rl = await authRateLimit.limit(ip);
+
+  if (!rl.success) {
+    return {
+      error: {
+        code: "AUTH_ERROR",
+        message: "Too many attempts. Try again later",
+      },
+    };
+  }
   const user = await db
     .select({
       user: users,
@@ -42,6 +54,16 @@ async function signIn(input: z.infer<typeof authSchema>) {
 }
 async function signUp(input: z.infer<typeof authSchema>) {
   const { username, password } = input;
+  const ip = (await headers()).get("x-real-ip") ?? "local";
+  const rl2 = await signUpRateLimit.limit(ip);
+  if (!rl2.success) {
+    return {
+      error: {
+        code: "AUTH_ERROR",
+        message: "Too many signups. Try again later",
+      },
+    };
+  }
 
   const existingUser = await db
     .select()
