@@ -31,7 +31,7 @@ export function ProductLink(props: {
     } catch (e) {
       console.error("failed to preload", prefetchProps.props.src, e);
     }
-  });
+  }, [prefetchProps]);
   return (
     <Link
       prefetch={true}
