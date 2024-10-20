@@ -27,6 +27,7 @@ export function ProductLink(props: {
     try {
       const url = prefetchProps.props.src;
       const img = new Image();
+      img.loading = "lazy";
       img.src = url;
     } catch (e) {
       console.error("failed to preload", prefetchProps.props.src, e);
