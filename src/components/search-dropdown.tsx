@@ -99,12 +99,11 @@ export function SearchDropdownComponent() {
             }}
           />
         </div>
-        {isOpen &&
-          filteredItems.length > 0 &&
-          committedSearchTerm === searchTerm && (
-            <div className="absolute z-10 mt-1 w-full rounded-md border border-gray-200 bg-white shadow-lg">
-              <ScrollArea className="h-[300px]">
-                {filteredItems.map((item, index) => (
+        {((isOpen && committedSearchTerm === searchTerm) || false) && (
+          <div className="absolute z-10 w-full border border-gray-200 bg-white shadow-lg">
+            <ScrollArea className="h-[300px]">
+              {filteredItems.length > 0 ? (
+                filteredItems.map((item, index) => (
                   <Link href={item.href} key={item.slug} prefetch={true}>
                     <div
                       className={cn("flex cursor-pointer items-center p-2", {
@@ -130,10 +129,15 @@ export function SearchDropdownComponent() {
                       <span className="text-sm">{item.name}</span>
                     </div>
                   </Link>
-                ))}
-              </ScrollArea>
-            </div>
-          )}
+                ))
+              ) : (
+                <div className="flex h-full items-center justify-center">
+                  <p className="text-sm text-gray-500">No results found</p>
+                </div>
+              )}
+            </ScrollArea>
+          </div>
+        )}
       </div>
     </div>
   );
