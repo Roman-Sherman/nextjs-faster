@@ -29,7 +29,7 @@ export default async function Layout({
           ))}
         </ul>
       </aside>
-      <main className="mx-auto max-w-screen-lg flex-grow">{children}</main>
+      <main className="flex-grow">{children}</main>
     </div>
   );
 }

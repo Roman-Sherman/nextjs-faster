@@ -72,7 +72,7 @@ export default async function Page(props: {
       ) : (
         <p>No products for this subcategory</p>
       )}
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+      <div className="flex flex-row flex-wrap gap-2">
         {sub.products.map((product) => (
           <ProductLink
             key={product.name}

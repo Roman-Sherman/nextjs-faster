@@ -46,7 +46,7 @@ export default async function Page(props: {
   const finalCount = countRes[0]?.count;
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container p-4">
       {finalCount && (
         <h1 className="mb-2 border-b-2 text-sm font-bold">
           {finalCount} {finalCount === 1 ? "Product" : "Products"}
@@ -58,13 +58,13 @@ export default async function Page(props: {
             <h2 className="mb-2 border-b-2 text-lg font-semibold">
               {subcollection.name}
             </h2>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+            <div className="flex flex-row flex-wrap gap-2">
               {subcollection.subcategories.map(
                 (subcategory, subcategoryIndex) => (
                   <Link
                     prefetch={true}
                     key={subcategoryIndex}
-                    className="group flex h-full flex-row gap-2 border px-4 py-2 hover:bg-gray-100"
+                    className="group flex h-full w-[200px] flex-row gap-2 border px-4 py-2 hover:bg-gray-100"
                     href={`/products/${category}/${subcategory.slug}`}
                   >
                     <div className="py-2">

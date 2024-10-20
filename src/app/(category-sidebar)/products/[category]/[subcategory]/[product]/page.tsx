@@ -2,7 +2,6 @@ import { ProductLink } from "@/components/ui/product-card";
 import { db } from "@/db";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ne } from "drizzle-orm";
 import { AddToCartForm } from "@/components/add-to-cart-form";
 import { Metadata } from "next";
 
@@ -40,22 +39,29 @@ export default async function Page(props: {
   const productData = await db.query.products.findFirst({
     where: (products, { eq }) => eq(products.slug, urlDecodedProduct),
   });
-  const related = await db.query.products.findMany({
+  const relatedUnshifted = await db.query.products.findMany({
     where: (products, { eq, and }) =>
-      and(
-        eq(products.subcategory_slug, urlDecodedSubcategory),
-        ne(products.slug, urlDecodedProduct),
-      ),
+      and(eq(products.subcategory_slug, urlDecodedSubcategory)),
     with: {
       subcategory: true,
     },
-    limit: 5,
+
+    orderBy: (products, { asc }) => asc(products.slug),
   });
+
   if (!productData) {
     return notFound();
   }
+  const currentProductIndex = relatedUnshifted.findIndex(
+    (p) => p.slug === productData.slug,
+  );
+  const related = [
+    ...relatedUnshifted.slice(currentProductIndex + 1),
+    ...relatedUnshifted.slice(0, currentProductIndex),
+  ];
+
   return (
-    <div className="container mx-auto p-4">
+    <div className="container p-4">
       <h1 className="border-t-2 pt-1 text-xl font-bold text-green-800">
         {productData.name}
       </h1>
@@ -82,7 +88,7 @@ export default async function Page(props: {
             Explore more products
           </h2>
         )}
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-row flex-wrap gap-2">
           {related?.map((product) => (
             <ProductLink
               key={product.name}
