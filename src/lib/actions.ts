@@ -8,6 +8,8 @@ import {
   subcollection,
 } from "../db/schema";
 import { getCart, updateCart } from "./cart";
+import { kv } from "@vercel/kv";
+import { z } from "zod";
 
 export async function addToCart(prevState: unknown, formData: FormData) {
   const prevCart = await getCart();
@@ -60,7 +62,29 @@ export async function removeFromCart(formData: FormData) {
   await updateCart(newCart);
 }
 
+const searchResultSchema = z.array(
+  z.object({
+    href: z.string(),
+    name: z.string(),
+    slug: z.string(),
+    image_url: z.string().nullable(),
+    description: z.string(),
+    price: z.string(),
+    subcategory_slug: z.string(),
+  }),
+);
+
 export async function searchProducts(searchTerm: string) {
+  const kvKey = `search:${searchTerm}`;
+
+  const rawCachedResults = await kv.get(kvKey);
+  const parsedCachedResults = searchResultSchema.safeParse(rawCachedResults);
+  if (parsedCachedResults.success) {
+    return parsedCachedResults.data;
+  }
+
+  // cache miss, run the search
+
   let results;
 
   if (searchTerm.length <= 2) {
@@ -111,11 +135,15 @@ export async function searchProducts(searchTerm: string) {
       );
   }
 
-  return results.map((item) => {
+  const searchResults = results.map((item) => {
     const href = `/products/${item.categories.slug}/${item.subcategories.slug}/${item.products.slug}`;
     return {
       ...item.products,
       href,
     };
   });
+
+  await kv.set(kvKey, searchResults, { ex: 60 * 60 }); // 1 hour
+
+  return searchResults;
 }
