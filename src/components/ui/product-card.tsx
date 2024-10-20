@@ -25,9 +25,16 @@ export function ProductLink(props: {
   });
   useEffect(() => {
     try {
-      const url = prefetchProps.props.src;
+      const iprops = prefetchProps.props;
       const img = new Image();
-      img.src = url;
+      // Don't interfer with important requests
+      img.fetchPriority = "low";
+      // Don't block the main thread with prefetch images
+      img.decoding = "async";
+      // Order is important here, sizes must be set before srcset, srcset must be set before src
+      if (iprops.sizes) img.sizes = iprops.sizes;
+      if (iprops.srcSet) img.srcset = iprops.srcSet;
+      if (iprops.src) img.src = iprops.src;
     } catch (e) {
       console.error("failed to preload", prefetchProps.props.src, e);
     }
