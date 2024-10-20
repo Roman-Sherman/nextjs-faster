@@ -69,7 +69,7 @@ export default async function RootLayout({
               <AuthServer />
             </Suspense>
           </div>
-          <header className="flex flex-col items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 pt-2 font-futura sm:flex-row sm:p-4 sm:pt-0">
+          <header className="flex flex-col items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 pb-[4px] pt-2 font-futura sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
             <div className="flex w-full items-center justify-center sm:w-auto">
               <Link
                 prefetch={true}
