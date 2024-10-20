@@ -7,6 +7,8 @@ import { Suspense } from "react";
 import { Cart } from "@/components/cart";
 import { AuthServer } from "./auth.server";
 import { Link } from "@/components/ui/link";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -153,6 +155,8 @@ export default async function RootLayout({
           </div>
         </footer>
       </body>
+      <Analytics />
+      <SpeedInsights />
     </html>
   );
 }
