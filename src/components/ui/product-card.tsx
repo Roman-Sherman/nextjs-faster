@@ -1,5 +1,6 @@
+"use client";
 import { Link } from "@/components/ui/link";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { Product } from "@/db/schema";
 export function ProductLink(props: {
   imageUrl?: string | null;
@@ -9,6 +10,15 @@ export function ProductLink(props: {
   product: Product;
 }) {
   const { category_slug, subcategory_slug, product, imageUrl } = props;
+  // prefetch the main image
+  const prefetchProps = getImageProps({
+    height: 256,
+    quality: 80,
+    width: 256,
+    src: imageUrl ?? "/placeholder.svg?height=64&width=64",
+    alt: `A small picture of ${product.name}`,
+  });
+  fetch(prefetchProps.props.src, { cache: "force-cache" });
   return (
     <Link
       prefetch={true}
