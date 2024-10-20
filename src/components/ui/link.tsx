@@ -9,6 +9,7 @@ type PrefetchImage = {
   sizes: string;
   src: string;
   alt: string;
+  loading: string;
 };
 
 function sleep(ms: number) {
@@ -46,6 +47,9 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
     <NextLink
       onMouseOver={() => {
         for (const image of images) {
+          if (image.loading === "lazy") {
+            continue;
+          }
           const img = new Image();
           img.decoding = "async";
           img.fetchPriority = "low";

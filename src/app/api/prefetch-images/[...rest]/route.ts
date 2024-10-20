@@ -29,6 +29,7 @@ export async function GET(
       sizes: img.getAttribute("sizes"),
       src: img.getAttribute("src"),
       alt: img.getAttribute("alt"),
+      loading: img.getAttribute("loading"),
     }),
   );
   return NextResponse.json({ images });
