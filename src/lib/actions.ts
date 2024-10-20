@@ -86,6 +86,7 @@ export async function searchProducts(searchTerm: string) {
     // For longer search terms, use full-text search with tsquery
     const formattedSearchTerm = searchTerm
       .split(" ")
+      .filter((term) => term.trim() !== "") // Filter out empty terms
       .map((term) => `${term}:*`)
       .join(" & ");
 
