@@ -54,7 +54,7 @@ export function ProductLink(props: {
           width={48}
           height={48}
           quality={65}
-          className="h-12 w-12 flex-shrink-0 object-cover"
+          className="h-auto w-12 flex-shrink-0 object-cover"
         />
       </div>
       <div className="px-2" />
