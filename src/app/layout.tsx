@@ -5,7 +5,6 @@ import { SearchDropdownComponent } from "@/components/search-dropdown";
 import { MenuIcon } from "lucide-react";
 import { Suspense } from "react";
 import { Cart } from "@/components/cart";
-import { AuthServer } from "./auth.server";
 import { Link } from "@/components/ui/link";
 // import { Analytics } from "@vercel/analytics/react";
 // import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -55,20 +54,7 @@ export default async function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
         <div className="flex flex-grow flex-col">
-          <div className="flex w-full justify-end px-4 pt-2 text-sm hover:underline">
-            <Suspense
-              fallback={
-                <button className="flex flex-row items-center gap-1">
-                  <div className="h-[20px]" />
-                  <svg viewBox="0 0 10 6" className="h-[6px] w-[10px]">
-                    <polygon points="0,0 5,6 10,0"></polygon>
-                  </svg>
-                </button>
-              }
-            >
-              <AuthServer />
-            </Suspense>
-          </div>
+          <div className="flex w-full justify-end px-4 pt-2 text-sm hover:underline"></div>
           <header className="flex flex-col items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 pt-2 font-futura sm:flex-row sm:p-4 sm:pt-0">
             <div className="flex w-full items-center justify-center sm:w-auto">
               <Link
