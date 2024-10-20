@@ -28,6 +28,7 @@ export async function getCart() {
   try {
     return cartSchema.parse(JSON.parse(cart.value));
   } catch {
+    console.error("Failed to parse cart cookie");
     return [];
   }
 }
