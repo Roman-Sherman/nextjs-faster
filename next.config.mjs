@@ -9,6 +9,19 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async headers() {
+    return [
+      {
+        source: "/_next/image", // Match the path for Next.js image requests
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, immutable, max-age=31536000", // Mark as immutable and set long caching
+          },
+        ],
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
