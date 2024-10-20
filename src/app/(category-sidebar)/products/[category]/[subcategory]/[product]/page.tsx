@@ -1,9 +1,9 @@
 import { ProductLink } from "@/components/ui/product-card";
 import { db } from "@/db";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { AddToCartForm } from "@/components/add-to-cart-form";
 import { Metadata } from "next";
+import CachedImage from "../../../../../../components/cached-image";
 
 export async function generateMetadata(props: {
   params: Promise<{ product: string; category: string; subcategory: string }>;
@@ -67,14 +67,11 @@ export default async function Page(props: {
       </h1>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
-          <Image
+          <CachedImage
             loading="eager"
             decoding="sync"
             src={productData.image_url ?? "/placeholder.svg?height=64&width=64"}
             alt={`A small picture of ${productData.name}`}
-            height={256}
-            quality={80}
-            width={256}
             className="h-64 w-64 flex-shrink-0 border-2"
           />
           <p className="flex-grow text-base">{productData.description}</p>
