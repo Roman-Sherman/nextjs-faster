@@ -154,9 +154,9 @@ export default async function RootLayout({
             </Link>
           </div>
         </footer>
+        <Analytics />
+        <SpeedInsights />
       </body>
-      <Analytics />
-      <SpeedInsights />
     </html>
   );
 }
