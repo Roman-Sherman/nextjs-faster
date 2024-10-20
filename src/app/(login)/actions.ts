@@ -91,5 +91,7 @@ export const signIn = validatedAction(authSchema, async (data) => {
 });
 
 export async function signOut() {
-  (await cookies()).delete("session");
+  // clear session & cart
+  const c = await cookies();
+  c.getAll().forEach((cookie) => c.delete(cookie.name));
 }
