@@ -18,10 +18,10 @@ export async function GET(
   { params }: { params: { rest: string[] } },
 ) {
   const schema = process.env.NODE_ENV === "development" ? "http" : "https";
-  const host =
-    process.env.NODE_ENV === "development"
-      ? "localhost:3000"
-      : process.env.VERCEL_URL;
+  const host = getHostname();
+  if (!host) {
+    return new Response("Failed to get hostname from env", { status: 500 });
+  }
   const href = (await params).rest.join("/");
   if (!href) {
     return new Response("Missing url parameter", { status: 400 });
