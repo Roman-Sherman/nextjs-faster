@@ -3,6 +3,10 @@ import { Link } from "@/components/ui/link";
 import Image, { getImageProps } from "next/image";
 import { Product } from "@/db/schema";
 import { useEffect } from "react";
+
+// https://next-master-at84qgcki-next-master.vercel.app/_next/image?url=https%3A%2F%2Fbevgyjm5apuichhj.public.blob.vercel-storage.com%2Fproducts%2FDrawing-Board-FKOQtEHFxxnlP4fnzlV5u9pSltgQhT&w=640&q=80
+// https://next-master-at84qgcki-next-master.vercel.app/_next/image?url=https%3A%2F%2Fbevgyjm5apuichhj.public.blob.vercel-storage.com%2Fproducts%2FDrawing-Board-FKOQtEHFxxnlP4fnzlV5u9pSltgQhT&w=640&q=80
+
 export function ProductLink(props: {
   imageUrl?: string | null;
   category_slug: string;
@@ -21,7 +25,7 @@ export function ProductLink(props: {
   });
   useEffect(() => {
     console.log("prefetching", prefetchProps.props.src);
-    fetch(prefetchProps.props.src, { cache: "force-cache" });
+    fetch(prefetchProps.props.src, { cache: "default" });
   }, [prefetchProps.props.src]);
   return (
     <Link
