@@ -30,7 +30,7 @@ export function WelcomeToast() {
             This demo is to highlight the speed a full-stack NextJS site can
             achieve.{" "}
             <a
-              href="https://github.com/ethanniser/NextMaster"
+              href="https://git.new/NextMaster"
               className="text-green-800 hover:underline"
               target="_blank"
             >

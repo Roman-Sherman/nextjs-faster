@@ -147,8 +147,7 @@ export default async function RootLayout({
           <div className="text-center sm:text-right">
             By using this website, you agree to check out the{" "}
             <Link
-              prefetch={true}
-              href="https://github.com/ethanniser/NextMaster"
+              href="https://git.new/NextMaster"
               className="font-bold hover:underline"
               target="_blank"
             >
