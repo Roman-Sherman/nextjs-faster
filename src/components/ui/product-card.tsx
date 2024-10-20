@@ -1,6 +1,7 @@
 "use client";
 import { Link } from "@/components/ui/link";
-import Image, { getImageProps } from "next/image";
+import NextImage from "next/image";
+import { getImageProps } from "next/image";
 import { Product } from "@/db/schema";
 import { useEffect } from "react";
 
@@ -23,9 +24,15 @@ export function ProductLink(props: {
     src: imageUrl ?? "/placeholder.svg?height=64&width=64",
     alt: `A small picture of ${product.name}`,
   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    console.log("prefetching", prefetchProps.props.src);
-    fetch(prefetchProps.props.src, { cache: "default" });
+    const func = async () => {
+      const url = prefetchProps.props.src;
+      console.log("prefetching", prefetchProps.props.src);
+      const img = new Image();
+      img.src = url;
+    };
+    func();
   }, [prefetchProps.props.src]);
   return (
     <Link
@@ -34,7 +41,7 @@ export function ProductLink(props: {
       href={`/products/${category_slug}/${subcategory_slug}/${product.slug}`}
     >
       <div className="py-2">
-        <Image
+        <NextImage
           loading={props.loading}
           decoding="sync"
           src={imageUrl ?? "/placeholder.svg?height=48&width=48"}
