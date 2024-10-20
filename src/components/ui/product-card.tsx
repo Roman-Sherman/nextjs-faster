@@ -3,7 +3,7 @@ import { Link } from "@/components/ui/link";
 import NextImage from "next/image";
 import { getImageProps } from "next/image";
 import { Product } from "@/db/schema";
-import { useEffect } from "react";
+import { usePreloadImage } from "./use-preload-image";
 
 export function ProductLink(props: {
   imageUrl?: string | null;
@@ -23,15 +23,7 @@ export function ProductLink(props: {
     src: imageUrl ?? "/placeholder.svg?height=64&width=64",
     alt: `A small picture of ${product.name}`,
   });
-  useEffect(() => {
-    try {
-      const url = prefetchProps.props.src;
-      const img = new Image();
-      img.src = url;
-    } catch (e) {
-      console.error("failed to preload", prefetchProps.props.src, e);
-    }
-  }, [prefetchProps]);
+  usePreloadImage(prefetchProps);
   return (
     <Link
       prefetch={true}

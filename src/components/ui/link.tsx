@@ -2,11 +2,22 @@
 
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
+import { preloadImage } from "./use-preload-image";
 
-export const Link: typeof NextLink = (({ children, ...props }) => {
+type LinkProps = React.ComponentProps<typeof NextLink> & {
+  imagesToLoadOnHover?: string[];
+};
+export const Link = ({ children, ...props }: LinkProps) => {
   const router = useRouter();
   return (
     <NextLink
+      onMouseOver={() => {
+        if (props.imagesToLoadOnHover) {
+          props.imagesToLoadOnHover.forEach((url) => {
+            preloadImage(url);
+          });
+        }
+      }}
       onMouseDown={(e) => {
         const url = new URL(String(props.href), window.location.href);
         if (
@@ -26,4 +37,4 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
       {children}
     </NextLink>
   );
-}) as typeof NextLink;
+};

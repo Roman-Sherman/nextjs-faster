@@ -8,7 +8,15 @@ export default async function Home() {
   const [collections, productCount] = await Promise.all([
     db.query.collections.findMany({
       with: {
-        categories: true,
+        categories: {
+          with: {
+            subcollections: {
+              with: {
+                subcategories: true,
+              },
+            },
+          },
+        },
       },
       orderBy: (collections, { asc }) => asc(collections.name),
     }),
@@ -28,6 +36,12 @@ export default async function Home() {
             {collection.categories.map((category) => (
               <Link
                 prefetch={true}
+                imagesToLoadOnHover={category.subcollections.flatMap(
+                  (subcategory) =>
+                    subcategory.subcategories.flatMap(
+                      (subcategory) => subcategory.image_url!,
+                    ),
+                )}
                 key={category.name}
                 className="flex flex-col items-center text-center"
                 href={`/products/${category.slug}`}
