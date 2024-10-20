@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
@@ -53,7 +53,7 @@ export default async function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
         <div className="flex flex-grow flex-col">
-          <div className="hidden w-full justify-end px-4 pt-2 text-sm hover:underline sm:flex">
+          <div className="flex w-full justify-end px-4 pt-2 text-sm hover:underline">
             <Suspense
               fallback={
                 <button className="flex flex-row items-center gap-1">
