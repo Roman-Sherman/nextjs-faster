@@ -3,10 +3,6 @@ import { Link } from "@/components/ui/link";
 import NextImage from "next/image";
 import { getImageProps } from "next/image";
 import { Product } from "@/db/schema";
-import { useEffect } from "react";
-
-// https://next-master-at84qgcki-next-master.vercel.app/_next/image?url=https%3A%2F%2Fbevgyjm5apuichhj.public.blob.vercel-storage.com%2Fproducts%2FDrawing-Board-FKOQtEHFxxnlP4fnzlV5u9pSltgQhT&w=640&q=80
-// https://next-master-at84qgcki-next-master.vercel.app/_next/image?url=https%3A%2F%2Fbevgyjm5apuichhj.public.blob.vercel-storage.com%2Fproducts%2FDrawing-Board-FKOQtEHFxxnlP4fnzlV5u9pSltgQhT&w=640&q=80
 
 export function ProductLink(props: {
   imageUrl?: string | null;
@@ -16,7 +12,8 @@ export function ProductLink(props: {
   product: Product;
 }) {
   const { category_slug, subcategory_slug, product, imageUrl } = props;
-  // prefetch the main image
+
+  // prefetch the main image for the product page
   const prefetchProps = getImageProps({
     height: 256,
     quality: 80,
@@ -24,16 +21,10 @@ export function ProductLink(props: {
     src: imageUrl ?? "/placeholder.svg?height=64&width=64",
     alt: `A small picture of ${product.name}`,
   });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    const func = async () => {
-      const url = prefetchProps.props.src;
-      console.log("prefetching", prefetchProps.props.src);
-      const img = new Image();
-      img.src = url;
-    };
-    func();
-  }, [prefetchProps.props.src]);
+  const url = prefetchProps.props.src;
+  const img = new Image();
+  img.src = url;
+
   return (
     <Link
       prefetch={true}
