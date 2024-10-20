@@ -20,8 +20,9 @@ export function ProductLink(props: {
     alt: `A small picture of ${product.name}`,
   });
   useEffect(() => {
+    console.log("prefetching", prefetchProps.props.src);
     fetch(prefetchProps.props.src, { cache: "force-cache" });
-  });
+  }, [prefetchProps.props.src]);
   return (
     <Link
       prefetch={true}
