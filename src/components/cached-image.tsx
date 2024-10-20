@@ -13,6 +13,8 @@ function CachedImage({
 }) {
   const [isLoaded, setIsLoaded] = useState("");
 
+  // TODO: check if thumbnail image is in cache - if not, simply render the full image
+
   return (
     <div>
       {/* Render cached thumbnail image */}
