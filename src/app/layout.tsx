@@ -156,6 +156,7 @@ export default async function RootLayout({
             </Link>
           </div>
         </footer>
+        {/* does putting this in suspense do anything? */}
         <Suspense fallback={null}>
           <Toaster closeButton />
           <WelcomeToast />
