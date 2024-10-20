@@ -32,6 +32,8 @@ async function prefetchImages(href: string) {
   return images as PrefetchImage[];
 }
 
+const seen = new Set<string>();
+
 export const Link: typeof NextLink = (({ children, ...props }) => {
   const [images, setImages] = useState<PrefetchImage[]>([]);
   const router = useRouter();
@@ -47,13 +49,14 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
     <NextLink
       onMouseOver={() => {
         for (const image of images) {
-          if (image.loading === "lazy") {
+          if (image.loading === "lazy" || seen.has(image.srcset)) {
             continue;
           }
           const img = new Image();
           img.decoding = "async";
           img.fetchPriority = "low";
           img.sizes = image.sizes;
+          seen.add(image.srcset);
           img.srcset = image.srcset;
           img.src = image.src;
           img.alt = image.alt;
