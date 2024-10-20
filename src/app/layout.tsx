@@ -9,6 +9,8 @@ import { AuthServer } from "./auth.server";
 import { Link } from "@/components/ui/link";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "sonner";
+import { WelcomeToast } from "./welcome-toast";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -154,6 +156,13 @@ export default async function RootLayout({
             </Link>
           </div>
         </footer>
+        <Suspense fallback={null}>
+          {children}
+
+          <Toaster closeButton />
+          <WelcomeToast />
+        </Suspense>
+
         <Analytics />
         <SpeedInsights />
       </body>
