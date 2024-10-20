@@ -20,7 +20,7 @@ async function prefetchImages(href: string) {
   if (!href.startsWith("/products")) {
     return [];
   }
-  await sleep(100);
+  await sleep(1000);
   const url = new URL(href, window.location.href);
   const imageResponse = await fetch(`/api/prefetch-images${url.pathname}`, {
     priority: "low",

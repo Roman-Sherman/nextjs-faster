@@ -32,5 +32,12 @@ export async function GET(
       loading: img.getAttribute("loading"),
     }))
     .filter((img) => img.src);
-  return NextResponse.json({ images });
+  return NextResponse.json(
+    { images },
+    {
+      headers: {
+        "Cache-Control": "public, max-age=3600",
+      },
+    },
+  );
 }
