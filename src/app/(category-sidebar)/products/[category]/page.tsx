@@ -64,7 +64,7 @@ export default async function Page(props: {
                   <Link
                     prefetch={true}
                     key={subcategoryIndex}
-                    className="group flex h-full w-[200px] flex-row gap-2 border px-4 py-2 hover:bg-gray-100"
+                    className="group flex h-full w-full flex-row gap-2 border px-4 py-2 hover:bg-gray-100 sm:w-[200px]"
                     href={`/products/${category}/${subcategory.slug}`}
                   >
                     <div className="py-2">
