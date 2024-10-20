@@ -1,17 +1,26 @@
 import { Link } from "@/components/ui/link";
 import { db } from "@/db";
+import { products } from "@/db/schema";
+import { count } from "drizzle-orm";
 import Image from "next/image";
 
 export default async function Home() {
-  const collections = await db.query.collections.findMany({
-    with: {
-      categories: true,
-    },
-    orderBy: (collections, { asc }) => asc(collections.name),
-  });
+  const [collections, productCount] = await Promise.all([
+    db.query.collections.findMany({
+      with: {
+        categories: true,
+      },
+      orderBy: (collections, { asc }) => asc(collections.name),
+    }),
+    db.select({ count: count() }).from(products),
+  ]);
   let imageCount = 0;
+
   return (
-    <div className="p-4">
+    <div className="w-full p-4">
+      <div className="mb-2 w-full flex-grow border-b-[1px] border-green-800 text-sm font-semibold text-black">
+        Explore {productCount.at(0)?.count} products
+      </div>
       {collections.map((collection) => (
         <div key={collection.name}>
           <h2 className="text-xl font-semibold">{collection.name}</h2>
