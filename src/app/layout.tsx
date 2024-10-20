@@ -33,13 +33,14 @@ export const metadata: Metadata = {
 // revalidate the data at most every day
 export const revalidate = 86400;
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  minimumScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-};
+// commented out due to accessibility issues
+// export const viewport: Viewport = {
+//   width: "device-width",
+//   initialScale: 1,
+//   minimumScale: 1,
+//   maximumScale: 1,
+//   userScalable: false,
+// };
 
 export default async function RootLayout({
   children,
