@@ -52,7 +52,7 @@ export default async function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
         <div className="flex flex-grow flex-col">
-          <div className="flex w-full justify-end px-4 pt-2 text-sm hover:underline">
+          <div className="hidden w-full justify-end px-4 pt-2 text-sm hover:underline sm:flex">
             <Suspense
               fallback={
                 <button className="flex flex-row items-center gap-1">
@@ -66,54 +66,49 @@ export default async function RootLayout({
               <AuthServer />
             </Suspense>
           </div>
-          <header className="flex items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 pt-0 font-futura md:p-4 md:pt-0">
-            <div className="flex items-center space-x-4">
+          <header className="flex flex-col items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 pt-2 font-futura sm:flex-row sm:p-4 sm:pt-0">
+            <div className="flex w-full items-center justify-center sm:w-auto">
               <Link
                 prefetch={true}
                 href="/"
-                className="hidden text-4xl font-bold text-green-800 sm:block"
+                className="text-4xl font-bold text-green-800"
               >
                 NextMaster
               </Link>
-              <Link
-                prefetch={true}
-                href="/"
-                className="block text-4xl font-bold text-green-800 sm:hidden"
-              >
-                <div className="rounded-lg bg-yellow-400 px-3 pt-2 tracking-tighter">
-                  N
-                </div>
-              </Link>
             </div>
-            <SearchDropdownComponent />
-            <div className="flex flex-row justify-between space-x-4">
-              <div className="relative">
+            <div className="items flex w-full flex-row items-center justify-between gap-4">
+              <div className="mx-0 flex-grow sm:mx-auto sm:flex-grow-0">
+                <SearchDropdownComponent />
+              </div>
+              <div className="flex flex-row justify-between space-x-4">
+                <div className="relative">
+                  <Link
+                    prefetch={true}
+                    href="/order"
+                    className="text-lg text-green-800 hover:underline"
+                  >
+                    ORDER
+                  </Link>
+                  <Suspense>
+                    <Cart />
+                  </Suspense>
+                </div>
                 <Link
                   prefetch={true}
-                  href="/order"
-                  className="text-lg text-green-800 hover:underline"
+                  href="/order-history"
+                  className="hidden text-lg text-green-800 hover:underline md:block"
                 >
-                  ORDER
+                  ORDER HISTORY
                 </Link>
-                <Suspense>
-                  <Cart />
-                </Suspense>
+                <Link
+                  prefetch={true}
+                  href="/order-history"
+                  aria-label="Order History"
+                  className="block text-lg text-green-800 hover:underline md:hidden"
+                >
+                  <MenuIcon />
+                </Link>
               </div>
-              <Link
-                prefetch={true}
-                href="/order-history"
-                className="hidden text-lg text-green-800 hover:underline md:block"
-              >
-                ORDER HISTORY
-              </Link>
-              <Link
-                prefetch={true}
-                href="/order-history"
-                aria-label="Order History"
-                className="block text-lg text-green-800 hover:underline md:hidden"
-              >
-                <MenuIcon />
-              </Link>
             </div>
           </header>
           {children}

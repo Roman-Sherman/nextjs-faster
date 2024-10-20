@@ -62,7 +62,7 @@ export function SearchDropdownComponent() {
 
   return (
     <div className="font-sans">
-      <div className="relative w-full">
+      <div className="relative flex-grow">
         <div className="relative">
           <Input
             ref={inputRef}
@@ -75,7 +75,7 @@ export function SearchDropdownComponent() {
               setHighlightedIndex(-1);
             }}
             onKeyDown={handleKeyDown}
-            className="w-[180px] font-sans font-medium sm:w-[300px] md:w-[375px]"
+            className="font-sans font-medium sm:w-[300px] md:w-[375px]"
           />
           <Search className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
           <X
