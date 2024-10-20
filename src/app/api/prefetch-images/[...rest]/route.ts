@@ -3,6 +3,16 @@ import { parseHTML } from "linkedom";
 
 export const dynamic = "force-static";
 
+function getHostname() {
+  if (process.env.NODE_ENV === "development") {
+    return "localhost:3000";
+  }
+  if (process.env.VERCEL_ENV === "production") {
+    return process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  }
+  return process.env.VERCEL_BRANCH_URL;
+}
+
 export async function GET(
   _: NextRequest,
   { params }: { params: { rest: string[] } },
