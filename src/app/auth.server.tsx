@@ -1,9 +1,30 @@
 import { getUser } from "@/lib/queries";
-import { LoginForm, SignInSignUp, SignOut } from "./auth.client";
+import dynamic from "next/dynamic";
+
+const SignInSignUp = dynamic(
+  () => import("./auth.client").then((mod) => mod.SignInSignUp),
+  {
+    loading: () => <p>Loading sign in options...</p>,
+  },
+);
+
+const SignOut = dynamic(
+  () => import("./auth.client").then((mod) => mod.SignOut),
+  {
+    loading: () => <p>Loading sign out...</p>,
+  },
+);
+
+const LoginForm = dynamic(
+  () => import("./auth.client").then((mod) => mod.LoginForm),
+  {
+    loading: () => <p>Loading login form...</p>,
+  },
+);
 
 export async function AuthServer() {
   const user = await getUser();
-  // TODO: Could dynamic load the sign-in/sign-up and sign-out components as they're not used on initial render
+
   if (!user) {
     return <SignInSignUp />;
   }
@@ -12,6 +33,7 @@ export async function AuthServer() {
 
 export async function PlaceOrderAuth() {
   const user = await getUser();
+
   if (user) {
     return null;
   }
