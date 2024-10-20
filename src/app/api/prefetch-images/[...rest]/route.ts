@@ -23,14 +23,14 @@ export async function GET(
   }
   const body = await response.text();
   const { document } = parseHTML(body);
-  const images = Array.from(document.querySelectorAll("main img")).map(
-    (img) => ({
+  const images = Array.from(document.querySelectorAll("main img"))
+    .map((img) => ({
       srcset: img.getAttribute("srcset"),
       sizes: img.getAttribute("sizes"),
       src: img.getAttribute("src"),
       alt: img.getAttribute("alt"),
       loading: img.getAttribute("loading"),
-    }),
-  );
+    }))
+    .filter((img) => img.src && img.srcset);
   return NextResponse.json({ images });
 }
