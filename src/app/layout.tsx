@@ -56,7 +56,7 @@ export default async function RootLayout({
       >
         <div className="flex flex-grow flex-col">
           <div className="flex w-full justify-end px-4 pt-2 text-sm hover:underline">
-            <Suspense
+            {/* <Suspense
               fallback={
                 <button className="flex flex-row items-center gap-1">
                   <div className="h-[20px]" />
@@ -67,7 +67,7 @@ export default async function RootLayout({
               }
             >
               <AuthServer />
-            </Suspense>
+            </Suspense> */}
           </div>
           <header className="flex flex-col items-center justify-between gap-4 border-b-2 border-yellow-300 p-2 pt-2 font-futura sm:flex-row sm:p-4 sm:pt-0">
             <div className="flex w-full items-center justify-center sm:w-auto">
