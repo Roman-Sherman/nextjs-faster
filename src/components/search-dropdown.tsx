@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Search, X } from "lucide-react";
@@ -19,6 +19,7 @@ export function SearchDropdownComponent() {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const search = async () => {
@@ -55,6 +56,7 @@ export function SearchDropdownComponent() {
       router.push(filteredItems[highlightedIndex].href);
       setSearchTerm(filteredItems[highlightedIndex].name);
       setIsOpen(false);
+      inputRef.current?.blur();
     }
   };
 
@@ -63,6 +65,7 @@ export function SearchDropdownComponent() {
       <div className="relative w-full">
         <div className="relative">
           <Input
+            ref={inputRef}
             type="text"
             placeholder="Search..."
             value={searchTerm}
@@ -102,6 +105,7 @@ export function SearchDropdownComponent() {
                     onClick={() => {
                       setSearchTerm(item.name);
                       setIsOpen(false);
+                      inputRef.current?.blur(); // Close the keyboard on mobile
                     }}
                   >
                     <Image
