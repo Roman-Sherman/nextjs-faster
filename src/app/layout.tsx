@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "sonner";
 import { WelcomeToast } from "./welcome-toast";
+import { GlobalStyles } from "@/components/style";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -53,6 +54,9 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
+      <head>
+        <GlobalStyles />
+      </head>
       <body
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex min-h-full flex-col antialiased`}
       >
