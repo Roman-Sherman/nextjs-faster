@@ -2,6 +2,7 @@
 import { Link } from "@/components/ui/link";
 import Image, { getImageProps } from "next/image";
 import { Product } from "@/db/schema";
+import { useEffect } from "react";
 export function ProductLink(props: {
   imageUrl?: string | null;
   category_slug: string;
@@ -18,7 +19,9 @@ export function ProductLink(props: {
     src: imageUrl ?? "/placeholder.svg?height=64&width=64",
     alt: `A small picture of ${product.name}`,
   });
-  fetch(prefetchProps.props.src, { cache: "force-cache" });
+  useEffect(() => {
+    fetch(prefetchProps.props.src, { cache: "force-cache" });
+  });
   return (
     <Link
       prefetch={true}
