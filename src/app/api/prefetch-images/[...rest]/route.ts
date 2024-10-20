@@ -31,6 +31,6 @@ export async function GET(
       alt: img.getAttribute("alt"),
       loading: img.getAttribute("loading"),
     }))
-    .filter((img) => img.src && img.srcset);
+    .filter((img) => img.src);
   return NextResponse.json({ images });
 }
