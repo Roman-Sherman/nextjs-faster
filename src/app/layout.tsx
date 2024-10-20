@@ -157,8 +157,6 @@ export default async function RootLayout({
           </div>
         </footer>
         <Suspense fallback={null}>
-          {children}
-
           <Toaster closeButton />
           <WelcomeToast />
         </Suspense>
