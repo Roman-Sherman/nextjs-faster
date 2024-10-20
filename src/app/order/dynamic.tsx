@@ -37,12 +37,12 @@ function CartItem({ product }: { product: CartItem }) {
   // limit to 2 decimal places
   const cost = (Number(product.price) * product.quantity).toFixed(2);
   return (
-    <div className="flex flex-row items-center justify-between space-x-4 border-t border-gray-200 pt-4">
+    <div className="flex flex-row items-center justify-between border-t border-gray-200 pt-4">
       <Link
         prefetch={true}
         href={`/products/${product.subcategory.subcollection.category_slug}/${product.subcategory.slug}/${product.slug}`}
       >
-        <div className="flex flex-row space-x-4">
+        <div className="flex flex-row space-x-2">
           <div className="flex h-24 w-24 items-center justify-center bg-gray-100">
             <Image
               loading="eager"
@@ -54,13 +54,13 @@ function CartItem({ product }: { product: CartItem }) {
               quality={65}
             />
           </div>
-          <div className="flex-grow">
+          <div className="max-w-[100px] flex-grow sm:max-w-full">
             <h2 className="font-semibold">{product.name}</h2>
             <p className="text-sm md:text-base">{product.description}</p>
           </div>
         </div>
       </Link>
-      <div className="flex items-center justify-center space-x-10">
+      <div className="flex flex-grow items-center justify-center md:space-x-10">
         <div className="flex flex-col-reverse md:flex-row md:gap-4">
           <p>{product.quantity}</p>
           <div className="flex md:block">
