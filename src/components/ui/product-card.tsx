@@ -5,6 +5,19 @@ import { getImageProps } from "next/image";
 import { Product } from "@/db/schema";
 import { useEffect } from "react";
 
+export function getProductLinkImageProps(
+  imageUrl: string,
+  productName: string,
+) {
+  return getImageProps({
+    width: 48,
+    height: 48,
+    quality: 65,
+    src: imageUrl,
+    alt: `A small picture of ${productName}`,
+  });
+}
+
 export function ProductLink(props: {
   imageUrl?: string | null;
   category_slug: string;
