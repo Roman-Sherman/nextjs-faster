@@ -3,6 +3,7 @@ import { Link } from "@/components/ui/link";
 import NextImage from "next/image";
 import { getImageProps } from "next/image";
 import { Product } from "@/db/schema";
+import { useEffect } from "react";
 
 export function ProductLink(props: {
   imageUrl?: string | null;
@@ -13,7 +14,8 @@ export function ProductLink(props: {
 }) {
   const { category_slug, subcategory_slug, product, imageUrl } = props;
 
-  // prefetch the main image for the product page
+  // prefetch the main image for the product page, if this is too heavy
+  // we could only prefetch the first few cards, then prefetch on hover
   const prefetchProps = getImageProps({
     height: 256,
     quality: 80,
@@ -21,10 +23,15 @@ export function ProductLink(props: {
     src: imageUrl ?? "/placeholder.svg?height=64&width=64",
     alt: `A small picture of ${product.name}`,
   });
-  const url = prefetchProps.props.src;
-  const img = new Image();
-  img.src = url;
-
+  useEffect(() => {
+    try {
+      const url = prefetchProps.props.src;
+      const img = new Image();
+      img.src = url;
+    } catch (e) {
+      console.error("failed to preload", prefetchProps.props.src, e);
+    }
+  });
   return (
     <Link
       prefetch={true}
