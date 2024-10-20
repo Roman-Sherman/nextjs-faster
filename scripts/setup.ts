@@ -1,6 +1,6 @@
-import { Command, Prompt } from "@effect/cli";
+import { Command, Options, Prompt } from "@effect/cli";
 import { NodeContext, NodeRuntime } from "@effect/platform-node";
-import { Effect } from "effect";
+import { Config, Effect } from "effect";
 
 const colorPrompt = Prompt.select({
   message: "Pick your favorite color",
@@ -58,7 +58,18 @@ const prompt = Prompt.all([
   togglePrompt,
 ]);
 
-const command = Command.prompt("favorites", prompt, Effect.log);
+const testOption = Options.boolean("test").pipe(
+  Options.withAlias("t"),
+  Options.withFallbackConfig(Config.boolean("TEST")),
+);
+
+const command = Command.make("favorites", { testOption }, (args) =>
+  Effect.gen(function* () {
+    yield* Effect.log(args);
+    const promptResults = yield* prompt;
+    yield* Effect.log(promptResults);
+  }),
+);
 
 const cli = Command.run(command, {
   name: "Prompt Examples",
