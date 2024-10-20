@@ -3,7 +3,8 @@ import { db } from "@/db";
 import { notFound } from "next/navigation";
 import { AddToCartForm } from "@/components/add-to-cart-form";
 import { Metadata } from "next";
-import { Image } from "@/components/ui/image";
+import { FastProductImage } from "@/components/ui/image";
+
 export async function generateMetadata(props: {
   params: Promise<{ product: string; category: string; subcategory: string }>;
 }): Promise<Metadata> {
@@ -71,7 +72,7 @@ export default async function Page(props: {
       </h1>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-2">
-          <Image
+          <FastProductImage
             loading="eager"
             decoding="sync"
             src={productData.image_url ?? "/placeholder.svg?height=64&width=64"}

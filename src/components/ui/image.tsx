@@ -31,7 +31,7 @@ function CachedImage(props: { props: NextImageProps; isLoaded: boolean }) {
   );
 }
 
-export const Image = (({ ...props }: NextImageProps) => {
+export const FastProductImage = (({ ...props }: NextImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (

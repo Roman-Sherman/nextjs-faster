@@ -1,6 +1,6 @@
 import { Link } from "@/components/ui/link";
-import { Image } from "./image";
 import { Product } from "@/db/schema";
+import Image from "next/image";
 export function ProductLink(props: {
   imageUrl?: string | null;
   category_slug: string;
