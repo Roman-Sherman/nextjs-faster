@@ -22,12 +22,14 @@ export async function updateCart(newItems: CartItem[]) {
 
 export async function getCart() {
   const cart = (await cookies()).get("cart");
-
   if (!cart) {
     return [];
   }
-
-  return cartSchema.parse(JSON.parse(cart.value));
+  try {
+    return cartSchema.parse(JSON.parse(cart.value));
+  } catch {
+    return [];
+  }
 }
 
 export async function detailedCart() {
