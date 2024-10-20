@@ -1,10 +1,9 @@
 import { ProductLink } from "@/components/ui/product-card";
 import { db } from "@/db";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { AddToCartForm } from "@/components/add-to-cart-form";
 import { Metadata } from "next";
-
+import { Image } from "@/components/ui/image";
 export async function generateMetadata(props: {
   params: Promise<{ product: string; category: string; subcategory: string }>;
 }): Promise<Metadata> {
@@ -24,6 +23,11 @@ export async function generateMetadata(props: {
     openGraph: { title: product.name, description: product.description },
   };
 }
+
+fetch("", {
+  // only check cache
+  cache: "only-if-cached",
+});
 
 export default async function Page(props: {
   params: Promise<{

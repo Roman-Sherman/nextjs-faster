@@ -1,5 +1,5 @@
 import { Link } from "@/components/ui/link";
-import Image from "next/image";
+import { Image } from "./image";
 import { Product } from "@/db/schema";
 export function ProductLink(props: {
   imageUrl?: string | null;
@@ -12,7 +12,7 @@ export function ProductLink(props: {
   return (
     <Link
       prefetch={true}
-      className="group flex h-[130px] w-full flex-row border px-4 py-2 hover:bg-gray-100 sm:w-[250px]"
+      className="group flex h-[130px] flex-row border px-4 py-2 hover:bg-gray-100 sm:w-[250px]"
       href={`/products/${category_slug}/${subcategory_slug}/${product.slug}`}
     >
       <div className="py-2">
