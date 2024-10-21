@@ -58,23 +58,23 @@ const main = Effect.gen(function* () {
     `Products without image urls found: ${productsWithoutImage.length}`,
   );
 
-  //   yield* Effect.all(
-  //     productsWithoutImage.map((product, i) =>
-  //       Effect.gen(function* () {
-  //         yield* Effect.log(
-  //           `Beginning update for index ${i} of ${productsWithoutImage.length}`,
-  //         );
-  //         const randomImageUrl = yield* Random.choice(allUrls);
-  //         yield* Effect.tryPromise(() =>
-  //           db
-  //             .update(products)
-  //             .set({ image_url: randomImageUrl })
-  //             .where(eq(products.slug, product.slug)),
-  //         );
-  //       }),
-  //     ),
-  //     { mode: "either", concurrency: 10 },
-  //   );
+  yield* Effect.all(
+    productsWithoutImage.map((product, i) =>
+      Effect.gen(function* () {
+        yield* Effect.log(
+          `Beginning update for index ${i} of ${productsWithoutImage.length}`,
+        );
+        const randomImageUrl = yield* Random.choice(allUrls);
+        yield* Effect.tryPromise(() =>
+          db
+            .update(products)
+            .set({ image_url: randomImageUrl })
+            .where(eq(products.slug, product.slug)),
+        );
+      }),
+    ),
+    { mode: "either", concurrency: 10 },
+  );
 });
 
 NodeRuntime.runMain(main);
