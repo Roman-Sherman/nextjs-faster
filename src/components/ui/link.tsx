@@ -17,13 +17,16 @@ function sleep(ms: number) {
 }
 
 async function prefetchImages(href: string) {
-  if (!href.startsWith("/") || href.startsWith("/order")) {
+  if (!href.startsWith("/") || href.startsWith("/order") || href === "/") {
     return [];
   }
   const url = new URL(href, window.location.href);
-  const imageResponse = await fetch(`/api/prefetch-images${url.pathname}`, {
-    priority: "low",
-  });
+  const imageResponse = await fetch(
+    `/api/prefetch-images${url.pathname || "/"}`,
+    {
+      priority: "low",
+    },
+  );
   // only throw in dev
   if (!imageResponse.ok && process.env.NODE_ENV === "development") {
     throw new Error("Failed to prefetch images");
@@ -36,6 +39,7 @@ const seen = new Set<string>();
 
 export const Link: typeof NextLink = (({ children, ...props }) => {
   const [images, setImages] = useState<PrefetchImage[]>([]);
+  const [preloading, setPreloading] = useState<(() => void)[]>([]);
   const linkRef = useRef<HTMLAnchorElement>(null);
   const router = useRouter();
   let prefetchTimeout: NodeJS.Timeout | null = null; // Track the timeout ID
@@ -85,21 +89,21 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
     <NextLink
       ref={linkRef}
       prefetch={false}
-      onMouseOver={() => {
+      onMouseEnter={() => {
         router.prefetch(String(props.href));
+        if (preloading.length) return;
+        const p: (() => void)[] = [];
         for (const image of images) {
-          if (image.loading === "lazy" || seen.has(image.srcset)) {
-            continue;
-          }
-          const img = new Image();
-          img.decoding = "async";
-          img.fetchPriority = "low";
-          img.sizes = image.sizes;
-          seen.add(image.srcset);
-          img.srcset = image.srcset;
-          img.src = image.src;
-          img.alt = image.alt;
+          const remove = prefetchImage(image);
+          if (remove) p.push(remove);
         }
+        setPreloading(p);
+      }}
+      onMouseLeave={() => {
+        for (const remove of preloading) {
+          remove();
+        }
+        setPreloading([]);
       }}
       onMouseDown={(e) => {
         const url = new URL(String(props.href), window.location.href);
@@ -121,3 +125,26 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
     </NextLink>
   );
 }) as typeof NextLink;
+
+function prefetchImage(image: PrefetchImage) {
+  if (image.loading === "lazy" || seen.has(image.srcset)) {
+    return;
+  }
+  const img = new Image();
+  img.decoding = "async";
+  img.fetchPriority = "low";
+  img.sizes = image.sizes;
+  seen.add(image.srcset);
+  img.srcset = image.srcset;
+  img.src = image.src;
+  img.alt = image.alt;
+  let done = false;
+  img.onload = img.onerror = () => {
+    done = true;
+  };
+  return () => {
+    if (done) return;
+    img.src = img.srcset = "";
+    seen.delete(image.srcset);
+  };
+}
