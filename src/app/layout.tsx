@@ -66,7 +66,7 @@ export default async function RootLayout({
                 <Link
                   prefetch={true}
                   href="/"
-                  className="text-4xl font-bold text-green-800"
+                  className="block px-4 text-4xl font-bold text-green-800"
                 >
                   NextMaster
                 </Link>
