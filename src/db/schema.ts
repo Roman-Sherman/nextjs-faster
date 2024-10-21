@@ -18,35 +18,59 @@ export const collections = pgTable("collections", {
 
 export type Collection = typeof collections.$inferSelect;
 
-export const categories = pgTable("categories", {
-  slug: text("slug").notNull().primaryKey(),
-  name: text("name").notNull(),
-  collection_id: integer("collection_id")
-    .notNull()
-    .references(() => collections.id, { onDelete: "cascade" }),
-  image_url: text("image_url"),
-});
+export const categories = pgTable(
+  "categories",
+  {
+    slug: text("slug").notNull().primaryKey(),
+    name: text("name").notNull(),
+    collection_id: integer("collection_id")
+      .notNull()
+      .references(() => collections.id, { onDelete: "cascade" }),
+    image_url: text("image_url"),
+  },
+  (table) => ({
+    collectionIdIdx: index("categories_collection_id_idx").on(
+      table.collection_id,
+    ),
+  }),
+);
 
 export type Category = typeof categories.$inferSelect;
 
-export const subcollection = pgTable("subcollections", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  category_slug: text("category_slug")
-    .notNull()
-    .references(() => categories.slug, { onDelete: "cascade" }),
-});
+export const subcollection = pgTable(
+  "subcollections",
+  {
+    id: serial("id").primaryKey(),
+    name: text("name").notNull(),
+    category_slug: text("category_slug")
+      .notNull()
+      .references(() => categories.slug, { onDelete: "cascade" }),
+  },
+  (table) => ({
+    categorySlugIdx: index("subcollections_category_slug_idx").on(
+      table.category_slug,
+    ),
+  }),
+);
 
 export type Subcollection = typeof subcollection.$inferSelect;
 
-export const subcategories = pgTable("subcategories", {
-  slug: text("slug").notNull().primaryKey(),
-  name: text("name").notNull(),
-  subcollection_id: integer("subcollection_id")
-    .notNull()
-    .references(() => subcollection.id, { onDelete: "cascade" }),
-  image_url: text("image_url"),
-});
+export const subcategories = pgTable(
+  "subcategories",
+  {
+    slug: text("slug").notNull().primaryKey(),
+    name: text("name").notNull(),
+    subcollection_id: integer("subcollection_id")
+      .notNull()
+      .references(() => subcollection.id, { onDelete: "cascade" }),
+    image_url: text("image_url"),
+  },
+  (table) => ({
+    subcollectionIdIdx: index("subcategories_subcollection_id_idx").on(
+      table.subcollection_id,
+    ),
+  }),
+);
 
 export type Subcategory = typeof subcategories.$inferSelect;
 
@@ -66,6 +90,9 @@ export const products = pgTable(
     nameSearchIndex: index("name_search_index").using(
       "gin",
       sql`to_tsvector('english', ${table.name})`,
+    ),
+    subcategorySlugIdx: index("products_subcategory_slug_idx").on(
+      table.subcategory_slug,
     ),
   }),
 );
