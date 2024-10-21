@@ -44,10 +44,10 @@ export async function getUser() {
 }
 
 export const getProductsForSubcategory = unstable_cache(
-  (subcategory) =>
+  (subcategorySlug: string) =>
     db.query.products.findMany({
       where: (products, { eq, and }) =>
-        and(eq(products.subcategory_slug, subcategory)),
+        and(eq(products.subcategory_slug, subcategorySlug)),
       orderBy: (products, { asc }) => asc(products.slug),
     }),
   ["subcategory-products"],
@@ -71,9 +71,9 @@ export const getCollections = unstable_cache(
 );
 
 export const getProductDetails = unstable_cache(
-  (product) =>
+  (productSlug: string) =>
     db.query.products.findFirst({
-      where: (products, { eq }) => eq(products.slug, product),
+      where: (products, { eq }) => eq(products.slug, productSlug),
     }),
   ["product"],
   {
@@ -82,9 +82,9 @@ export const getProductDetails = unstable_cache(
 );
 
 export const getSubcategory = unstable_cache(
-  (subcategory) =>
+  (subcategorySlug: string) =>
     db.query.subcategories.findFirst({
-      where: (subcategories, { eq }) => eq(subcategories.slug, subcategory),
+      where: (subcategories, { eq }) => eq(subcategories.slug, subcategorySlug),
     }),
   ["subcategory"],
   {
@@ -93,9 +93,9 @@ export const getSubcategory = unstable_cache(
 );
 
 export const getCategory = unstable_cache(
-  (category) =>
+  (categorySlug: string) =>
     db.query.categories.findFirst({
-      where: (categories, { eq }) => eq(categories.slug, category),
+      where: (categories, { eq }) => eq(categories.slug, categorySlug),
       with: {
         subcollections: {
           with: {
@@ -111,13 +111,12 @@ export const getCategory = unstable_cache(
 );
 
 export const getCollectionDetails = unstable_cache(
-  async (cn) =>
+  async (collectionName: string) =>
     db.query.collections.findMany({
       with: {
         categories: true,
       },
-      where: (collections, { eq }) =>
-        eq(collections.name, decodeURIComponent(cn)),
+      where: (collections, { eq }) => eq(collections.name, collectionName),
       orderBy: (collections, { asc }) => asc(collections.name),
     }),
   ["collection"],
@@ -136,7 +135,7 @@ export const getProductCount = unstable_cache(
 
 // could be optimized by storing category slug on the products table
 export const getCategoryProductCount = unstable_cache(
-  (categorySlug) =>
+  (categorySlug: string) =>
     db
       .select({ count: count() })
       .from(categories)
@@ -157,7 +156,7 @@ export const getCategoryProductCount = unstable_cache(
 );
 
 export const getSubcategoryProductCount = unstable_cache(
-  (subcategorySlug) =>
+  (subcategorySlug: string) =>
     db
       .select({ count: count() })
       .from(products)
