@@ -14,7 +14,9 @@ export default async function Home(props: {
     collection: string;
   }>;
 }) {
-  const collectionName = decodeURIComponent((await props.params).collection);
+  const collectionName = decodeURIComponent(
+    (await props.params).collection,
+  ).toLowerCase();
 
   const collections = await getCollectionDetails(collectionName);
   let imageCount = 0;
