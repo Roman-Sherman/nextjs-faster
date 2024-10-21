@@ -17,21 +17,21 @@ export async function generateMetadata(props: {
     orderBy: (categories, { asc }) => asc(categories.name),
   });
 
-  const rows = await db
-    .select({ count: count() })
-    .from(products)
-    .where(eq(products.subcategory_slug, urlDecodedCategory));
+  // const rows = await db
+  //   .select({ count: count() })
+  //   .from(products)
+  //   .where(eq(products.subcategory_slug, urlDecodedCategory));
 
   if (!subcategory) {
     return notFound();
   }
 
-  const description = rows[0]?.count
-    ? `Choose from over ${rows[0]?.count - 1} products in ${subcategory.name}. In stock and ready to ship.`
-    : undefined;
+  // const description = rows[0]?.count
+  //   ? `Choose from over ${rows[0]?.count - 1} products in ${subcategory.name}. In stock and ready to ship.`
+  //   : undefined;
 
   return {
-    openGraph: { title: subcategory.name, description },
+    openGraph: { title: subcategory.name, description: "" },
   };
 }
 
@@ -57,17 +57,17 @@ export default async function Page(props: {
     return notFound();
   }
 
-  const countRes = await db
-    .select({ count: count() })
-    .from(products)
-    .where(eq(products.subcategory_slug, urlDecodedSubcategory));
+  // const countRes = await db
+  //   .select({ count: count() })
+  //   .from(products)
+  //   .where(eq(products.subcategory_slug, urlDecodedSubcategory));
 
-  const finalCount = countRes[0]?.count;
+  const finalCount = 0; //countRes[0]?.count;
   return (
     <div className="container mx-auto p-4">
       {finalCount > 0 ? (
         <h1 className="mb-2 border-b-2 text-sm font-bold">
-          {finalCount} {finalCount === 1 ? "Product" : "Products"}
+          {/* {finalCount} {finalCount === 1 ? "Product" : "Products"} */}
         </h1>
       ) : (
         <p>No products for this subcategory</p>
