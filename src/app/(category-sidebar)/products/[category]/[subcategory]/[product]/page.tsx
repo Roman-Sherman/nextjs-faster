@@ -86,7 +86,7 @@ export default async function Page(props: {
             height={256}
             quality={80}
             width={256}
-            className="h-64 w-64 flex-shrink-0 border-2"
+            className="h-56 w-56 flex-shrink-0 border-2 md:h-64 md:w-64"
           />
           <p className="flex-grow text-base">{productData.description}</p>
         </div>
