@@ -14,6 +14,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^0.0.68",
     "@effect/platform": "^0.68.6",
     "@effect/platform-node": "^0.63.6",
     "@next/env": "^14.2.15",
@@ -31,6 +32,7 @@
     "@vercel/kv": "^3.0.0",
     "@vercel/postgres": "^0.10.0",
     "@vercel/speed-insights": "^1.0.12",
+    "ai": "^3.4.16",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
