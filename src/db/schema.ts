@@ -91,6 +91,9 @@ export const products = pgTable(
       "gin",
       sql`to_tsvector('english', ${table.name})`,
     ),
+    nameTrgmIndex: index("name_trgm_index")
+      .using("gin", sql`${table.name} gin_trgm_ops`)
+      .concurrently(),
     subcategorySlugIdx: index("products_subcategory_slug_idx").on(
       table.subcategory_slug,
     ),
