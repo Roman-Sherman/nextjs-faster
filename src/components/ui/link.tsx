@@ -21,12 +21,9 @@ async function prefetchImages(href: string) {
     return [];
   }
   const url = new URL(href, window.location.href);
-  const imageResponse = await fetch(
-    `/api/prefetch-images${url.pathname || "/"}`,
-    {
-      priority: "low",
-    },
-  );
+  const imageResponse = await fetch(`/api/prefetch-images${url.pathname}`, {
+    priority: "low",
+  });
   // only throw in dev
   if (!imageResponse.ok && process.env.NODE_ENV === "development") {
     throw new Error("Failed to prefetch images");
