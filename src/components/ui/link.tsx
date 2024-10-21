@@ -61,7 +61,7 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
             }, console.error);
             // Stop observing once images are prefetched
             observer.unobserve(entry.target);
-          }, 1000); // 1-second delay
+          }, 300); // 300ms delay
         } else if (prefetchTimeout) {
           // If the element leaves the viewport before 1 second, cancel the prefetch
           clearTimeout(prefetchTimeout);
