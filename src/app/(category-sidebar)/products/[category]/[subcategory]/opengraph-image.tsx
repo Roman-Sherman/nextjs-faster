@@ -1,4 +1,3 @@
-import { db } from "@/db";
 import { ImageResponse } from "next/og";
 import { notFound } from "next/navigation";
 import { getSubcategory } from "@/lib/queries";

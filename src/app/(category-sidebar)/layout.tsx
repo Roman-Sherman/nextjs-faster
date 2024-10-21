@@ -1,5 +1,4 @@
 import { Link } from "@/components/ui/link";
-import { db } from "@/db";
 import { getCollections } from "@/lib/queries";
 
 export default async function Layout({

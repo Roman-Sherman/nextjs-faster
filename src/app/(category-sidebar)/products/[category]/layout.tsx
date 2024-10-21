@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { db } from "../../../../db";
 import { notFound } from "next/navigation";
 import { getCategory } from "@/lib/queries";
 
