@@ -2,6 +2,7 @@
 const nextConfig = {
   experimental: {
     ppr: true,
+    scrollRestoration: true,
   },
   typescript: {
     ignoreBuildErrors: true,
