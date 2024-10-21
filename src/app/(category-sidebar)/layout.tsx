@@ -14,7 +14,7 @@ export default async function Layout({
   });
   return (
     <div className="flex flex-grow overflow-hidden font-helvetica-roman">
-      <aside className="sticky top-[73px] hidden h-[calc(100vh-73px)] w-48 min-w-48 overflow-y-auto border-r border-gray-400 p-3 md:block">
+      <aside className="sticky hidden h-screen w-64 min-w-48 border-r p-4 md:block">
         <h2 className="border-b border-green-800 text-sm font-semibold text-green-900">
           Choose a Category
         </h2>
