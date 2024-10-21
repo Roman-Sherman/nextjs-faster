@@ -6,6 +6,23 @@ import {
   getSubcategory,
   getSubcategoryProductCount,
 } from "@/lib/queries";
+import { db } from "@/db";
+
+export async function generateStaticParams() {
+  const results = await db.query.subcategories.findMany({
+    with: {
+      subcollection: {
+        with: {
+          category: true,
+        },
+      },
+    },
+  });
+  return results.map((s) => ({
+    category: s.subcollection.category.slug,
+    subcategory: s.slug,
+  }));
+}
 
 export async function generateMetadata(props: {
   params: Promise<{ category: string; subcategory: string }>;

@@ -14,6 +14,7 @@ import { relations } from "drizzle-orm";
 export const collections = pgTable("collections", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
+  slug: text("slug").notNull(),
 });
 
 export type Collection = typeof collections.$inferSelect;

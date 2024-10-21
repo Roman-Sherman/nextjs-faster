@@ -5,6 +5,28 @@ import { AddToCartForm } from "@/components/add-to-cart-form";
 import { Metadata } from "next";
 
 import { getProductDetails, getProductsForSubcategory } from "@/lib/queries";
+// import { db } from "@/db";
+
+// export async function generateStaticParams() {
+//   const results = await db.query.products.findMany({
+//     with: {
+//       subcategory: {
+//         with: {
+//           subcollection: {
+//             with: {
+//               category: true,
+//             },
+//           },
+//         },
+//       },
+//     },
+//   });
+//   return results.map((s) => ({
+//     category: s.subcategory.subcollection.category.slug,
+//     subcategory: s.subcategory.slug,
+//     product: s.slug,
+//   }));
+// }
 
 export async function generateMetadata(props: {
   params: Promise<{ product: string; category: string; subcategory: string }>;
