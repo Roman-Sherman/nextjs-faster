@@ -60,7 +60,7 @@ function CartItem({ product }: { product: CartItem }) {
           </div>
         </div>
       </Link>
-      <div className="flex flex-grow items-center justify-center md:space-x-10">
+      <div className="flex items-center justify-center md:space-x-10">
         <div className="flex flex-col-reverse md:flex-row md:gap-4">
           <p>{product.quantity}</p>
           <div className="flex md:block">
