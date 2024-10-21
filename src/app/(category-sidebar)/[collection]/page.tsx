@@ -1,13 +1,13 @@
 import { Link } from "@/components/ui/link";
-import { db } from "@/db";
-import { collections } from "@/db/schema";
+// import { db } from "@/db";
+// import { collections } from "@/db/schema";
 import { getCollectionDetails } from "@/lib/queries";
 
 import Image from "next/image";
 
-export async function generateStaticParams() {
-  return await db.select({ collection: collections.slug }).from(collections);
-}
+// export async function generateStaticParams() {
+//   return await db.select({ collection: collections.slug }).from(collections);
+// }
 
 export default async function Home(props: {
   params: Promise<{
