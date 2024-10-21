@@ -53,7 +53,9 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
         const entry = entries[0];
         if (entry.isIntersecting) {
           // Set a timeout to trigger prefetch after 1 second
-          prefetchTimeout = setTimeout(() => {
+          prefetchTimeout = setTimeout(async () => {
+            router.prefetch(String(props.href));
+            await sleep(0); // We want the doc prefetches to happen first.
             void prefetchImages(String(props.href)).then((images) => {
               setImages(images);
             }, console.error);
@@ -82,7 +84,9 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
   return (
     <NextLink
       ref={linkRef}
+      prefetch={false}
       onMouseOver={() => {
+        router.prefetch(String(props.href));
         for (const image of images) {
           if (image.loading === "lazy" || seen.has(image.srcset)) {
             continue;
