@@ -36,6 +36,7 @@ A highly performant replica of [McMaster-Carr](https://www.mcmaster.com/) using 
 
 ### Performance
 
-[PageSpeed report](https://pagespeed.web.dev/analysis/https-next-master-vercel-app/4181robe62?form_factor=mobile)
+[PageSpeed report](https://pagespeed.web.dev/analysis/https-next-master-vercel-app/g1joy8i7u9?form_factor=mobile)
 
-![image](https://github.com/user-attachments/assets/ccca9cb4-eedc-4415-b225-db9ee82ebf27)
+<img width="987" alt="image" src="https://github.com/user-attachments/assets/926be902-8bc9-4303-8a41-cb0d5c117403">
+
