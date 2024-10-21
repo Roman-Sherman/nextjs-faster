@@ -10,6 +10,7 @@ import { Link } from "@/components/ui/link";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "sonner";
 import { WelcomeToast } from "./welcome-toast";
+import NextLink from "next/link";
 
 const helvetica = localFont({
   src: "./fonts/HelveticaNeueLTPro-Md.woff",
@@ -63,13 +64,13 @@ export default async function RootLayout({
                 </Suspense>
               </div>
               <div className="flex w-full flex-col items-start justify-center gap-2 sm:w-auto sm:flex-row sm:items-center">
-                <Link
+                <NextLink
                   prefetch={true}
                   href="/"
-                  className="block px-4 text-4xl font-bold text-green-800"
+                  className="text-4xl font-bold text-green-800"
                 >
                   NextMaster
-                </Link>
+                </NextLink>
                 <div className="items flex w-full flex-row items-center justify-between gap-4">
                   <div className="mx-0 flex-grow sm:mx-auto sm:flex-grow-0">
                     <SearchDropdownComponent />
