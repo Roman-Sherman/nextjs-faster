@@ -31,6 +31,7 @@ export function LoginForm() {
             name="username"
             aria-label="Username"
             type="text"
+            autoCapitalize="off"
             autoComplete="username"
             spellCheck={false}
             required
