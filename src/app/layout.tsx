@@ -57,9 +57,9 @@ export default async function RootLayout({
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex flex-col overflow-y-hidden antialiased`}
       >
         <div>
-          <header className="z-10 flex h-[85px] flex-grow flex-col items-center justify-between gap-4 border-b-2 border-yellow-300 bg-background p-2 pb-[4px] pt-2 font-futura sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
+          <header className="z-10 flex flex-grow items-center justify-between gap-4 border-b-2 border-yellow-300 bg-background p-2 pb-[4px] pt-2 font-futura sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
             <div className="flex flex-grow flex-col">
-              <div className="flex w-full justify-end px-4 pt-2 font-sans text-sm hover:underline">
+              <div className="absolute right-2 top-2 flex w-full justify-end pt-2 font-sans text-sm hover:underline sm:relative sm:right-0 sm:top-0">
                 <Suspense
                   fallback={
                     <button className="flex flex-row items-center gap-1">
@@ -73,7 +73,7 @@ export default async function RootLayout({
                   <AuthServer />
                 </Suspense>
               </div>
-              <div className="flex w-full items-center justify-center sm:w-auto">
+              <div className="flex w-full flex-col items-start justify-center gap-2 sm:w-auto sm:flex-row sm:items-center">
                 <Link
                   prefetch={true}
                   href="/"
