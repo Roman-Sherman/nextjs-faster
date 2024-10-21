@@ -28,10 +28,13 @@ export function SearchDropdownComponent() {
       setFilteredItems([]);
       setCommittedSearchTerm("");
     } else {
+      const currentSearchTerm = searchTerm;
       startTransition(() => {
-        searchProducts(searchTerm).then((results) => {
-          setFilteredItems(results);
-          setCommittedSearchTerm(searchTerm);
+        searchProducts(currentSearchTerm).then((results) => {
+          if (currentSearchTerm === searchTerm) {
+            setFilteredItems(results);
+            setCommittedSearchTerm(currentSearchTerm);
+          }
         });
       });
     }
