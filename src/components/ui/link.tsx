@@ -43,9 +43,9 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
     if (props.prefetch === false) {
       return;
     }
-    void prefetchImages(String(props.href)).then((images) => {
-      setImages(images);
-    }, console.error);
+    // void prefetchImages(String(props.href)).then((images) => {
+    //   setImages(images);
+    // }, console.error);
   }, [props.href, props.prefetch]);
   return (
     <NextLink
