@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useTransition } from "react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Search, X, Loader2 } from "lucide-react";
+import { X } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Product } from "../db/schema";
@@ -18,6 +18,8 @@ export function SearchDropdownComponent() {
   const [filteredItems, setFilteredItems] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -27,14 +29,20 @@ export function SearchDropdownComponent() {
     if (searchTerm.length === 0) {
       setFilteredItems([]);
     } else {
-      const currentSearchTerm = searchTerm;
-      fetch(`/api/search?q=${currentSearchTerm}`).then(async (results) => {
-        const json = await results.json();
+      setIsLoading(true);
 
+      const searchedFor = searchTerm;
+      fetch(`/api/search?q=${searchTerm}`).then(async (results) => {
+        const currentSearchTerm = inputRef.current?.value;
+        if (currentSearchTerm !== searchedFor) {
+          return;
+        }
+        const json = await results.json();
+        setIsLoading(false);
         setFilteredItems(json as ProductSearchResult);
       });
     }
-  }, [searchTerm]);
+  }, [searchTerm, inputRef]);
 
   const params = useParams();
   useEffect(() => {
@@ -124,6 +132,10 @@ export function SearchDropdownComponent() {
                     </div>
                   </Link>
                 ))
+              ) : isLoading ? (
+                <div className="flex h-full items-center justify-center">
+                  <p className="text-sm text-gray-500">Loading...</p>
+                </div>
               ) : (
                 <div className="flex h-full items-center justify-center">
                   <p className="text-sm text-gray-500">No results found</p>

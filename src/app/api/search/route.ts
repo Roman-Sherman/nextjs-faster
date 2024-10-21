@@ -5,9 +5,9 @@ import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
     // format is /api/search?q=term
-    const searchTerm = request.nextUrl.searchParams.get("q");
-    if (!searchTerm) {
-      return [];
+    const searchTerm = request.nextUrl.searchParams.get("q")
+    if (!searchTerm || !searchTerm.length) {
+      return Response.json([]);
     }
   
     let results;
