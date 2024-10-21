@@ -112,13 +112,13 @@ export const getCategory = unstable_cache(
 );
 
 export const getCollectionDetails = unstable_cache(
-  async (collectionName: string) =>
+  async (collectionSlug: string) =>
     db.query.collections.findMany({
       with: {
         categories: true,
       },
-      where: (collections, { eq }) => eq(collections.name, collectionName),
-      orderBy: (collections, { asc }) => asc(collections.name),
+      where: (collections, { eq }) => eq(collections.slug, collectionSlug),
+      orderBy: (collections, { asc }) => asc(collections.slug),
     }),
   ["collection"],
   {
