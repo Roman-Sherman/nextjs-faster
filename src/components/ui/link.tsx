@@ -17,7 +17,7 @@ function sleep(ms: number) {
 }
 
 async function prefetchImages(href: string) {
-  if (!href.startsWith("/products")) {
+  if (!href.startsWith("/") || href.startsWith("/order")) {
     return [];
   }
   const url = new URL(href, window.location.href);
