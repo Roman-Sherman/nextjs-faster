@@ -8,7 +8,6 @@ import { Cart } from "@/components/cart";
 import { AuthServer } from "./auth.server";
 import { Link } from "@/components/ui/link";
 import { Analytics } from "@vercel/analytics/react";
-// import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "sonner";
 import { WelcomeToast } from "./welcome-toast";
 
@@ -163,7 +162,6 @@ export default async function RootLayout({
           <WelcomeToast />
         </Suspense>
         <Analytics scriptSrc="/insights/events.js" endpoint="/hfi/events" />
-        {/* <SpeedInsights scriptSrc="/insights/vitals.js" endpoint="/hfi/vitals" /> */}
       </body>
     </html>
   );
