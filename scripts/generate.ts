@@ -5,7 +5,7 @@ import {
   categories,
   collections,
   subcategories,
-  subcollection,
+  subcollections,
 } from "../src/db/schema";
 import { eq, isNull } from "drizzle-orm";
 import { generateObject } from "ai";
@@ -117,7 +117,7 @@ const generateSubCollections = async () => {
   });
 
   await Promise.all(promises);
-  await db.insert(subcollection).values(data).onConflictDoNothing();
+  await db.insert(subcollections).values(data).onConflictDoNothing();
 };
 
 // generateSubCollections();
@@ -126,10 +126,10 @@ const getSubcollections = async () => {
   // only get subcollections that have no subcategories
   const result = await db
     .select()
-    .from(subcollection)
+    .from(subcollections)
     .leftJoin(
       subcategories,
-      eq(subcollection.id, subcategories.subcollection_id),
+      eq(subcollections.id, subcategories.subcollection_id),
     )
     .where(isNull(subcategories.subcollection_id))
     .limit(300);

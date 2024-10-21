@@ -37,7 +37,7 @@ export const categories = pgTable(
 
 export type Category = typeof categories.$inferSelect;
 
-export const subcollection = pgTable(
+export const subcollections = pgTable(
   "subcollections",
   {
     id: serial("id").primaryKey(),
@@ -53,7 +53,7 @@ export const subcollection = pgTable(
   }),
 );
 
-export type Subcollection = typeof subcollection.$inferSelect;
+export type Subcollection = typeof subcollections.$inferSelect;
 
 export const subcategories = pgTable(
   "subcategories",
@@ -62,7 +62,7 @@ export const subcategories = pgTable(
     name: text("name").notNull(),
     subcollection_id: integer("subcollection_id")
       .notNull()
-      .references(() => subcollection.id, { onDelete: "cascade" }),
+      .references(() => subcollections.id, { onDelete: "cascade" }),
     image_url: text("image_url"),
   },
   (table) => ({
@@ -111,14 +111,14 @@ export const categoriesRelations = relations(categories, ({ one, many }) => ({
     fields: [categories.collection_id],
     references: [collections.id],
   }),
-  subcollections: many(subcollection),
+  subcollections: many(subcollections),
 }));
 
 export const subcollectionRelations = relations(
-  subcollection,
+  subcollections,
   ({ one, many }) => ({
     category: one(categories, {
-      fields: [subcollection.category_slug],
+      fields: [subcollections.category_slug],
       references: [categories.slug],
     }),
     subcategories: many(subcategories),
@@ -128,9 +128,9 @@ export const subcollectionRelations = relations(
 export const subcategoriesRelations = relations(
   subcategories,
   ({ one, many }) => ({
-    subcollection: one(subcollection, {
+    subcollection: one(subcollections, {
       fields: [subcategories.subcollection_id],
-      references: [subcollection.id],
+      references: [subcollections.id],
     }),
     products: many(products),
   }),

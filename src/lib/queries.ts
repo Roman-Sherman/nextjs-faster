@@ -4,7 +4,7 @@ import {
   categories,
   products,
   subcategories,
-  subcollection,
+  subcollections,
   users,
 } from "@/db/schema";
 import { db } from "@/db";
@@ -140,10 +140,13 @@ export const getCategoryProductCount = unstable_cache(
     db
       .select({ count: count() })
       .from(categories)
-      .leftJoin(subcollection, eq(categories.slug, subcollection.category_slug))
+      .leftJoin(
+        subcollections,
+        eq(categories.slug, subcollections.category_slug),
+      )
       .leftJoin(
         subcategories,
-        eq(subcollection.id, subcategories.subcollection_id),
+        eq(subcollections.id, subcategories.subcollection_id),
       )
       .leftJoin(products, eq(subcategories.slug, products.subcategory_slug))
       .where(eq(categories.slug, categorySlug)),

@@ -6,7 +6,7 @@ import {
   subcategories as subcategories_table,
   subcategories,
   products,
-  subcollection,
+  subcollections,
 } from "../src/db/schema";
 import { eq, sql, lt } from "drizzle-orm";
 import OpenAI from "openai";

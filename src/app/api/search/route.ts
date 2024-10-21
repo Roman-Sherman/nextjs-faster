@@ -3,7 +3,7 @@ import {
   categories,
   products,
   subcategories,
-  subcollection,
+  subcollections,
 } from "@/db/schema";
 import { sql } from "drizzle-orm";
 import { NextRequest } from "next/server";
@@ -29,12 +29,12 @@ export async function GET(request: NextRequest) {
         sql`${products.subcategory_slug} = ${subcategories.slug}`,
       )
       .innerJoin(
-        subcollection,
-        sql`${subcategories.subcollection_id} = ${subcollection.id}`,
+        subcollections,
+        sql`${subcategories.subcollection_id} = ${subcollections.id}`,
       )
       .innerJoin(
         categories,
-        sql`${subcollection.category_slug} = ${categories.slug}`,
+        sql`${subcollections.category_slug} = ${categories.slug}`,
       );
   } else {
     // For longer search terms, use full-text search with tsquery
@@ -56,12 +56,12 @@ export async function GET(request: NextRequest) {
         sql`${products.subcategory_slug} = ${subcategories.slug}`,
       )
       .innerJoin(
-        subcollection,
-        sql`${subcategories.subcollection_id} = ${subcollection.id}`,
+        subcollections,
+        sql`${subcategories.subcollection_id} = ${subcollections.id}`,
       )
       .innerJoin(
         categories,
-        sql`${subcollection.category_slug} = ${categories.slug}`,
+        sql`${subcollections.category_slug} = ${categories.slug}`,
       );
   }
 
