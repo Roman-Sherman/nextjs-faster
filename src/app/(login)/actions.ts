@@ -34,7 +34,7 @@ export const signUp = validatedAction(authSchema, async (data) => {
     .limit(1);
 
   if (existingUser.length > 0) {
-    return { error: "Failed to create user. Please try again." };
+    return { error: "Username already taken. Please try again." };
   }
 
   const passwordHash = await hashPassword(password);
@@ -74,7 +74,7 @@ export const signIn = validatedAction(authSchema, async (data) => {
     .limit(1);
 
   if (user.length === 0) {
-    return { error: "Invalid email or password. Please try again." };
+    return { error: "Invalid username or password. Please try again." };
   }
 
   const { user: foundUser } = user[0];
@@ -85,7 +85,7 @@ export const signIn = validatedAction(authSchema, async (data) => {
   );
 
   if (!isPasswordValid) {
-    return { error: "Invalid email or password. Please try again." };
+    return { error: "Invalid username or password. Please try again." };
   }
   await setSession(foundUser);
 });
