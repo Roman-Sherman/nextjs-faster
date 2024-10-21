@@ -67,8 +67,8 @@ export const products = pgTable(
       "gin",
       sql`to_tsvector('english', ${table.name})`,
     ),
-    nameTrgmIndex: index("trgm")
-      .using("gin", sql`${table.name}`, sql`gi`, sql`n_trgm_ops`)
+    nameTrgmIndex: index("name_trgm_index")
+      .using("gin", sql`${table.name} gin_trgm_ops`) // Use gin_trgm_ops for trigram search
       .concurrently(),
   }),
 );
