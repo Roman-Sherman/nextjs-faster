@@ -6,7 +6,6 @@ import { AddToCartForm } from "@/components/add-to-cart-form";
 import { Metadata } from "next";
 
 import { getProductDetails, getProductsForSubcategory } from "@/lib/queries";
-import { unstable_cache } from "@/lib/unstable-cache";
 
 export async function generateMetadata(props: {
   params: Promise<{ product: string; category: string; subcategory: string }>;

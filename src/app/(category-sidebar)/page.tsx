@@ -2,7 +2,6 @@ import { Link } from "@/components/ui/link";
 import { db } from "@/db";
 import { products } from "@/db/schema";
 import { getCollections, getProductCount } from "@/lib/queries";
-import { unstable_cache } from "@/lib/unstable-cache";
 import { count } from "drizzle-orm";
 
 import Image from "next/image";
