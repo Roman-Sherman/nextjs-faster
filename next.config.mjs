@@ -29,6 +29,7 @@ const nextConfig = {
         hostname: "bevgyjm5apuichhj.public.blob.vercel-storage.com",
         port: "",
         pathname: "/**",
+        search: "",
       },
     ],
   },
