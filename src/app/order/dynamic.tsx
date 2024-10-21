@@ -49,9 +49,9 @@ function CartItem({ product }: { product: CartItem }) {
               decoding="sync"
               src={product.image_url ?? "/placeholder.svg"}
               alt="Product"
-              width={80}
-              height={80}
-              quality={65}
+              width={256}
+              height={256}
+              quality={80}
             />
           </div>
           <div className="max-w-[100px] flex-grow sm:max-w-full">
