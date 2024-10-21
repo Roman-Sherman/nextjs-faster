@@ -56,7 +56,7 @@ export default async function RootLayout({
       <body
         className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex flex-col overflow-y-hidden antialiased`}
       >
-        <header className="sticky top-0 z-10 flex w-[100vw] flex-grow flex-col items-center justify-between gap-4 border-b-2 border-yellow-300 bg-background p-2 pb-[4px] pt-2 font-futura sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
+        <header className="z-10 flex flex-grow flex-col items-center justify-between gap-4 border-b-2 border-yellow-300 bg-background p-2 pb-[4px] pt-2 font-futura sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
           <div className="flex flex-grow flex-col">
             <div className="flex w-full justify-end px-4 pt-2 font-sans text-sm hover:underline">
               <Suspense
@@ -118,7 +118,7 @@ export default async function RootLayout({
           </div>
         </header>
         {children}
-        <footer className="sticky bottom-0 flex h-auto flex-col items-center justify-between space-y-2 border-t border-gray-400 bg-background px-4 font-helvetica text-[11px] sm:h-6 sm:flex-row sm:space-y-0">
+        <footer className="flex h-auto flex-col items-center justify-between space-y-2 border-t border-gray-400 bg-background px-4 font-helvetica text-[11px] sm:h-6 sm:flex-row sm:space-y-0">
           <div className="flex flex-wrap justify-center space-x-2 pt-2 sm:justify-start">
             <span className="hover:bg-yellow-100 hover:underline">Home</span>
             <span>|</span>
