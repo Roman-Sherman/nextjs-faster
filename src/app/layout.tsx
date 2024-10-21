@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
@@ -38,13 +38,10 @@ export const metadata: Metadata = {
 export const revalidate = 86400;
 
 // commented out due to accessibility issues
-// export const viewport: Viewport = {
-//   width: "device-width",
-//   initialScale: 1,
-//   minimumScale: 1,
-//   maximumScale: 1,
-//   userScalable: false,
-// };
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default async function RootLayout({
   children,
