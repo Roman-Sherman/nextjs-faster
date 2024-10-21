@@ -10,7 +10,7 @@ import {
 import { getCart, updateCart } from "./cart";
 import { kv } from "@vercel/kv";
 import { z } from "zod";
-
+import { waitUntil } from "@vercel/functions";
 export async function addToCart(prevState: unknown, formData: FormData) {
   const prevCart = await getCart();
   const productSlug = formData.get("productSlug");
@@ -143,7 +143,7 @@ export async function searchProducts(searchTerm: string) {
     };
   });
 
-  await kv.set(kvKey, searchResults, { ex: 60 * 60 }); // 1 hour
+  waitUntil(kv.set(kvKey, searchResults, { ex: 60 * 60 })); // 1 hour
 
   return searchResults;
 }
