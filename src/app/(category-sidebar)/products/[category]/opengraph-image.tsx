@@ -1,6 +1,6 @@
-import { db } from "@/db";
 import { ImageResponse } from "next/og";
 import { notFound } from "next/navigation";
+import { getCategory } from "@/lib/queries";
 
 // Route segment config
 export const runtime = "edge";
@@ -23,13 +23,7 @@ export default async function Image(props: {
   const { category: categoryParam } = await props.params;
   const urlDecodedCategory = decodeURIComponent(categoryParam);
 
-  const category = await db.query.categories.findFirst({
-    where: (categories, { eq }) => eq(categories.slug, urlDecodedCategory),
-    with: {
-      subcollections: true,
-    },
-    orderBy: (categories, { asc }) => asc(categories.name),
-  });
+  const category = await getCategory(urlDecodedCategory);
 
   if (!category) {
     return notFound();

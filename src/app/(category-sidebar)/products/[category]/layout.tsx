@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { db } from "../../../../db";
 import { notFound } from "next/navigation";
+import { getCategory } from "@/lib/queries";
 
 export async function generateMetadata({
   params,
@@ -9,13 +9,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { category: categoryParam } = await params;
   const urlDecoded = decodeURIComponent(categoryParam);
-  const category = await db.query.categories.findFirst({
-    where: (categories, { eq }) => eq(categories.slug, urlDecoded),
-    with: {
-      subcollections: true,
-    },
-    orderBy: (categories, { asc }) => asc(categories.name),
-  });
+  const category = await getCategory(urlDecoded);
 
   if (!category) {
     return notFound();

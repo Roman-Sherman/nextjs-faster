@@ -1,6 +1,6 @@
-import { db } from "@/db";
 import { ImageResponse } from "next/og";
 import { notFound } from "next/navigation";
+import { getProductDetails } from "@/lib/queries";
 
 // Route segment config
 export const runtime = "edge";
@@ -25,12 +25,8 @@ export default async function Image(props: {
   console.log(props);
   const { product } = await props.params;
   const urlDecodedProduct = decodeURIComponent(product);
-  // const urlDecodedSubcategory = decodeURIComponent(subcategory);
-  // const urlDecodedCategory = decodeURIComponent(category);
-  const productData = await db.query.products.findFirst({
-    where: (products, { eq }) => eq(products.slug, urlDecodedProduct),
-  });
-  console.log(productData);
+  const productData = await getProductDetails(urlDecodedProduct);
+
   if (!productData) {
     notFound();
   }

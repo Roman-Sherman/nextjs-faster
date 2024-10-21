@@ -1,14 +1,7 @@
-import { db } from "@/db";
-import {
-  categories,
-  products,
-  subcategories,
-  subcollection,
-} from "@/db/schema";
-import { count, eq } from "drizzle-orm";
 import Image from "next/image";
 import { Link } from "@/components/ui/link";
 import { notFound } from "next/navigation";
+import { getCategory, getCategoryProductCount } from "@/lib/queries";
 
 export default async function Page(props: {
   params: Promise<{
@@ -17,31 +10,12 @@ export default async function Page(props: {
 }) {
   const { category } = await props.params;
   const urlDecoded = decodeURIComponent(category);
-  const cat = await db.query.categories.findFirst({
-    where: (categories, { eq }) => eq(categories.slug, urlDecoded),
-    with: {
-      subcollections: {
-        with: {
-          subcategories: true,
-        },
-      },
-    },
-    orderBy: (categories, { asc }) => asc(categories.name),
-  });
+  const cat = await getCategory(urlDecoded);
   if (!cat) {
     return notFound();
   }
 
-  const countRes = await db
-    .select({ count: count() })
-    .from(categories)
-    .leftJoin(subcollection, eq(categories.slug, subcollection.category_slug))
-    .leftJoin(
-      subcategories,
-      eq(subcollection.id, subcategories.subcollection_id),
-    )
-    .leftJoin(products, eq(subcategories.slug, products.subcategory_slug))
-    .where(eq(categories.slug, cat.slug));
+  const countRes = await getCategoryProductCount(urlDecoded);
 
   const finalCount = countRes[0]?.count;
 

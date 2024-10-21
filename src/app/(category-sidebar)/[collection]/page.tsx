@@ -1,7 +1,6 @@
 import { Link } from "@/components/ui/link";
-import { db } from "@/db";
-import { products } from "@/db/schema";
-import { count } from "drizzle-orm";
+import { getCollectionDetails } from "@/lib/queries";
+
 import Image from "next/image";
 
 export default async function Home(props: {
@@ -11,14 +10,7 @@ export default async function Home(props: {
 }) {
   const collectionName = decodeURIComponent((await props.params).collection);
 
-  const collections = await db.query.collections.findMany({
-    with: {
-      categories: true,
-    },
-    where: (collections, { eq }) =>
-      eq(collections.name, decodeURIComponent(collectionName)),
-    orderBy: (collections, { asc }) => asc(collections.name),
-  });
+  const collections = await getCollectionDetails(collectionName);
   let imageCount = 0;
 
   return (
