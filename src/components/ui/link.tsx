@@ -20,8 +20,6 @@ async function prefetchImages(href: string) {
   if (!href.startsWith("/products")) {
     return [];
   }
-  // Delay the prefetch until after Next.js has time to prefetch the page itself.
-  await sleep(1000);
   const url = new URL(href, window.location.href);
   const imageResponse = await fetch(`/api/prefetch-images${url.pathname}`, {
     priority: "low",
