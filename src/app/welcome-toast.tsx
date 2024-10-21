@@ -24,8 +24,7 @@ export function WelcomeToast() {
             >
               McMaster.com
             </a>{" "}
-            using Next.js. All of the 1 million products on this site are AI
-            generated.
+            using Next.js. All of the 1M products on this site are AI generated.
             <hr className="my-2" />
             This demo is to highlight the speed a full-stack Next.js site can
             achieve.{" "}
