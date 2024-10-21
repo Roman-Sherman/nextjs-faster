@@ -6,7 +6,7 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const allCategories = await getCollections();
+  const allCollections = await getCollections();
   return (
     <div className="flex flex-grow font-helvetica-roman">
       <aside className="hidden w-64 min-w-64 max-w-64 border-r p-4 md:block">
@@ -14,14 +14,14 @@ export default async function Layout({
           Choose a Category
         </h2>
         <ul className="flex flex-col items-start justify-center">
-          {allCategories.map((category) => (
-            <li key={category.name} className="w-full">
+          {allCollections.map((collection) => (
+            <li key={collection.slug} className="w-full">
               <Link
                 prefetch={true}
-                href={`/${category.name}`}
+                href={`/${collection.slug}`}
                 className="block w-full py-1 text-xs text-gray-800 hover:bg-yellow-100 hover:underline"
               >
-                {category.name}
+                {collection.name}
               </Link>
             </li>
           ))}
