@@ -53,7 +53,7 @@ export const getProductsForSubcategory = unstable_cache(
     }),
   ["subcategory-products"],
   {
-    revalidate: 600,
+    revalidate: 60 * 60 * 2, // two hours,
   },
 );
 
@@ -67,7 +67,7 @@ export const getCollections = unstable_cache(
     }),
   ["collections"],
   {
-    revalidate: 600,
+    revalidate: 60 * 60 * 2, // two hours,
   },
 );
 
@@ -78,7 +78,7 @@ export const getProductDetails = unstable_cache(
     }),
   ["product"],
   {
-    revalidate: 600,
+    revalidate: 60 * 60 * 2, // two hours,
   },
 );
 
@@ -89,7 +89,7 @@ export const getSubcategory = unstable_cache(
     }),
   ["subcategory"],
   {
-    revalidate: 600,
+    revalidate: 60 * 60 * 2, // two hours,
   },
 );
 
@@ -107,7 +107,7 @@ export const getCategory = unstable_cache(
     }),
   ["category"],
   {
-    revalidate: 600,
+    revalidate: 60 * 60 * 2, // two hours,
   },
 );
 
@@ -122,7 +122,7 @@ export const getCollectionDetails = unstable_cache(
     }),
   ["collection"],
   {
-    revalidate: 600,
+    revalidate: 60 * 60 * 2, // two hours,
   },
 );
 
@@ -130,7 +130,7 @@ export const getProductCount = unstable_cache(
   () => db.select({ count: count() }).from(products),
   ["total-product-count"],
   {
-    revalidate: 600,
+    revalidate: 60 * 60 * 2, // two hours,
   },
 );
 
@@ -152,7 +152,7 @@ export const getCategoryProductCount = unstable_cache(
       .where(eq(categories.slug, categorySlug)),
   ["category-product-count"],
   {
-    revalidate: 600,
+    revalidate: 60 * 60 * 2, // two hours,
   },
 );
 
@@ -164,7 +164,7 @@ export const getSubcategoryProductCount = unstable_cache(
       .where(eq(products.subcategory_slug, subcategorySlug)),
   ["subcategory-product-count"],
   {
-    revalidate: 600,
+    revalidate: 60 * 60 * 2, // two hours,
   },
 );
 
@@ -225,5 +225,5 @@ export const getSearchResults = unstable_cache(
     return results;
   },
   ["search-results"],
-  { revalidate: 600 },
+  { revalidate: 60 * 60 * 2 }, // two hours
 );
