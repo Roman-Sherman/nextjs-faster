@@ -6,10 +6,10 @@ A highly performant replica of [McMaster-Carr](https://www.mcmaster.com/) using 
 
 - Uses [Next.js 15](https://nextjs.org/)
   - All mutations are done via [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
-- [Partial Pre-Rendering](https://vercel.com/blog/partial-prerendering-with-next-js-creating-a-new-default-rendering-model) is used to precompute the shells of pages
+- [Partial Prerendering](https://vercel.com/blog/partial-prerendering-with-next-js-creating-a-new-default-rendering-model) is used to precompute the shells of pages
   - When deployed, these are served statically from the edge
   - Dynamic data (such as cart information) is then streamed in
-- Uses [Drizzle ORM](https://orm.drizzle.team/docs/overview) on top of [@vercel/postgres](https://vercel.com/docs/storage/vercel-postgres)
+- Uses [Drizzle ORM](https://orm.drizzle.team/docs/overview) on top of [Neon Postgres](https://neon.tech)
 - Images storied on [Vercel Blob](https://vercel.com/docs/storage/vercel-blob)
 - Used [v0](https://v0.dev) to generate all initial UIs, check out some of the threads we were particularly impressed by:
   - [v0 makes pretty impressive search dropdown without a library](https://v0.dev/chat/lFfc68X3fir?b=b_1o4tkiC9EEm&p=0)
