@@ -32,6 +32,27 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/insights/vitals.js",
+        destination:
+          "https://cdn.vercel-insights.com/v1/speed-insights/script.js",
+      },
+      {
+        source: "/insights/events.js",
+        destination: "https://cdn.vercel-insights.com/v1/script.js",
+      },
+      {
+        source: "/hfi/events/:slug*",
+        destination: "https://vitals.vercel-insights.com/v1/:slug*",
+      },
+      {
+        source: "/hfi/vitals/:slug*",
+        destination: "https://vitals.vercel-insights.com/v2/:slug*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
