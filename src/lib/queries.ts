@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { verifyToken } from "./session";
-import { products, users } from "@/db/schema";
+import { categories, products, subcategories, subcollection, users } from "@/db/schema";
 import { db } from "@/db";
 import { eq, and, count } from "drizzle-orm";
 import { unstable_cache } from "./unstable-cache";
@@ -123,10 +123,39 @@ export const getCollectionDetails = unstable_cache(
   },
 );
 
-export const  getProductCount = unstable_cache(
+export const getProductCount = unstable_cache(
   () => db.select({ count: count() }).from(products),
   ["total-product-count"],
   {
     revalidate: 600,
   },
+);
+
+// could be optimized by storing category slug on the products table
+export const getCategoryProductCount = unstable_cache(
+  (categorySlug) =>  db
+  .select({ count: count() })
+  .from(categories)
+  .leftJoin(subcollection, eq(categories.slug, subcollection.category_slug))
+  .leftJoin(
+    subcategories,
+    eq(subcollection.id, subcategories.subcollection_id),
+  )
+  .leftJoin(products, eq(subcategories.slug, products.subcategory_slug))
+  .where(eq(categories.slug, categorySlug)),
+  ["category-product-count"],
+  {
+    revalidate: 600,
+  }
+)
+
+export const getSubcategoryProductCount = unstable_cache(
+  (subcategorySlug) =>  db
+    .select({ count: count() })
+    .from(products)
+    .where(eq(products.subcategory_slug, subcategorySlug)),
+  ["subcategory-product-count"],
+  {
+    revalidate: 600,
+  }
 );
