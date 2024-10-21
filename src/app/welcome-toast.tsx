@@ -19,7 +19,7 @@ export function WelcomeToast() {
             This is a recreation of{" "}
             <a
               href="https://www.mcmaster.com/"
-              className="text-green-800 hover:underline"
+              className="font-semibold text-green-800 hover:underline"
               target="_blank"
             >
               McMaster.com
@@ -30,7 +30,7 @@ export function WelcomeToast() {
             achieve.{" "}
             <a
               href="https://git.new/NextMaster"
-              className="text-green-800 hover:underline"
+              className="font-semibold text-green-800 hover:underline"
               target="_blank"
             >
               Get the Source
