@@ -5,16 +5,18 @@ import { count } from "drizzle-orm";
 import Image from "next/image";
 
 export default async function Home(props: {
-  params: {
+  params: Promise<{
     collection: string;
-  };
+  }>;
 }) {
+  const collectionName = decodeURIComponent((await props.params).collection);
+
   const collections = await db.query.collections.findMany({
     with: {
       categories: true,
     },
     where: (collections, { eq }) =>
-      eq(collections.name, decodeURIComponent(props.params.collection)),
+      eq(collections.name, decodeURIComponent(collectionName)),
     orderBy: (collections, { asc }) => asc(collections.name),
   });
   let imageCount = 0;
