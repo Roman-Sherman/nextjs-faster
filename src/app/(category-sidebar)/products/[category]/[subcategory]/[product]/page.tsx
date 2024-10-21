@@ -5,16 +5,16 @@ import { notFound } from "next/navigation";
 import { AddToCartForm } from "@/components/add-to-cart-form";
 import { Metadata } from "next";
 
+import { getProductDetails, getProductsForSubcategory } from "@/lib/queries";
+import { unstable_cache } from "@/lib/unstable-cache";
+
 export async function generateMetadata(props: {
   params: Promise<{ product: string; category: string; subcategory: string }>;
 }): Promise<Metadata> {
   const { product: productParam } = await props.params;
   const urlDecodedProduct = decodeURIComponent(productParam);
 
-  const product = await db.query.products.findFirst({
-    where: (products, { eq }) => eq(products.slug, urlDecodedProduct),
-    orderBy: (products, { asc }) => asc(products.name),
-  });
+  const product = await getProductDetails(urlDecodedProduct);
 
   if (!product) {
     return notFound();
@@ -35,19 +35,10 @@ export default async function Page(props: {
   const { product, subcategory, category } = await props.params;
   const urlDecodedProduct = decodeURIComponent(product);
   const urlDecodedSubcategory = decodeURIComponent(subcategory);
-  // const urlDecodedCategory = decodeURIComponent(category);
-  const productData = await db.query.products.findFirst({
-    where: (products, { eq }) => eq(products.slug, urlDecodedProduct),
-  });
-  const relatedUnshifted = await db.query.products.findMany({
-    where: (products, { eq, and }) =>
-      and(eq(products.subcategory_slug, urlDecodedSubcategory)),
-    with: {
-      subcategory: true,
-    },
-
-    orderBy: (products, { asc }) => asc(products.slug),
-  });
+  const [productData, relatedUnshifted] = await Promise.all([
+    getProductDetails(urlDecodedProduct),
+    getProductsForSubcategory(urlDecodedSubcategory),
+  ]);
 
   if (!productData) {
     return notFound();

@@ -9,6 +9,7 @@ import { count, eq } from "drizzle-orm";
 import Image from "next/image";
 import { Link } from "@/components/ui/link";
 import { notFound } from "next/navigation";
+import { getCategory } from "@/lib/queries";
 
 export default async function Page(props: {
   params: Promise<{
@@ -17,17 +18,7 @@ export default async function Page(props: {
 }) {
   const { category } = await props.params;
   const urlDecoded = decodeURIComponent(category);
-  const cat = await db.query.categories.findFirst({
-    where: (categories, { eq }) => eq(categories.slug, urlDecoded),
-    with: {
-      subcollections: {
-        with: {
-          subcategories: true,
-        },
-      },
-    },
-    orderBy: (categories, { asc }) => asc(categories.name),
-  });
+  const cat = await getCategory(urlDecoded);
   if (!cat) {
     return notFound();
   }

@@ -1,17 +1,13 @@
 import { Link } from "@/components/ui/link";
 import { db } from "@/db";
+import { getCollections } from "@/lib/queries";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const allCategories = await db.query.collections.findMany({
-    with: {
-      categories: true,
-    },
-    orderBy: (collections, { asc }) => asc(collections.name),
-  });
+  const allCategories = await getCollections();
   return (
     <div className="flex flex-grow overflow-hidden font-helvetica-roman">
       <aside className="sticky hidden h-screen w-64 min-w-64 max-w-64 border-r p-4 md:block">

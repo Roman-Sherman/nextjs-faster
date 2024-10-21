@@ -1,18 +1,16 @@
 import { Link } from "@/components/ui/link";
 import { db } from "@/db";
 import { products } from "@/db/schema";
+import { getCollections, getProductCount } from "@/lib/queries";
+import { unstable_cache } from "@/lib/unstable-cache";
 import { count } from "drizzle-orm";
+
 import Image from "next/image";
 
 export default async function Home() {
   const [collections, productCount] = await Promise.all([
-    db.query.collections.findMany({
-      with: {
-        categories: true,
-      },
-      orderBy: (collections, { asc }) => asc(collections.name),
-    }),
-    db.select({ count: count() }).from(products),
+    getCollections(),
+    getProductCount(),
   ]);
   let imageCount = 0;
 

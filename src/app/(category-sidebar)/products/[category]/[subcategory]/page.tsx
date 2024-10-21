@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { products } from "@/db/schema";
 import { count, eq } from "drizzle-orm";
 import type { Metadata } from "next";
+import { getProductsForSubcategory, getSubcategory } from "@/lib/queries";
 
 export async function generateMetadata(props: {
   params: Promise<{ category: string; subcategory: string }>;
@@ -11,11 +12,7 @@ export async function generateMetadata(props: {
   const { subcategory: subcategoryParam } = await props.params;
   const urlDecodedCategory = decodeURIComponent(subcategoryParam);
 
-  const subcategory = await db.query.subcategories.findFirst({
-    where: (subcategories, { eq }) =>
-      eq(subcategories.slug, urlDecodedCategory),
-    orderBy: (categories, { asc }) => asc(categories.name),
-  });
+  const subcategory = await getSubcategory(urlDecodedCategory);
 
   // const rows = await db
   //   .select({ count: count() })
@@ -44,16 +41,9 @@ export default async function Page(props: {
   const { subcategory, category } = await props.params;
   // const urlDecodedCategory = decodeURIComponent(category);
   const urlDecodedSubcategory = decodeURIComponent(subcategory);
-  const sub = await db.query.subcategories.findFirst({
-    where: (subcategories, { eq }) =>
-      eq(subcategories.slug, urlDecodedSubcategory),
-    with: {
-      products: true,
-    },
-    orderBy: (subcategories, { asc }) => asc(subcategories.name),
-  });
+  const products = await getProductsForSubcategory(urlDecodedSubcategory);
 
-  if (!sub) {
+  if (!products) {
     return notFound();
   }
 
@@ -73,7 +63,7 @@ export default async function Page(props: {
         <p>No products for this subcategory</p>
       )}
       <div className="flex flex-row flex-wrap gap-2">
-        {sub.products.map((product) => (
+        {products.map((product) => (
           <ProductLink
             key={product.name}
             loading="eager"
