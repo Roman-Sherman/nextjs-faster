@@ -4,6 +4,8 @@ A highly performant replica of [McMaster-Carr](https://www.mcmaster.com/) using 
 
 ### Design notes
 
+**Check out the detailed [twitter thread](https://x.com/ethanniser/status/1848442738204643330)**
+
 - Uses [Next.js 15](https://nextjs.org/)
   - All mutations are done via [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
 - [Partial Prerendering](https://vercel.com/blog/partial-prerendering-with-next-js-creating-a-new-default-rendering-model) is used to precompute the shells of pages
