@@ -56,9 +56,9 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
         if (entry.isIntersecting) {
           // Set a timeout to trigger prefetch after 1 second
           prefetchTimeout = setTimeout(() => {
-            // void prefetchImages(String(props.href)).then((images) => {
-            //   setImages(images);
-            // }, console.error);
+            void prefetchImages(String(props.href)).then((images) => {
+              setImages(images);
+            }, console.error);
             // Stop observing once images are prefetched
             observer.unobserve(entry.target);
           }, 300); // 300ms delay
