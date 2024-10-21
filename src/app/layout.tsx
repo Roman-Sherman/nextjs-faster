@@ -33,17 +33,7 @@ export const metadata: Metadata = {
   description: "A performant site built with Next.js",
 };
 
-// revalidate the data at most every day
-export const revalidate = 86400;
-
-// commented out due to accessibility issues
-// export const viewport: Viewport = {
-//   width: "device-width",
-//   initialScale: 1,
-//   minimumScale: 1,
-//   maximumScale: 1,
-//   userScalable: false,
-// };
+export const revalidate = 86400; // One day
 
 export default async function RootLayout({
   children,
