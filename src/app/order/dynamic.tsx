@@ -65,7 +65,7 @@ function CartItem({ product }: { product: CartItem }) {
           <p>{product.quantity}</p>
           <div className="flex md:block">
             <div className="min-w-8 text-sm md:min-w-24 md:text-base">
-              <p>${product.price} each</p>
+              <p>${Number(product.price).toFixed(2)} each</p>
             </div>
           </div>
           <div className="min-w-24">
