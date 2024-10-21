@@ -160,7 +160,7 @@ export default async function RootLayout({
           <Toaster closeButton />
           <WelcomeToast />
         </Suspense>
-        
+
         <Analytics scriptSrc="/insights/events.js" endpoint="/hfi/events" />
         <SpeedInsights scriptSrc="/insights/vitals.js" endpoint="/hfi/vitals" />
       </body>
