@@ -45,11 +45,11 @@ const nextConfig = {
       },
       {
         source: "/hfi/events/:slug*",
-        destination: "https://vitals.vercel-insights.com/v1/:slug*",
+        destination: "/_vercel/insights/:slug*",
       },
       {
         source: "/hfi/vitals/:slug*",
-        destination: "https://vitals.vercel-insights.com/v2/:slug*",
+        destination: "/_vercel/speed-insights/:slug*",
       },
     ];
   },
