@@ -19,17 +19,17 @@ export default async function Home() {
   return (
     <div className="w-full p-4">
       <div className="mb-2 w-full flex-grow border-b-[1px] border-green-800 text-sm font-semibold text-black">
-        Explore {productCount.at(0)?.count} products
+        Explore {productCount.at(0)?.count.toLocaleString()} products
       </div>
       {collections.map((collection) => (
         <div key={collection.name}>
           <h2 className="text-xl font-semibold">{collection.name}</h2>
-          <div className="grid grid-cols-2 gap-4 border-b-2 py-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          <div className="flex flex-row flex-wrap justify-center gap-2 border-b-2 py-4 sm:justify-start">
             {collection.categories.map((category) => (
               <Link
                 prefetch={true}
                 key={category.name}
-                className="flex flex-col items-center text-center"
+                className="flex w-[125px] flex-col items-center text-center"
                 href={`/products/${category.slug}`}
               >
                 <Image
