@@ -43,7 +43,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex flex-col overflow-y-hidden antialiased`}
+        className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex flex-col antialiased`}
       >
         <div>
           <header className="z-10 flex flex-grow items-center justify-between gap-4 border-b-2 border-yellow-300 bg-background p-2 pb-[4px] pt-2 font-futura sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
