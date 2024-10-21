@@ -118,7 +118,7 @@ export default async function RootLayout({
           </div>
         </header>
         {children}
-        <footer className="flex h-auto flex-col items-center justify-between space-y-2 border-t border-gray-400 px-4 font-helvetica text-[11px] sm:h-6 sm:flex-row sm:space-y-0">
+        <footer className="sticky bottom-0 flex h-auto flex-col items-center justify-between space-y-2 border-t border-gray-400 bg-background px-4 font-helvetica text-[11px] sm:h-6 sm:flex-row sm:space-y-0">
           <div className="flex flex-wrap justify-center space-x-2 pt-2 sm:justify-start">
             <span className="hover:bg-yellow-100 hover:underline">Home</span>
             <span>|</span>
