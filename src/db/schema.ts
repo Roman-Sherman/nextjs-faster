@@ -63,7 +63,11 @@ export const products = pgTable(
     image_url: text("image_url"),
   },
   (table) => ({
-    nameSearchIndex: index("name_search_index")
+    nameSearchIndex: index("name_search_index").using(
+      "gin",
+      sql`to_tsvector('english', ${table.name})`,
+    ),
+    nameTrgmIndex: index("trgm")
       .using("gin", sql`${table.name}`, sql`gi`, sql`n_trgm_ops`)
       .concurrently(),
   }),
