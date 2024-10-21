@@ -161,8 +161,8 @@ export default async function RootLayout({
           <WelcomeToast />
         </Suspense>
 
-        <Analytics />
-        <SpeedInsights />
+        <Analytics scriptSrc="/insights/events.js" endpoint="/hfi/events" />
+        <SpeedInsights scriptSrc="/insights/vitals.js" endpoint="/hfi/vitals" />
       </body>
     </html>
   );
