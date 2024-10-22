@@ -77,6 +77,8 @@ export function SearchDropdownComponent() {
         <div className="relative">
           <Input
             ref={inputRef}
+            autoCapitalize="off"
+            autoCorrect="off"
             type="text"
             placeholder="Search..."
             value={searchTerm}
