@@ -1,0 +1,15 @@
+# Block all crawlers from accessing the site
+User-agent: *
+Disallow: /
+
+# Allow Twitter to fetch Open Graph data
+User-agent: Twitterbot
+Allow: /
+
+# Allow Facebook to fetch Open Graph data
+User-agent: facebookexternalhit
+Allow: /
+
+# Allow LinkedIn to fetch Open Graph data
+User-agent: LinkedInBot
+Allow: /
