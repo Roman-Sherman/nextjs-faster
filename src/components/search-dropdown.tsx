@@ -22,6 +22,7 @@ export function SearchDropdownComponent() {
 
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // we don't need react query, we have react query at home
   // react query at home:
@@ -71,8 +72,26 @@ export function SearchDropdownComponent() {
     }
   };
 
+  // close dropdown when clicking outside dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+        inputRef.current?.blur();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
   return (
-    <div className="font-sans">
+    <div className="font-sans" ref={dropdownRef}>
       <div className="relative flex-grow">
         <div className="relative">
           <Input
