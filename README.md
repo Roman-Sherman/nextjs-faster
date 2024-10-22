@@ -35,6 +35,7 @@ A highly performant replica of [McMaster-Carr](https://www.mcmaster.com/) using 
 - For DB migrations with `drizzle-kit`:
   - Make sure `?sslmode=required` is added to the `POSTGRES_URL` env for dev
   - Run `pnpm db:push` to apply schema to your db
+- The data/data.zip includes a ~300 MB data.sql file with the full schema and 1,000,000+ products
 
 ### Performance
 
