@@ -42,6 +42,7 @@ export async function GET(
       loading: img.getAttribute("loading"),
     }))
     .filter((img) => img.src);
+  console.log("Prefetched images", images);
   return NextResponse.json(
     { images },
     {
