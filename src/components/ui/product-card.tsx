@@ -33,7 +33,9 @@ export function ProductLink(props: {
     height: 256,
     quality: 80,
     width: 256,
-    src: imageUrl ?? "/placeholder.svg?height=64&width=64",
+    src: imageUrl
+      ? imageUrl + `?product=${product.slug}`
+      : "/placeholder.svg?height=64&width=64",
     alt: `A small picture of ${product.name}`,
   });
   useEffect(() => {
