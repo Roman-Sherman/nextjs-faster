@@ -20,7 +20,7 @@ A highly performant replica of [McMaster-Carr](https://www.mcmaster.com/) using 
 
 #### AI
 
-- Used [OpenAI](https://openai.com)'s `gpt-3.5-turbo` to generate product categories, names and descriptions
+- Used [OpenAI](https://openai.com)'s `gpt-4o-mini` with their batch API and the Vercel AI SDK to generate product categories, names and descriptions
 - [GetImg.ai](https://getimg.ai) was used to generate product images via the `stable-diffusion-v1-5` model
 
 ### Deployment
