@@ -1,6 +1,10 @@
-# Block all crawlers from accessing the site
+# Block all crawlers from accessing /products
 User-agent: *
-Disallow: /
+Disallow: /products
+
+# Allow crawling of the homepage
+User-agent: *
+Allow: /
 
 # Allow Twitter to fetch Open Graph data
 User-agent: Twitterbot
