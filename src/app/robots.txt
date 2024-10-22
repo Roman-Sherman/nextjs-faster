@@ -1,15 +1,22 @@
-# Block all crawlers from accessing the site
+# Block all crawlers from accessing /products
 User-agent: *
-Disallow: /
+Disallow: /products
 
-# Allow Twitter to fetch Open Graph data
+# Allow Twitter to fetch Open Graph data from /products
 User-agent: Twitterbot
+Allow: /products
 Allow: /
 
-# Allow Facebook to fetch Open Graph data
+# Allow Facebook to fetch Open Graph data from /products
 User-agent: facebookexternalhit
+Allow: /products
 Allow: /
 
-# Allow LinkedIn to fetch Open Graph data
+# Allow LinkedIn to fetch Open Graph data from /products
 User-agent: LinkedInBot
+Allow: /products
+Allow: /
+
+# Allow crawling of the homepage for all crawlers
+User-agent: *
 Allow: /
