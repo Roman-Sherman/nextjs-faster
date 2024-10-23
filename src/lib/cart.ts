@@ -20,6 +20,10 @@ const cartSchema = z.array(
 export type CartItem = z.infer<typeof cartSchema>[number];
 
 export async function updateCart(newItems: CartItem[]) {
+  const parsedItems = cartSchema.safeParse(newItems);
+  if (!parsedItems.success) {
+    throw new Error("Invalid cart items");
+  }
   (await cookies()).set("cart", JSON.stringify(newItems), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
