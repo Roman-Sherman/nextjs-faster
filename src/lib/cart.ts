@@ -12,6 +12,7 @@ const cartSchema = z.array(
       subcategory_slug: z.string(),
       image_url: z.string().nullable(),
     }),
+    categorySlug: z.string(),
     quantity: z.number(),
   }),
 );

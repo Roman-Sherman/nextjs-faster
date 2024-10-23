@@ -17,18 +17,13 @@ export default async function Page() {
 
         <div className="flex grid-cols-3 flex-col gap-8 pt-4 lg:grid">
           <div className="col-span-2">
-            <Suspense>
-              <CartItems />
-            </Suspense>
+            <CartItems />
           </div>
 
           <div className="space-y-4">
             <div className="rounded bg-gray-100 p-4">
               <p className="font-semibold">
-                Merchandise{" "}
-                <Suspense>
-                  <TotalCost />
-                </Suspense>
+                Merchandise <TotalCost />
               </p>
               <p className="text-sm text-gray-500">
                 Applicable shipping and tax will be added.

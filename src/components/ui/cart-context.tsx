@@ -12,7 +12,7 @@ import { Product } from "../../db/schema";
 
 type CartContextType = {
   cart: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, categorySlug: string) => void;
   removeFromCart: (productSlug: string) => void;
 };
 
@@ -21,6 +21,7 @@ const reducer = (
   action:
     | {
         type: "ADD";
+        categorySlug: string;
         product: Product;
       }
     | {
@@ -41,7 +42,14 @@ const reducer = (
           return item;
         });
       } else {
-        return [...state, { product: action.product, quantity: 1 }];
+        return [
+          ...state,
+          {
+            product: action.product,
+            categorySlug: action.categorySlug,
+            quantity: 1,
+          },
+        ];
       }
     case "REMOVE":
       return state.filter((item) => item.product.slug !== action.productSlug);
@@ -74,8 +82,8 @@ export const CartProvider = ({
     reducer,
   );
 
-  const addToCart = async (product: Product) => {
-    updateOptimisticCart({ type: "ADD", product });
+  const addToCart = async (product: Product, categorySlug: string) => {
+    updateOptimisticCart({ type: "ADD", product, categorySlug });
   };
 
   const removeFromCart = async (productSlug: string) => {

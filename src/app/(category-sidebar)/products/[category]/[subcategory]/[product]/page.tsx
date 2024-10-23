@@ -93,7 +93,7 @@ export default async function Page(props: {
         <p className="text-xl font-bold">
           ${parseFloat(productData.price).toFixed(2)}
         </p>
-        <AddToCartForm product={productData} />
+        <AddToCartForm product={productData} categorySlug={category} />
       </div>
       <div className="pt-8">
         {related.length > 0 && (

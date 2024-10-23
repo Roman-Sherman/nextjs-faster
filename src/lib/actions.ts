@@ -3,7 +3,7 @@
 import { Product } from "../db/schema";
 import { getCart, updateCart } from "./cart";
 
-export async function addToCart(product: Product) {
+export async function addToCart(product: Product, categorySlug: string) {
   const prevCart = await getCart();
   const productSlug = product.slug;
   const itemAlreadyExists = prevCart.find(
@@ -26,6 +26,7 @@ export async function addToCart(product: Product) {
       ...prevCart,
       {
         product,
+        categorySlug,
         quantity: 1,
       },
     ];
@@ -35,12 +36,8 @@ export async function addToCart(product: Product) {
   return "Item added to cart";
 }
 
-export async function removeFromCart(formData: FormData) {
+export async function removeFromCart(productSlug: string) {
   const prevCart = await getCart();
-  const productSlug = formData.get("productSlug");
-  if (typeof productSlug !== "string") {
-    return;
-  }
   const itemAlreadyExists = prevCart.find(
     (item) => item.product.slug === productSlug,
   );
