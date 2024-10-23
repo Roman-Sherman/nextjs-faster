@@ -2,7 +2,7 @@
 
 import { getCart, updateCart } from "./cart";
 
-export async function addToCart(prevState: unknown, formData: FormData) {
+export async function addToCart(formData: FormData) {
   const prevCart = await getCart();
   const productSlug = formData.get("productSlug");
   if (typeof productSlug !== "string") {

@@ -1,7 +1,8 @@
-import { getCart } from "@/lib/cart";
+"use client";
+import { useCart } from "./ui/cart-context";
 
-export async function Cart() {
-  const cart = await getCart();
+export function Cart() {
+  const { cart } = useCart();
   if (cart.length == 0) {
     return null;
   }

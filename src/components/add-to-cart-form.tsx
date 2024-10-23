@@ -1,11 +1,24 @@
 "use client";
-import { useActionState } from "react";
-import { addToCart } from "@/lib/actions";
+
+import { revalidatePath } from "next/cache";
+import { addToCart } from "../lib/actions";
+import { useCart } from "./ui/cart-context";
 
 export function AddToCartForm({ productSlug }: { productSlug: string }) {
-  const [message, formAction, isPending] = useActionState(addToCart, null);
+  const { addToCart: optimisticAddToCart } = useCart();
   return (
-    <form className="flex flex-col gap-2" action={formAction}>
+    <form
+      className="flex flex-col gap-2"
+      action={async (data) => {
+        optimisticAddToCart(productSlug);
+        try {
+          await addToCart(data);
+        } catch (error) {
+          // TODO: investigate better way of revalidating
+          revalidatePath("/");
+        }
+      }}
+    >
       <input type="hidden" name="productSlug" value={productSlug} />
       <button
         type="submit"
@@ -13,8 +26,8 @@ export function AddToCartForm({ productSlug }: { productSlug: string }) {
       >
         Add to cart
       </button>
-      {isPending && <p>Adding to cart...</p>}
-      {!isPending && message && <p>{message}</p>}
+      {/* {isPending && <p>Adding to cart...</p>}
+      {!isPending && message && <p>{message}</p>} */}
     </form>
   );
 }
