@@ -1,7 +1,8 @@
 "use server";
 
+import { db } from "../db";
 import { Product } from "../db/schema";
-import { getCart, updateCart } from "./cart";
+import { CartItem, getCart, updateCart } from "./cart";
 
 export async function addToCart(product: Product, categorySlug: string) {
   const prevCart = await getCart();
@@ -46,4 +47,34 @@ export async function removeFromCart(productSlug: string) {
   }
   const newCart = prevCart.filter((item) => item.product.slug !== productSlug);
   await updateCart(newCart);
+}
+
+export async function validateCart(cart: CartItem[]) {
+  const freshProducts = await db.query.products.findMany({
+    where: (products, { inArray }) =>
+      inArray(
+        products.slug,
+        cart.map((item) => item.product.slug),
+      ),
+  });
+
+  const validatedCart = cart
+    .filter((item) => {
+      const freshProduct = freshProducts.find(
+        (product) => product.slug === item.product.slug,
+      );
+      return freshProduct !== undefined;
+    })
+    .map((item) => {
+      const freshProduct = freshProducts.find(
+        (product) => product.slug === item.product.slug,
+      )!;
+      return {
+        ...item,
+        product: freshProduct,
+      };
+    });
+
+  await updateCart(validatedCart);
+  return validatedCart;
 }

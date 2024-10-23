@@ -5,10 +5,12 @@ import React, {
   ReactNode,
   useMemo,
   use,
+  useEffect,
 } from "react";
 import { CartItem } from "@/lib/cart";
 import { useOptimistic } from "react";
 import { Product } from "../../db/schema";
+import { validateCart } from "../../lib/actions";
 
 type CartContextType = {
   cart: CartItem[];
@@ -75,12 +77,19 @@ export const CartProvider = ({
   children: ReactNode;
   getCart: Promise<CartItem[]>;
 }) => {
-  // TODO: revalidate initialCart with database to ensure removed products are removed from cart
   const initialCart = use(getCart);
   const [optimisticCart, updateOptimisticCart] = useOptimistic(
     initialCart,
     reducer,
   );
+
+  // swr - revalidate any stale data after initial render
+  useEffect(() => {
+    const revalidate = async () => {
+      await validateCart(initialCart);
+    };
+    revalidate();
+  }, []);
 
   const addToCart = async (product: Product, categorySlug: string) => {
     updateOptimisticCart({ type: "ADD", product, categorySlug });
