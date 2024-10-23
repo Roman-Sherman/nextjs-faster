@@ -1,20 +1,18 @@
 "use server";
 
+import { Product } from "../db/schema";
 import { getCart, updateCart } from "./cart";
 
-export async function addToCart(formData: FormData) {
+export async function addToCart(product: Product) {
   const prevCart = await getCart();
-  const productSlug = formData.get("productSlug");
-  if (typeof productSlug !== "string") {
-    return;
-  }
+  const productSlug = product.slug;
   const itemAlreadyExists = prevCart.find(
-    (item) => item.productSlug === productSlug,
+    (item) => item.product.slug === productSlug,
   );
   if (itemAlreadyExists) {
     const newQuantity = itemAlreadyExists.quantity + 1;
     const newCart = prevCart.map((item) => {
-      if (item.productSlug === productSlug) {
+      if (item.product.slug === productSlug) {
         return {
           ...item,
           quantity: newQuantity,
@@ -27,7 +25,7 @@ export async function addToCart(formData: FormData) {
     const newCart = [
       ...prevCart,
       {
-        productSlug,
+        product,
         quantity: 1,
       },
     ];
@@ -44,11 +42,11 @@ export async function removeFromCart(formData: FormData) {
     return;
   }
   const itemAlreadyExists = prevCart.find(
-    (item) => item.productSlug === productSlug,
+    (item) => item.product.slug === productSlug,
   );
   if (!itemAlreadyExists) {
     return;
   }
-  const newCart = prevCart.filter((item) => item.productSlug !== productSlug);
+  const newCart = prevCart.filter((item) => item.product.slug !== productSlug);
   await updateCart(newCart);
 }

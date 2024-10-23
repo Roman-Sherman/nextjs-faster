@@ -8,37 +8,43 @@ import React, {
 } from "react";
 import { CartItem } from "@/lib/cart";
 import { useOptimistic } from "react";
+import { Product } from "../../db/schema";
 
 type CartContextType = {
   cart: CartItem[];
-  addToCart: (productSlug: string) => void;
+  addToCart: (product: Product) => void;
   removeFromCart: (productSlug: string) => void;
 };
 
 const reducer = (
   state: CartItem[],
-  action: {
-    type: "ADD" | "REMOVE";
-    productSlug: string;
-  },
+  action:
+    | {
+        type: "ADD";
+        product: Product;
+      }
+    | {
+        type: "REMOVE";
+        productSlug: string;
+      },
 ) => {
   switch (action.type) {
     case "ADD":
       const item = state.find(
-        (item) => item.productSlug === action.productSlug,
+        (item) => item.product.slug === action.product.slug,
       );
       if (item) {
         return state.map((item) => {
-          if (item.productSlug === action.productSlug) {
+          if (item.product.slug === action.product.slug) {
             return { ...item, quantity: item.quantity + 1 };
           }
           return item;
         });
       } else {
-        return [...state, { productSlug: action.productSlug, quantity: 1 }];
+        return [...state, { product: action.product, quantity: 1 }];
       }
     case "REMOVE":
-      return state.filter((item) => item.productSlug !== action.productSlug);
+      return state.filter((item) => item.product.slug !== action.productSlug);
     default:
       return state;
   }
@@ -61,14 +67,15 @@ export const CartProvider = ({
   children: ReactNode;
   getCart: Promise<CartItem[]>;
 }) => {
+  // TODO: revalidate initialCart with database to ensure removed products are removed from cart
   const initialCart = use(getCart);
   const [optimisticCart, updateOptimisticCart] = useOptimistic(
     initialCart,
     reducer,
   );
 
-  const addToCart = async (productSlug: string) => {
-    updateOptimisticCart({ type: "ADD", productSlug });
+  const addToCart = async (product: Product) => {
+    updateOptimisticCart({ type: "ADD", product });
   };
 
   const removeFromCart = async (productSlug: string) => {

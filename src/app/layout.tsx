@@ -42,6 +42,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // TODO: add migration logic to upgrade cart to new schema
   const cart = getCart();
   return (
     <html lang="en" className="h-full">

@@ -4,7 +4,14 @@ import { z } from "zod";
 
 const cartSchema = z.array(
   z.object({
-    productSlug: z.string(),
+    product: z.object({
+      slug: z.string(),
+      name: z.string(),
+      description: z.string(),
+      price: z.string(), // numeric string
+      subcategory_slug: z.string(),
+      image_url: z.string().nullable(),
+    }),
     quantity: z.number(),
   }),
 );
@@ -40,7 +47,7 @@ export async function detailedCart() {
     where: (products, { inArray }) =>
       inArray(
         products.slug,
-        cart.map((item) => item.productSlug),
+        cart.map((item) => item.product.slug),
       ),
     with: {
       subcategory: {
@@ -54,7 +61,7 @@ export async function detailedCart() {
   const withQuantity = products.map((product) => ({
     ...product,
     quantity:
-      cart.find((item) => item.productSlug === product.slug)?.quantity ?? 0,
+      cart.find((item) => item.product.slug === product.slug)?.quantity ?? 0,
   }));
   return withQuantity;
 }
