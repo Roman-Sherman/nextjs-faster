@@ -12,10 +12,6 @@ type PrefetchImage = {
   loading: string;
 };
 
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 async function prefetchImages(href: string) {
   if (!href.startsWith("/") || href.startsWith("/order") || href === "/") {
     return [];
@@ -39,7 +35,6 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
   const [preloading, setPreloading] = useState<(() => void)[]>([]);
   const linkRef = useRef<HTMLAnchorElement>(null);
   const router = useRouter();
-  let prefetchTimeout: NodeJS.Timeout | null = null; // Track the timeout ID
 
   useEffect(() => {
     if (props.prefetch === false) {
@@ -53,20 +48,12 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
       (entries) => {
         const entry = entries[0];
         if (entry.isIntersecting) {
-          // Set a timeout to trigger prefetch after 1 second
-          prefetchTimeout = setTimeout(async () => {
-            router.prefetch(String(props.href));
-            await sleep(0); // We want the doc prefetches to happen first.
-            void prefetchImages(String(props.href)).then((images) => {
-              setImages(images);
-            }, console.error);
-            // Stop observing once images are prefetched
-            observer.unobserve(entry.target);
-          }, 300); // 300ms delay
-        } else if (prefetchTimeout) {
-          // If the element leaves the viewport before 1 second, cancel the prefetch
-          clearTimeout(prefetchTimeout);
-          prefetchTimeout = null;
+          router.prefetch(String(props.href));
+          void prefetchImages(String(props.href)).then((images) => {
+            setImages(images);
+          }, console.error);
+          // Stop observing once images are prefetched
+          observer.unobserve(entry.target);
         }
       },
       { rootMargin: "0px", threshold: 0.1 }, // Trigger when at least 10% is visible
@@ -76,11 +63,8 @@ export const Link: typeof NextLink = (({ children, ...props }) => {
 
     return () => {
       observer.disconnect(); // Cleanup the observer when the component unmounts
-      if (prefetchTimeout) {
-        clearTimeout(prefetchTimeout); // Clear any pending timeouts when component unmounts
-      }
     };
-  }, [props.href, props.prefetch]);
+  }, [props.href, props.prefetch, router]);
 
   return (
     <NextLink
