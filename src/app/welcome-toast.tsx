@@ -16,15 +16,8 @@ export function WelcomeToast() {
         },
         description: (
           <>
-            This is a recreation of{" "}
-            <a
-              href="https://www.mcmaster.com/"
-              className="font-semibold text-green-800 hover:underline"
-              target="_blank"
-            >
-              McMaster.com
-            </a>{" "}
-            using Next.js. All of the 1M products on this site are AI generated.
+            This is a highly performant e-commerce template using Next.js. All
+            of the 1M products on this site are AI generated.
             <hr className="my-2" />
             This demo is to highlight the speed a full-stack Next.js site can
             achieve.{" "}
