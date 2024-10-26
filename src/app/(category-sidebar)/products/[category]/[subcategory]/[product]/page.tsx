@@ -73,7 +73,7 @@ export default async function Page(props: {
 
   return (
     <div className="container p-4">
-      <h1 className="border-t-2 pt-1 text-xl font-bold text-green-800">
+      <h1 className="text-accent1 border-t-2 pt-1 text-xl font-bold">
         {productData.name}
       </h1>
       <div className="flex flex-col gap-2">
@@ -97,7 +97,7 @@ export default async function Page(props: {
       </div>
       <div className="pt-8">
         {related.length > 0 && (
-          <h2 className="text-lg font-bold text-green-800">
+          <h2 className="text-accent1 text-lg font-bold">
             Explore more products
           </h2>
         )}

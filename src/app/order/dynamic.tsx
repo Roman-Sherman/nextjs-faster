@@ -14,7 +14,7 @@ export async function CartItems() {
     <>
       {cart.length > 0 && (
         <div className="pb-4">
-          <p className="font-semibold text-green-700">Delivers in 2-4 weeks</p>
+          <p className="text-accent1 font-semibold">Delivers in 2-4 weeks</p>
           <p className="text-sm text-gray-500">Need this sooner?</p>
         </div>
       )}

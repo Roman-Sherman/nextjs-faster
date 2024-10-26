@@ -58,7 +58,7 @@ export function LoginForm() {
 
         <Button
           type="submit"
-          className="rounded-[1px] bg-green-800 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+          className="bg-accent1 hover:bg-accent1 focus:ring-accent1 rounded-[1px] px-4 py-2 text-xs font-semibold text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
           disabled={pending}
           formAction={signInFormAction}
         >
@@ -68,7 +68,7 @@ export function LoginForm() {
         <Button
           type="submit"
           variant={"ghost"}
-          className="rounded-[2px] border-[1px] border-green-800 bg-white px-4 py-2 text-xs font-semibold text-green-800"
+          className="border-accent1 text-accent1 rounded-[2px] border-[1px] bg-white px-4 py-2 text-xs font-semibold"
           disabled={pending}
           formAction={signUpFormAction}
         >
@@ -92,7 +92,7 @@ export function SignInSignUp() {
         </svg>
       </PopoverTrigger>
       <PopoverContent className="px-8 py-4">
-        <span className="text-sm font-semibold text-green-800">Log in</span>
+        <span className="text-accent1 text-sm font-semibold">Log in</span>
         <LoginForm />
       </PopoverContent>
     </Popover>
@@ -115,7 +115,7 @@ export function SignOut(props: { username: string }) {
           <Button
             formAction={signOut}
             variant={"ghost"}
-            className="rounded-[2px] border-[1px] border-green-800 bg-white px-4 py-2 text-xs font-semibold text-green-800"
+            className="border-accent1 text-accent1 rounded-[2px] border-[1px] bg-white px-4 py-2 text-xs font-semibold"
           >
             {"Sign Out"}
           </Button>

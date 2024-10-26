@@ -32,10 +32,10 @@ export function LoginForm() {
         </div>
         <div className="text-sm underline">Reset Password</div>
       </div>
-      <div className="w-full rounded-sm bg-green-800 p-2 text-center font-bold text-white hover:bg-green-800">
+      <div className="bg-accent1 hover:bg-accent1 w-full rounded-sm p-2 text-center font-bold text-white">
         Log in
       </div>
-      <div className="w-full rounded-sm border border-green-800 p-2 text-center font-bold text-green-800">
+      <div className="border-accent1 text-accent1 w-full rounded-sm border p-2 text-center font-bold">
         Create login
       </div>
     </div>

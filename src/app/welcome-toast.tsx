@@ -23,7 +23,7 @@ export function WelcomeToast() {
             achieve.{" "}
             <a
               href="https://github.com/ethanniser/NextMaster"
-              className="font-semibold text-green-800 hover:underline"
+              className="text-accent1 font-semibold hover:underline"
               target="_blank"
             >
               Get the Source
