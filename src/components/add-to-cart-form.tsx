@@ -9,7 +9,7 @@ export function AddToCartForm({ productSlug }: { productSlug: string }) {
       <input type="hidden" name="productSlug" value={productSlug} />
       <button
         type="submit"
-        className="bg-accent1 max-w-[150px] rounded-[2px] px-5 py-1 text-sm font-semibold text-white"
+        className="max-w-[150px] rounded-[2px] bg-accent1 px-5 py-1 text-sm font-semibold text-white"
       >
         Add to cart
       </button>

@@ -55,8 +55,8 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        accent1: "#991b1b",
-        accent2: "#a5f3fc",
+        accent1: "#1d4ed8",
+        accent2: "#bfdbfe",
       },
       borderRadius: {
         lg: "var(--radius)",

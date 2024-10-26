@@ -17,7 +17,7 @@ export async function PlaceOrderAuth() {
   }
   return (
     <>
-      <p className="text-accent1 font-semibold">Log in to place an order</p>
+      <p className="font-semibold text-accent1">Log in to place an order</p>
       <LoginForm />
     </>
   );

@@ -7,7 +7,7 @@ export async function Cart() {
   }
   const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
   return (
-    <div className="text-accent1 bg-accent2 absolute -right-3 -top-1 rounded-full px-1 text-xs">
+    <div className="absolute -right-3 -top-1 rounded-full bg-accent2 px-1 text-xs text-accent1">
       {totalQuantity}
     </div>
   );

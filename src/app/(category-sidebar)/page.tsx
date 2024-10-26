@@ -12,7 +12,7 @@ export default async function Home() {
 
   return (
     <div className="w-full p-4">
-      <div className="border-accent1 mb-2 w-full flex-grow border-b-[1px] text-sm font-semibold text-black">
+      <div className="mb-2 w-full flex-grow border-b-[1px] border-accent1 text-sm font-semibold text-black">
         Explore {productCount.at(0)?.count.toLocaleString()} products
       </div>
       {collections.map((collection) => (
@@ -31,7 +31,7 @@ export default async function Home() {
                   decoding="sync"
                   src={category.image_url ?? "/placeholder.svg"}
                   alt={`A small picture of ${category.name}`}
-                  className="hover:bg-accent2 mb-2 h-14 w-14 border"
+                  className="mb-2 h-14 w-14 border hover:bg-accent2"
                   width={48}
                   height={48}
                   quality={65}

@@ -8,7 +8,7 @@ export function WelcomeToast() {
     // ignore if screen height is too small
     if (window.innerHeight < 850) return;
     if (!document.cookie.includes("welcome-toast=3")) {
-      toast("🚀 Welcome to NextMaster!", {
+      toast("🚀 Welcome to NextFaster!", {
         id: "welcome-toast",
         duration: Infinity,
         onDismiss: () => {
@@ -22,8 +22,8 @@ export function WelcomeToast() {
             This demo is to highlight the speed a full-stack Next.js site can
             achieve.{" "}
             <a
-              href="https://github.com/ethanniser/NextMaster"
-              className="text-accent1 font-semibold hover:underline"
+              href="https://github.com/ethanniser/NextFaster"
+              className="font-semibold text-accent1 hover:underline"
               target="_blank"
             >
               Get the Source

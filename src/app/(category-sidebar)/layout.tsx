@@ -10,7 +10,7 @@ export default async function Layout({
   return (
     <div className="flex flex-grow font-mono">
       <aside className="hidden w-64 min-w-64 max-w-64 border-r p-4 md:block">
-        <h2 className="border-accent1 text-accent1 border-b text-sm font-semibold">
+        <h2 className="border-b border-accent1 text-sm font-semibold text-accent1">
           Choose a Category
         </h2>
         <ul className="flex flex-col items-start justify-center">
@@ -19,7 +19,7 @@ export default async function Layout({
               <Link
                 prefetch={true}
                 href={`/${collection.slug}`}
-                className="hover:bg-accent2 block w-full py-1 text-xs text-gray-800 hover:underline"
+                className="block w-full py-1 text-xs text-gray-800 hover:bg-accent2 hover:underline"
               >
                 {collection.name}
               </Link>

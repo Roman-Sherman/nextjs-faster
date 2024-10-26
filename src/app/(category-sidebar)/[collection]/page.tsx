@@ -37,7 +37,7 @@ export default async function Home(props: {
                   decoding="sync"
                   src={category.image_url ?? "/placeholder.svg"}
                   alt={`A small picture of ${category.name}`}
-                  className="hover:bg-accent2 mb-2 h-14 w-14 border"
+                  className="mb-2 h-14 w-14 border hover:bg-accent2"
                   width={48}
                   height={48}
                   quality={65}

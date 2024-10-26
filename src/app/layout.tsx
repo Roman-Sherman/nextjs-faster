@@ -14,8 +14,8 @@ import { GeistMono } from "geist/font/mono";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | NextMaster",
-    default: "NextMaster",
+    template: "%s | NextFaster",
+    default: "NextFaster",
   },
   description: "A performant site built with Next.js",
 };
@@ -33,7 +33,7 @@ export default async function RootLayout({
         className={`${GeistSans.variable} ${GeistMono.variable} flex flex-col antialiased`}
       >
         <div>
-          <header className="border-accent2 z-10 flex flex-grow items-center justify-between gap-4 border-b-2 bg-background p-2 pb-[4px] pt-2 sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
+          <header className="z-10 flex flex-grow items-center justify-between gap-4 border-b-2 border-accent2 bg-background p-2 pb-[4px] pt-2 sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
             <div className="flex flex-grow flex-col">
               <div className="absolute right-2 top-2 flex justify-end pt-2 font-sans text-sm hover:underline sm:relative sm:right-0 sm:top-0">
                 <Suspense
@@ -53,9 +53,9 @@ export default async function RootLayout({
                 <Link
                   prefetch={true}
                   href="/"
-                  className="text-accent1 text-4xl font-bold"
+                  className="text-4xl font-bold text-accent1"
                 >
-                  NextMaster
+                  NextFaster
                 </Link>
                 <div className="items flex w-full flex-row items-center justify-between gap-4">
                   <div className="mx-0 flex-grow sm:mx-auto sm:flex-grow-0">
@@ -66,7 +66,7 @@ export default async function RootLayout({
                       <Link
                         prefetch={true}
                         href="/order"
-                        className="text-accent1 text-lg hover:underline"
+                        className="text-lg text-accent1 hover:underline"
                       >
                         ORDER
                       </Link>
@@ -77,7 +77,7 @@ export default async function RootLayout({
                     <Link
                       prefetch={true}
                       href="/order-history"
-                      className="text-accent1 hidden text-lg hover:underline md:block"
+                      className="hidden text-lg text-accent1 hover:underline md:block"
                     >
                       ORDER HISTORY
                     </Link>
@@ -85,7 +85,7 @@ export default async function RootLayout({
                       prefetch={true}
                       href="/order-history"
                       aria-label="Order History"
-                      className="text-accent1 block text-lg hover:underline md:hidden"
+                      className="block text-lg text-accent1 hover:underline md:hidden"
                     >
                       <MenuIcon />
                     </Link>
@@ -111,8 +111,8 @@ export default async function RootLayout({
           <div className="text-center sm:text-right">
             By using this website, you agree to check out the{" "}
             <Link
-              href="https://github.com/ethanniser/NextMaster"
-              className="font-bold hover:underline"
+              href="https://github.com/ethanniser/NextFaster"
+              className="font-bold text-accent1 hover:underline"
               target="_blank"
             >
               Source Code
