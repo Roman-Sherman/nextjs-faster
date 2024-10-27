@@ -11,9 +11,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        helvetica: ["var(--font-helvetica)"],
-        "helvetica-roman": ["var(--font-helvetica-roman)"],
-        futura: ["var(--font-futura)"],
+        sans: ["var(--font-geist-sans)"],
+        mono: ["var(--font-geist-mono)"],
       },
       colors: {
         background: "hsl(var(--background))",
@@ -56,6 +55,8 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        accent1: "#1d4ed8",
+        accent2: "#bfdbfe",
       },
       borderRadius: {
         lg: "var(--radius)",

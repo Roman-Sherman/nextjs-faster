@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { SearchDropdownComponent } from "@/components/search-dropdown";
 import { MenuIcon } from "lucide-react";
@@ -10,25 +9,13 @@ import { Link } from "@/components/ui/link";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "sonner";
 import { WelcomeToast } from "./welcome-toast";
-
-const helvetica = localFont({
-  src: "./fonts/HelveticaNeueLTPro-Md.woff",
-  variable: "--font-helvetica",
-});
-const helveticaRoman = localFont({
-  src: "./fonts/HelveticaNeueLTPro-Roman.woff",
-  variable: "--font-helvetica-roman",
-});
-
-const futura = localFont({
-  src: "./fonts/FuturaLTPro-BoldCond.woff2",
-  variable: "--font-futura",
-});
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | NextMaster",
-    default: "NextMaster",
+    template: "%s | NextFaster",
+    default: "NextFaster",
   },
   description: "A performant site built with Next.js",
 };
@@ -43,10 +30,10 @@ export default async function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${helvetica.variable} ${helveticaRoman.variable} ${futura.variable} flex flex-col antialiased`}
+        className={`${GeistSans.variable} ${GeistMono.variable} flex flex-col antialiased`}
       >
         <div>
-          <header className="z-10 flex flex-grow items-center justify-between gap-4 border-b-2 border-yellow-300 bg-background p-2 pb-[4px] pt-2 font-futura sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
+          <header className="z-10 flex flex-grow items-center justify-between gap-4 border-b-2 border-accent2 bg-background p-2 pb-[4px] pt-2 sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
             <div className="flex flex-grow flex-col">
               <div className="absolute right-2 top-2 flex justify-end pt-2 font-sans text-sm hover:underline sm:relative sm:right-0 sm:top-0">
                 <Suspense
@@ -66,9 +53,9 @@ export default async function RootLayout({
                 <Link
                   prefetch={true}
                   href="/"
-                  className="text-4xl font-bold text-green-800"
+                  className="text-4xl font-bold text-accent1"
                 >
-                  NextMaster
+                  NextFaster
                 </Link>
                 <div className="items flex w-full flex-row items-center justify-between gap-4">
                   <div className="mx-0 flex-grow sm:mx-auto sm:flex-grow-0">
@@ -79,7 +66,7 @@ export default async function RootLayout({
                       <Link
                         prefetch={true}
                         href="/order"
-                        className="text-lg text-green-800 hover:underline"
+                        className="text-lg text-accent1 hover:underline"
                       >
                         ORDER
                       </Link>
@@ -90,7 +77,7 @@ export default async function RootLayout({
                     <Link
                       prefetch={true}
                       href="/order-history"
-                      className="hidden text-lg text-green-800 hover:underline md:block"
+                      className="hidden text-lg text-accent1 hover:underline md:block"
                     >
                       ORDER HISTORY
                     </Link>
@@ -98,7 +85,7 @@ export default async function RootLayout({
                       prefetch={true}
                       href="/order-history"
                       aria-label="Order History"
-                      className="block text-lg text-green-800 hover:underline md:hidden"
+                      className="block text-lg text-accent1 hover:underline md:hidden"
                     >
                       <MenuIcon />
                     </Link>
@@ -109,37 +96,23 @@ export default async function RootLayout({
           </header>
           {children}
         </div>
-        <footer className="flex h-[8px] flex-col items-center justify-between space-y-2 border-t border-gray-400 bg-background px-4 font-helvetica text-[11px] sm:h-6 sm:flex-row sm:space-y-0">
+        <footer className="flex h-[8px] flex-col items-center justify-between space-y-2 border-t border-gray-400 bg-background px-4 font-sans text-[11px] sm:h-6 sm:flex-row sm:space-y-0">
           <div className="flex flex-wrap justify-center space-x-2 pt-2 sm:justify-start">
-            <span className="hover:bg-yellow-100 hover:underline">Home</span>
+            <span className="hover:bg-accent2 hover:underline">Home</span>
             <span>|</span>
-            <span className="hover:bg-yellow-100 hover:underline">
-              Location
-            </span>
+            <span className="hover:bg-accent2 hover:underline">FAQ</span>
             <span>|</span>
-            <span className="hover:bg-yellow-100 hover:underline">Returns</span>
+            <span className="hover:bg-accent2 hover:underline">Returns</span>
             <span>|</span>
-            <span className="hover:bg-yellow-100 hover:underline">Careers</span>
+            <span className="hover:bg-accent2 hover:underline">Careers</span>
             <span>|</span>
-            <span className="hover:bg-yellow-100 hover:underline">
-              Mobile App
-            </span>
-            <span>|</span>
-            <span className="hover:bg-yellow-100 hover:underline">
-              Solidworks Add-In
-            </span>
-            <span>|</span>
-            <span className="hover:bg-yellow-100 hover:underline">Help</span>
-            <span>|</span>
-            <span className="hover:bg-yellow-100 hover:underline">
-              Settings
-            </span>
+            <span className="hover:bg-accent2 hover:underline">Contact</span>
           </div>
           <div className="text-center sm:text-right">
             By using this website, you agree to check out the{" "}
             <Link
-              href="https://github.com/ethanniser/NextMaster"
-              className="font-bold hover:underline"
+              href="https://github.com/ethanniser/NextFaster"
+              className="font-bold text-accent1 hover:underline"
               target="_blank"
             >
               Source Code
