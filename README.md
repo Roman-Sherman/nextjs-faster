@@ -39,4 +39,6 @@ A highly performant e-commerce template using Next.js and AI generated content b
 
 ### Performance
 
-todo!()
+[PageSpeed Report](https://pagespeed.web.dev/analysis/https-next-faster-vercel-app/7iywdkce2k?form_factor=desktop)
+
+
