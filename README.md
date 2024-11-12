@@ -32,7 +32,7 @@ A highly performant e-commerce template using Next.js and AI generated content b
 
 - Run `vc env pull` to get a `.env.local` file with your db credentials.
 - Run `pnpm install` && `pnpm dev` to start developing.
-- The data/data.zip includes a ~300 MB data.sql file with the full schema and 1,000,000+ products (*Note, the data exceeds the size limit allowed by the free tier for Neon on Vercel* [see more](https://vercel.com/docs/storage/vercel-postgres/usage-and-pricing#pricing)). To seed Vercel Postgres with this data:
+- The data/data.zip includes a ~300 MB data.sql file with the full schema and 1,000,000+ products (_Note, the data exceeds the size limit allowed by the free tier for Neon on Vercel_ [see more](https://vercel.com/docs/storage/vercel-postgres/usage-and-pricing#pricing)). To seed Vercel Postgres with this data:
   - Unzip data.zip to data.sql.
   - Run `psql "YOUR_CONNECTION_STRING" -f data.sql`.
 - For DB migrations with `drizzle-kit`:
