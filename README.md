@@ -97,8 +97,8 @@ Total: $160.00
 
 #### Even More Info
 
-![image](https://gist.github.com/user-attachments/assets/384939eb-6e69-4bb8-bdad-8e5b6790093a)
+![image](https://github.com/user-attachments/assets/fc0ba91c-6e58-4ea0-8c1c-3acfaf56e98a)
 
-![image](https://gist.github.com/user-attachments/assets/497b77fe-c2bd-43c4-beeb-7498b9020bde)
+![image](https://github.com/user-attachments/assets/fa208c6f-a943-42f2-ae90-3c50889cc98e)
 
-![image](https://gist.github.com/user-attachments/assets/d8a9bfc4-b7d9-42b9-9a41-6db73e72d4f8)
+![image](https://github.com/user-attachments/assets/e04b0948-e18c-4bd5-b0d4-7ef65f2af84a)
