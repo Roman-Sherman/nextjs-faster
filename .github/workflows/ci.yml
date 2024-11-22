@@ -19,8 +19,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PAT }}
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
@@ -45,8 +43,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PAT }}
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
@@ -71,8 +67,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PAT }}
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
