@@ -107,7 +107,7 @@ export function SearchDropdownComponent() {
               setHighlightedIndex(-1);
             }}
             onKeyDown={handleKeyDown}
-            className="font-sans font-medium sm:w-[300px] md:w-[375px]"
+            className="pr-12 font-sans font-medium sm:w-[300px] md:w-[375px]"
           />
           <X
             className={cn(
