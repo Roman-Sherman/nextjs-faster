@@ -33,7 +33,7 @@ export default async function RootLayout({
         className={`${GeistSans.variable} ${GeistMono.variable} flex flex-col antialiased`}
       >
         <div>
-          <header className="z-10 flex flex-grow items-center justify-between gap-4 border-b-2 border-accent2 bg-background p-2 pb-[4px] pt-2 sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
+          <header className="sticky top-0 z-10 flex flex-grow items-center justify-between gap-4 border-b-2 border-accent2 bg-background p-2 pb-[4px] pt-2 sm:flex-row sm:p-4 sm:pb-[4px] sm:pt-0">
             <div className="flex flex-grow flex-col">
               <div className="absolute right-2 top-2 flex justify-end pt-2 font-sans text-sm hover:underline sm:relative sm:right-0 sm:top-0">
                 <Suspense
@@ -96,7 +96,7 @@ export default async function RootLayout({
           </header>
           {children}
         </div>
-        <footer className="flex h-[8px] flex-col items-center justify-between space-y-2 border-t border-gray-400 bg-background px-4 font-sans text-[11px] sm:h-6 sm:flex-row sm:space-y-0">
+        <footer className="sticky bottom-0 flex h-[8px] flex-col items-center justify-between space-y-2 border-t border-gray-400 bg-background px-4 font-sans text-[11px] sm:h-6 sm:flex-row sm:space-y-0">
           <div className="flex flex-wrap justify-center space-x-2 pt-2 sm:justify-start">
             <span className="hover:bg-accent2 hover:underline">Home</span>
             <span>|</span>
