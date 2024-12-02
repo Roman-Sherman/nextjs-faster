@@ -95,3 +95,7 @@ select:focus,
 textarea {
   font-size: 16px;
 }
+
+[aria-label="Close toast"] {
+  background-color: white;
+}
